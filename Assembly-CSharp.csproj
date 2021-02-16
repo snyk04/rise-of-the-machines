@@ -595,6 +595,9 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Daniil/Programming stuff/Unity/Rise of the machines/Rise-of-the-machines/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>C:/Daniil/Programming stuff/Unity/Rise of the machines/Rise-of-the-machines/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>C:/Daniil/Programming stuff/Unity/Rise of the machines/Rise-of-the-machines/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
@@ -610,20 +613,23 @@
     <Reference Include="Unity.CollabProxy.Editor">
       <HintPath>C:/Daniil/Programming stuff/Unity/Rise of the machines/Rise-of-the-machines/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Postprocessing.Editor">
+      <HintPath>C:/Daniil/Programming stuff/Unity/Rise of the machines/Rise-of-the-machines/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>C:/Daniil/Programming stuff/Unity/Rise of the machines/Rise-of-the-machines/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+      <HintPath>C:/Daniil/Programming stuff/Unity/Rise of the machines/Rise-of-the-machines/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>C:/Daniil/Programming stuff/Unity/Rise of the machines/Rise-of-the-machines/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:/Daniil/Programming stuff/Unity/Rise of the machines/Rise-of-the-machines/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>C:/Daniil/Programming stuff/Unity/Rise of the machines/Rise-of-the-machines/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Editor">
-      <HintPath>C:/Daniil/Programming stuff/Unity/Rise of the machines/Rise-of-the-machines/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Runtime">
-      <HintPath>C:/Daniil/Programming stuff/Unity/Rise of the machines/Rise-of-the-machines/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup></ItemGroup>
