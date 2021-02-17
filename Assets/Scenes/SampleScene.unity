@@ -634,7 +634,7 @@ GameObject:
   - component: {fileID: 1934206134}
   - component: {fileID: 1934206133}
   - component: {fileID: 1934206135}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -795,6 +795,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486560743175155912, guid: d3463ee89162fbc45994bb9da6f1328e,
+        type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 963194227}
+    - target: {fileID: 7486560743175155912, guid: d3463ee89162fbc45994bb9da6f1328e,
+        type: 3}
+      propertyPath: lookAt
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486560743175155912, guid: d3463ee89162fbc45994bb9da6f1328e,
+        type: 3}
+      propertyPath: rotOffset
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486560743175155912, guid: d3463ee89162fbc45994bb9da6f1328e,
+        type: 3}
+      propertyPath: isGunRotate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486560743175155912, guid: d3463ee89162fbc45994bb9da6f1328e,
+        type: 3}
+      propertyPath: valueOffset
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3463ee89162fbc45994bb9da6f1328e, type: 3}
