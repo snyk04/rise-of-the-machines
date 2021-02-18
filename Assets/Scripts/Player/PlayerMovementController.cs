@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Classes;
+using UnityEngine;
 
 namespace Player {
     public class PlayerMovementController : MonoBehaviour {
@@ -19,18 +20,19 @@ namespace Player {
         }
 
         void FixedUpdate() {
-            MovePlayer(out var moveVector);
+            MovePlayer(out var localMoveDir);
             TurnPlayer();
-            animationController.Animate(moveVector.x, moveVector.z, false);
+            animationController.Animate(localMoveDir.x, localMoveDir.y, false);
         }
 
-        private void MovePlayer(out Vector3 moveVector) {
-            moveVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            var desiredDirection =
-                (mainCamera.transform.forward * moveVector.z + mainCamera.transform.right * moveVector.x).normalized;
-            desiredDirection = new Vector3(desiredDirection.x, transform.position.y, desiredDirection.z);
-            var moveDirection = transform.position + desiredDirection * (Time.deltaTime * speed);
-            rigidbodyComponent.MovePosition(moveDirection);
+        private void MovePlayer(out Vector2 localMoveDir) {
+            var moveVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            var desiredDirection = (GetComponent<Camera>().transform.forward * moveVector.z + GetComponent<Camera>().transform.right * moveVector.x);
+            desiredDirection.y = 0f;
+            desiredDirection.Normalize();
+            var moveToPosition = transform.position + desiredDirection * (Time.deltaTime * speed);
+            rigidbodyComponent.MovePosition(moveToPosition);
+            localMoveDir = new Vector2 {x = desiredDirection.x, y = desiredDirection.z}.RotateDegrees(transform.rotation.eulerAngles.y);
         }
 
         private void TurnPlayer() {
