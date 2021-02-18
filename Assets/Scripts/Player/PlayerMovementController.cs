@@ -27,7 +27,7 @@ namespace Player {
 
         private void MovePlayer(out Vector2 localMoveDir) {
             var moveVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            var desiredDirection = (GetComponent<Camera>().transform.forward * moveVector.z + GetComponent<Camera>().transform.right * moveVector.x);
+            var desiredDirection = mainCamera.transform.forward * moveVector.z + mainCamera.transform.right * moveVector.x;
             desiredDirection.y = 0f;
             desiredDirection.Normalize();
             var moveToPosition = transform.position + desiredDirection * (Time.deltaTime * speed);
