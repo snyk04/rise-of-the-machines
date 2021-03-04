@@ -2,12 +2,8 @@
 
 namespace Player {
     public class PlayerAnimationController : MonoBehaviour {
-        private Animator animator;
-
-        void Awake() {
-            animator = GetComponent<Animator>();
-        }
-
+        [SerializeField] private Animator animator;
+        
         public void Animate(float hor, float ver, bool isDead) {
             AnimateMove(hor, ver);
             AnimateDeath(isDead);
