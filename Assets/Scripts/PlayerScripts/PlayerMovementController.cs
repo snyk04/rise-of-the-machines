@@ -1,7 +1,9 @@
-﻿using Classes;
+﻿using System;
+using Classes;
 using UnityEngine;
 
-namespace Player {
+
+namespace PlayerScripts {
     public class PlayerMovementController : MonoBehaviour {
         private static readonly Vector3 GUN_ROTATION_OFFSET = 90 * Vector3.up;
         private Rigidbody rigidbodyComponent;
@@ -27,12 +29,15 @@ namespace Player {
 
         private void MovePlayer(out Vector2 localMoveDir) {
             var moveVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            var desiredDirection = mainCamera.transform.forward * moveVector.z + mainCamera.transform.right * moveVector.x;
+            var desiredDirection =
+                mainCamera.transform.forward * moveVector.z + mainCamera.transform.right * moveVector.x;
             desiredDirection.y = 0f;
             desiredDirection.Normalize();
-            var moveToPosition = transform.position + desiredDirection * (Time.deltaTime * speed);
+            var moveToPosition = transform.position + desiredDirection * (Time.deltaTime * Player.player.MoveSpeed);
             rigidbodyComponent.MovePosition(moveToPosition);
-            localMoveDir = new Vector2 {x = desiredDirection.x, y = desiredDirection.z}.RotateDegrees(-transform.rotation.eulerAngles.y);
+            localMoveDir =
+                new Vector2 {x = desiredDirection.x, y = desiredDirection.z}.RotateDegrees(-transform.rotation
+                    .eulerAngles.y);
         }
 
         private void TurnPlayer() {
