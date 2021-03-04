@@ -3,19 +3,20 @@
 namespace Classes {
     public abstract class Person {
         private float health;
+
         public bool IsDead => Health.Equals(0);
 
         public delegate void OnHealthZero();
 
         public event OnHealthZero healthZero;
 
-        protected Person(float health, float maxHealth, float moveSpeed) {
-            this.health = health;
+        protected Person(float maxHealth, float moveSpeed) {
+            health = maxHealth;
             MaxHealth = maxHealth;
             MoveSpeed = moveSpeed;
             healthZero += Die;
         }
-
+        
         public float Health {
             get => health;
             private set {
@@ -30,6 +31,8 @@ namespace Classes {
         public float MoveSpeed { get; }
 
         public virtual void Die() { }
+
+        public virtual void Attack() { }
 
         public void TakeDamage(float damage) {
             Health -= damage;
