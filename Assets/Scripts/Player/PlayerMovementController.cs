@@ -33,7 +33,6 @@ namespace Player {
             var moveToPosition = transform.position + desiredDirection * (Time.deltaTime * speed);
             rigidbodyComponent.MovePosition(moveToPosition);
             localMoveDir = new Vector2 {x = desiredDirection.x, y = desiredDirection.z}.RotateDegrees(-transform.rotation.eulerAngles.y);
-            Debug.Log(localMoveDir);
         }
 
         private void TurnPlayer() {
