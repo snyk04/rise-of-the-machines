@@ -265,8 +265,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 1
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 800477983}
-  m_Follow: {fileID: 800477983}
+  m_LookAt: {fileID: 0}
+  m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 50
     OrthographicSize: 10
@@ -374,12 +374,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
---- !u!4 &800477983 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 13703700978406915, guid: d3463ee89162fbc45994bb9da6f1328e,
-    type: 3}
-  m_PrefabInstance: {fileID: 13703701623162140}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,7 +614,7 @@ Transform:
   - {fileID: 473368215}
   - {fileID: 963194228}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1934206131
 GameObject:
@@ -801,5 +795,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7486560743175155912, guid: d3463ee89162fbc45994bb9da6f1328e,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 963194227}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3463ee89162fbc45994bb9da6f1328e, type: 3}
