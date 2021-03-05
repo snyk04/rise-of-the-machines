@@ -1,7 +1,9 @@
-﻿namespace Classes
+﻿using UnityEngine;
+
+namespace Classes
 {
     public class Enemy : Person
     {
-        public Enemy(float health, float maxHealth, float moveSpeed) : base(health, maxHealth, moveSpeed) { }
+        public Enemy(float maxHealth, float moveSpeed, Transform transform) : base(maxHealth, moveSpeed, transform) { }
     }
 }

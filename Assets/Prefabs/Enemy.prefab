@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 5123428254204717873}
   - component: {fileID: 5123428254204717872}
   - component: {fileID: 5123428254204717875}
-  m_Layer: 0
+  - component: {fileID: 2257089912114560652}
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,8 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -10.177587, y: 9.415361, z: -2.542509}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 5123428254882310816}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -116,44 +116,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 674bd1c983ac3a54a9456773e5f673d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eyezone: {fileID: 5123428254882310816}
-  player: {fileID: 0}
   checksPerSecondForFindPlayer: 5
   checksPerSecondForPursuitPlayer: 5
   fieldOfView: 180
   viewDistance: 10
-  fightStartDistance: 3
-  fightStopDistance: 5
+  fightStartDistance: 2
+  fightStopDistance: 4
   raycastObstacleLayer:
     serializedVersion: 2
     m_Bits: 256
---- !u!1 &5123428254882310819
-GameObject:
+--- !u!65 &2257089912114560652
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5123428254882310816}
-  m_Layer: 0
-  m_Name: Eyezone
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5123428254882310816
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5123428254882310819}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1553, z: 0.6619}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5123428254204717879}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 5123428254204717874}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.32973868, y: 3, z: 2.721244}
+  m_Center: {x: 0.00000018626451, y: 1.34, z: -0.42603958}
