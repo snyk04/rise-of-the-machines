@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &921695414394039401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 640491716450861251}
+  m_Layer: 0
+  m_Name: Muzzle hole
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &640491716450861251
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921695414394039401}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.665, y: 0.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6162677609561538340}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &1862899703222403861
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,6 +863,7 @@ GameObject:
   - component: {fileID: 5941121672153182829}
   - component: {fileID: 3966178105243693619}
   - component: {fileID: 7486560743175155912}
+  - component: {fileID: 4184686360142757241}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -952,7 +983,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   isGunRotate: 1
-  speed: 4
+--- !u!114 &4184686360142757241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7486560743064069200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2b5450f642984840b86ada6c247db70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun: {fileID: 7136223002006771002}
 --- !u!1 &7486560743064069204
 GameObject:
   m_ObjectHideFlags: 0
@@ -1153,7 +1196,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7486560743063582842
 Transform:
   m_ObjectHideFlags: 0
@@ -1832,8 +1875,9 @@ GameObject:
   - component: {fileID: 6162677609561538340}
   - component: {fileID: 3409548106755184140}
   - component: {fileID: 2848781795333516857}
+  - component: {fileID: 7136223002006771002}
   m_Layer: 0
-  m_Name: GunMesh
+  m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1849,7 +1893,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 640491716450861251}
   m_Father: {fileID: 7486560743063582842}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1900,3 +1945,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &7136223002006771002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7842612515168531634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31b89dc8191cae44fa97ee5c263e8f30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  muzzleHole: {fileID: 640491716450861251}
+  damageableLayer:
+    serializedVersion: 2
+    m_Bits: 512

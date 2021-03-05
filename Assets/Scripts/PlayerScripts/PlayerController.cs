@@ -12,7 +12,7 @@ namespace PlayerScripts
         private void Awake()
         {
             playerController = this;
-            var player = new Player(new Human(10, 3), new Robot(2, 3));
+            var player = new Player(new Human(10, 4), new Robot(2, 4));
         }
     }
 }
