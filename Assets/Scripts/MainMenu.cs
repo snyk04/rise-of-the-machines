@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Dropdown graphDropdown;
     [SerializeField] private Dropdown resolutionDropdown;
 
-    void Start()
+    private void Start()
     {
         HumanButton();
     }

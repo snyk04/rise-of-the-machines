@@ -17,13 +17,13 @@ namespace PlayerScripts
 
         public float speed;
 
-        void Awake()
+        private void Awake()
         {
             rigidbodyComponent = GetComponent<Rigidbody>();
             animationController = GetComponent<PlayerAnimation>();
             mainCamera = mainCamera ? mainCamera : Camera.main;
         }
-        void FixedUpdate()
+        private void FixedUpdate()
         {
             MovePlayer(out Vector2 localMoveDir);
             TurnPlayer();
