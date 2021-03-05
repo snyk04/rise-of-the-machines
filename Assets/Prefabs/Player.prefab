@@ -829,9 +829,9 @@ GameObject:
   - component: {fileID: 7486560743063582832}
   - component: {fileID: 7486560743054546892}
   - component: {fileID: 7486560743175155918}
-  - component: {fileID: 7486560743175155912}
   - component: {fileID: 1366971994089929401}
   - component: {fileID: 5941121672153182829}
+  - component: {fileID: 7486560743175155912}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -894,25 +894,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &7486560743175155912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7486560743064069200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91700bf0972f5cc43a748abb191df706, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
-  gun: {fileID: 6162677609561538340}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 512
-  isGunRotate: 1
-  speed: 4
 --- !u!136 &1366971994089929401
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -940,6 +921,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 7486560743054546892}
+--- !u!114 &7486560743175155912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7486560743064069200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91700bf0972f5cc43a748abb191df706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  gun: {fileID: 6162677609561538340}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 512
+  isGunRotate: 1
+  speed: 4
 --- !u!1 &7486560743064069204
 GameObject:
   m_ObjectHideFlags: 0
