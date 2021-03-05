@@ -1,110 +1,97 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject PersText;
-    public GameObject RobotText;
-    public GameObject PersModel;
-    public GameObject RobotModel;
-    public GameObject settingsPanel;
-    public GameObject skladText;
-    public GameObject craftText;
-    public Dropdown graphDropdown;
-    public Dropdown resolutionDropdown;
+    [SerializeField] private GameObject humanText;
+    [SerializeField] private GameObject robotText;
+    [SerializeField] private GameObject humanObject;
+    [SerializeField] private GameObject robotObject;
+    [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject storageText;
+    [SerializeField] private GameObject craftText;
+    [SerializeField] private Dropdown graphDropdown;
+    [SerializeField] private Dropdown resolutionDropdown;
 
     void Start()
     {
-        PersModel.SetActive(true);
-        PersText.SetActive(true);
-        RobotModel.SetActive(false);
-        RobotText.SetActive(false);
+        HumanButton();
     }
 
-    public void exitButtnon()
+    public void LoadLevel()
+    {
+        SceneManager.LoadScene(1);
+    }
+    public void ExitButtnon()
     {
         Application.Quit();
     }
 
-    public void loadLevel()
+    public void HumanButton()
     {
-        SceneManager.LoadScene(1);
+        humanObject.SetActive(true);
+        humanText.SetActive(true);
+        robotObject.SetActive(false);
+        robotText.SetActive(false);
+    }
+    public void RobotButton()
+    {
+        humanObject.SetActive(false);
+        humanText.SetActive(false);
+        robotObject.SetActive(true);
+        robotText.SetActive(true);
     }
 
-    public void persButton()
+    public void StorageButton()
     {
-        PersModel.SetActive(true);
-        PersText.SetActive(true);
-        RobotModel.SetActive(false);
-        RobotText.SetActive(false);
-    }
-    public void robotButton()
-    {
-        PersModel.SetActive(false);
-        PersText.SetActive(false);
-        RobotModel.SetActive(true);
-        RobotText.SetActive(true);
-    }
-
-    public void skladButton()
-    {
-        skladText.SetActive(true);
+        storageText.SetActive(true);
         craftText.SetActive(false);
     }
-    public void craftButton()
+    public void CraftButton()
     {
-        skladText.SetActive(false);
+        storageText.SetActive(false);
         craftText.SetActive(true);
     }
 
-    public void settingsButton()
+    public void SettingsButton()
     {
         settingsPanel.SetActive(true);
     }
-    public void settingsButtonExit()
+    public void SettingsButtonExit()
     {
         settingsPanel.SetActive(false);
     }
 
-    public void graphicsChanger()
+    public void GraphicsChanger()
     {
-        if (graphDropdown.value == 0)
+        switch (graphDropdown.value)
         {
-            QualitySettings.SetQualityLevel(1, true);
-        }
-        if (graphDropdown.value == 1)
-        {
-            QualitySettings.SetQualityLevel(3, true);
-        }
-        if (graphDropdown.value == 2)
-        {
-            QualitySettings.SetQualityLevel(6, true);
-        }
-
-    }
-
-    public void resolutionChanger()
-    {
-        if (resolutionDropdown.value == 0)
-        {
-            Screen.SetResolution(640, 480, true);
-            Debug.Log("loh");
-        }
-        if (resolutionDropdown.value == 1)
-        {
-            Screen.SetResolution(1366, 768, true);
-        }
-        if (resolutionDropdown.value == 2)
-        {
-            Screen.SetResolution(1920, 1080, true);
+            case 0:
+                QualitySettings.SetQualityLevel(1, true);
+                break;
+            case 1:
+                QualitySettings.SetQualityLevel(3, true);
+                break;
+            case 2:
+                QualitySettings.SetQualityLevel(6, true);
+                break;
         }
     }
-
-    void Update()
+    public void ResolutionChanger()
     {
-        
+        switch (resolutionDropdown.value)
+        {
+            case 0:
+                Screen.SetResolution(640, 480, true);
+                Debug.Log("loh");
+                break;
+            case 1:
+                Screen.SetResolution(1366, 768, true);
+                break;
+            case 2:
+                Screen.SetResolution(1920, 1080, true);
+                break;
+        }
     }
 }

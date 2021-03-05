@@ -601,7 +601,7 @@ GameObject:
   - component: {fileID: 175745915}
   - component: {fileID: 175745914}
   m_Layer: 5
-  m_Name: MicrochelButton
+  m_Name: HumanButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1645,7 +1645,7 @@ GameObject:
   - component: {fileID: 558644701}
   - component: {fileID: 558644700}
   m_Layer: 5
-  m_Name: Sklad/Craft_Panel
+  m_Name: Sklad/CraftPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2963,7 +2963,7 @@ GameObject:
   - component: {fileID: 1052295573}
   - component: {fileID: 1052295572}
   m_Layer: 5
-  m_Name: MinecraftButton
+  m_Name: CraftButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4607,13 +4607,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45562f4f6495598489f53444cfcbf99f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PersText: {fileID: 170302811}
-  RobotText: {fileID: 1224578628}
-  PersModel: {fileID: 2136351477}
-  RobotModel: {fileID: 291455291}
-  settingsPanel: {fileID: 51882216}
-  skladText: {fileID: 652879831}
-  craftText: {fileID: 1319483414}
+  humanText: {fileID: 0}
+  robotText: {fileID: 0}
+  humanObject: {fileID: 0}
+  robotObject: {fileID: 0}
+  settingsPanel: {fileID: 0}
+  storageText: {fileID: 0}
+  craftText: {fileID: 0}
   graphDropdown: {fileID: 580735815}
   resolutionDropdown: {fileID: 2016263092}
 --- !u!1 &1798268533
@@ -4785,7 +4785,7 @@ GameObject:
   - component: {fileID: 1994735452}
   - component: {fileID: 1994735451}
   m_Layer: 5
-  m_Name: SkladButton
+  m_Name: StorageButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5336,7 +5336,7 @@ GameObject:
   - component: {fileID: 2136351480}
   - component: {fileID: 2136351479}
   m_Layer: 0
-  m_Name: Pers
+  m_Name: Human
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

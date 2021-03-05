@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using PlayerScripts;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,9 +12,6 @@ public class EnemyController : MonoBehaviour
         Battle
     }
 
-    [SerializeField] private Transform eyezone;
-    [SerializeField] private Transform player;
-    [Space]
     [SerializeField] private int checksPerSecondForFindPlayer;
     [SerializeField] private int checksPerSecondForPursuitPlayer;
     [SerializeField] private float fieldOfView;
@@ -23,12 +21,14 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private LayerMask raycastObstacleLayer;
 
     private NavMeshAgent navMeshAgent;
+    private Transform playerTransform;
 
     private State currentState;
 
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        playerTransform = PlayerController.playerController.transform;
     }
     private void Start()
     {
@@ -41,11 +41,11 @@ public class EnemyController : MonoBehaviour
         {
             yield return new WaitForSeconds(1 / checksPerSecondForFindPlayer);
 
-            if (Physics.Linecast(transform.position, player.position, raycastObstacleLayer))
+            if (Physics.Linecast(transform.position, playerTransform.position, raycastObstacleLayer))
             {
                 continue;
             }
-            Vector3 vectorBetweenEnemyAndPlayer = player.position - transform.position;
+            Vector3 vectorBetweenEnemyAndPlayer = playerTransform.position - transform.position;
             if (Vector3.Angle(transform.forward, vectorBetweenEnemyAndPlayer) > fieldOfView / 2)
             {
                 continue;
@@ -57,36 +57,40 @@ public class EnemyController : MonoBehaviour
 
             ChangeState(State.Pursuit, PursuitPlayer());
         }
-
-        yield return null;
     }
     private IEnumerator PursuitPlayer()
     {
         navMeshAgent.Warp(transform.position);
+
         while (currentState == State.Pursuit)
         {
             yield return new WaitForSeconds(1 / checksPerSecondForPursuitPlayer);
 
-            float distanceVectorLength = (player.position - transform.position).magnitude;
+            float distanceVectorLength = (playerTransform.position - transform.position).magnitude;
             if (distanceVectorLength > viewDistance * 1.5f)
             {
                 navMeshAgent.isStopped = true;
                 ChangeState(State.Patrol, FindPlayer());
+                break;
             }
             else if (distanceVectorLength <= fightStartDistance)
             {
                 navMeshAgent.isStopped = true;
                 ChangeState(State.Battle, FightPlayer());
+                break;
             }
-            navMeshAgent.destination = player.position;
+
+            navMeshAgent.destination = playerTransform.position;
         }
     }
     private IEnumerator FightPlayer()
     {
-        while ((player.position - transform.position).magnitude <= fightStopDistance)
+        while ((playerTransform.position - transform.position).magnitude <= fightStopDistance)
         {
+            // TODO: Battle logic
             yield return new WaitForSeconds(1);
         }
+
         ChangeState(State.Pursuit, PursuitPlayer());
     }
 

@@ -13,19 +13,19 @@ namespace PlayerScripts
         [SerializeField] private bool isGunRotate;
 
         private Rigidbody rigidbodyComponent;
-        private PlayerAnimationController animationController;
+        private PlayerAnimation animationController;
 
         public float speed;
 
         void Awake()
         {
             rigidbodyComponent = GetComponent<Rigidbody>();
-            animationController = GetComponent<PlayerAnimationController>();
+            animationController = GetComponent<PlayerAnimation>();
             mainCamera = mainCamera ? mainCamera : Camera.main;
         }
         void FixedUpdate()
         {
-            MovePlayer(out var localMoveDir);
+            MovePlayer(out Vector2 localMoveDir);
             TurnPlayer();
             animationController.Animate(localMoveDir.x, localMoveDir.y, false);
         }
@@ -33,28 +33,37 @@ namespace PlayerScripts
         private void MovePlayer(out Vector2 localMoveDir)
         {
             var moveVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            var desiredDirection =
-                mainCamera.transform.forward * moveVector.z + mainCamera.transform.right * moveVector.x;
+
+            Vector3 desiredDirection = 
+                mainCamera.transform.forward * moveVector.z + 
+                mainCamera.transform.right * moveVector.x;
             desiredDirection.y = 0f;
             desiredDirection.Normalize();
-            var moveToPosition = transform.position + desiredDirection * (Time.deltaTime * Player.player.MoveSpeed);
-            rigidbodyComponent.MovePosition(moveToPosition);
-            localMoveDir =
-                new Vector2 { x = desiredDirection.x, y = desiredDirection.z }.RotateDegrees(-transform.rotation
-                    .eulerAngles.y);
+
+            Vector3 goalPosition =
+                transform.position + 
+                desiredDirection * (Time.deltaTime * Player.player.MoveSpeed);
+            rigidbodyComponent.MovePosition(goalPosition);
+
+            localMoveDir = new Vector2
+            {
+                x = desiredDirection.x,
+                y = desiredDirection.z
+            }.RotateDegrees(-transform.rotation.eulerAngles.y);
         }
         private void TurnPlayer()
         {
-            var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out var hit, whatIsGround))
+            if (Physics.Raycast(ray, out RaycastHit hit, whatIsGround))
             {
-                var playerToMouse = hit.point - transform.position;
+                Vector3 playerToMouse = hit.point - transform.position;
                 playerToMouse.y = 0f;
                 playerToMouse.Normalize();
                 rigidbodyComponent.MoveRotation(Quaternion.LookRotation(playerToMouse));
                 if (isGunRotate)
-                { // todo Clamp rotation of gun 
+                { 
+                    // todo Clamp rotation of gun 
                     gun.LookAt(hit.point);
                     gun.localEulerAngles += GUN_ROTATION_OFFSET;
                 }
