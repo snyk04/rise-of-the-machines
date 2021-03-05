@@ -12,7 +12,7 @@ namespace PlayerScripts
         [SerializeField] private GameObject robotModel;
         [SerializeField] private GameObject text;
         [SerializeField] private GameObject text1;
-        private PlayerMovementController PlayerMovementController;
+        private PlayerMovement PlayerMovementController;
         private bool flag;
 
         void OnTriggerStay(Collider other)

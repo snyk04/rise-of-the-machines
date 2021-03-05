@@ -1,16 +1,20 @@
 ﻿using Classes;
 using UnityEngine;
 
-namespace PlayerScripts {
-    public class PlayerController : MonoBehaviour {
-        public static PlayerController playerController;
+namespace PlayerScripts
+{
+    public class PlayerController : MonoBehaviour
+    {
+        [SerializeField] private Transform human;
+        [SerializeField] private Transform robot;
 
-        [SerializeField] private Transform raycastTarget;
+        public static PlayerController playerController;
         private Player player;
 
-        void Awake() {
+        private void Awake()
+        {
             playerController = this;
-            var player = new Player(new Human(10, 3), new Robot(2, 3));
+            var player = new Player(new Human(10, 4, human), new Robot(2, 4, robot));
         }
     }
 }

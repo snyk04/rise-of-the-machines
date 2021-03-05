@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 namespace PlayerScripts {
-    public class PlayerAnimationController : MonoBehaviour {
+    public class PlayerAnimation : MonoBehaviour {
         [SerializeField] private Animator humanAnimator;
         [SerializeField] private Animator robotAnimator;
 
