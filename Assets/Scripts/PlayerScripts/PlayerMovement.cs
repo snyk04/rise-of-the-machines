@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PlayerScripts
 {
-    public class PlayerMovementController : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour
     {
         private static readonly Vector3 GUN_ROTATION_OFFSET = 90 * Vector3.up;
 
@@ -14,8 +14,6 @@ namespace PlayerScripts
 
         private Rigidbody rigidbodyComponent;
         private PlayerAnimation animationController;
-
-        public float speed;
 
         private void Awake()
         {
