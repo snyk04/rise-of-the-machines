@@ -28,11 +28,11 @@ public class EnemyController : MonoBehaviour
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        playerTransform = PlayerController.playerController.transform;
     }
     private void Start()
     {
         ChangeState(State.Patrol, FindPlayer());
+        playerTransform = PlayerController.playerController.transform;
     }
 
     private IEnumerator FindPlayer()

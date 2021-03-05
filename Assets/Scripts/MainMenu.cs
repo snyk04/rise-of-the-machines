@@ -11,7 +11,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject storageText;
     [SerializeField] private GameObject craftText;
-    [SerializeField] private Dropdown graphDropdown;
+    [SerializeField] private Dropdown graphicsDropdown;
     [SerializeField] private Dropdown resolutionDropdown;
 
     private void Start()
@@ -19,11 +19,11 @@ public class MainMenu : MonoBehaviour
         HumanButton();
     }
 
-    public void LoadLevel()
+    public void PlayButton()
     {
         SceneManager.LoadScene(1);
     }
-    public void ExitButtnon()
+    public void ExitButton()
     {
         Application.Quit();
     }
@@ -65,7 +65,7 @@ public class MainMenu : MonoBehaviour
 
     public void GraphicsChanger()
     {
-        switch (graphDropdown.value)
+        switch (graphicsDropdown.value)
         {
             case 0:
                 QualitySettings.SetQualityLevel(1, true);
