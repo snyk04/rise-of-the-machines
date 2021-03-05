@@ -1,4 +1,6 @@
-﻿namespace Classes
+﻿using UnityEngine;
+
+namespace Classes
 {
     public class Player
     {
@@ -16,6 +18,7 @@
         private TakeDamage takeDamage;
         private RestoreHealth restoreHealth;
         public float MoveSpeed { get; private set; }
+        public Transform Transform { get; private set; }
 
         private State currentState;
         private Human human;
@@ -65,17 +68,18 @@
 
         private void TransformIntoHuman()
         {
-            TransformIntoObject(Human.TakeDamage, Human.RestoreHealth, Human.MoveSpeed);
+            TransformIntoObject(Human.TakeDamage, Human.RestoreHealth, Human.MoveSpeed, Human.Transform);
         }
         private void TransformIntoRobot()
         {
-            TransformIntoObject(Robot.TakeDamage, Robot.RestoreHealth, Robot.MoveSpeed);
+            TransformIntoObject(Robot.TakeDamage, Robot.RestoreHealth, Robot.MoveSpeed, Robot.Transform);
         }
-        private void TransformIntoObject(TakeDamage objTakeDamage, RestoreHealth objRestoreHealth, float objMoveSpeed)
+        private void TransformIntoObject(TakeDamage objTakeDamage, RestoreHealth objRestoreHealth, float objMoveSpeed, Transform objTransform)
         {
             takeDamage = objTakeDamage;
             restoreHealth = objRestoreHealth;
             MoveSpeed = objMoveSpeed;
+            Transform = objTransform;
         }
     }
 }

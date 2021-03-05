@@ -311,7 +311,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 473368214}
-  m_LocalRotation: {x: 0.37081033, y: -0.000000015979715, z: 0.000000006380304, w: 0.9287087}
+  m_LocalRotation: {x: 0.37081033, y: 0.000000015979715, z: -0.000000006380304, w: 0.9287087}
   m_LocalPosition: {x: -2.249736, y: 3.4439945, z: -6.2612085}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -556,7 +556,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.37081033, y: -0.000000015979715, z: 0.000000006380304, w: 0.9287087}
+  m_LocalRotation: {x: 0.37081033, y: 0.000000015979715, z: -0.000000006380304, w: 0.9287087}
   m_LocalPosition: {x: -2.249736, y: 3.4439945, z: -6.2612085}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -828,6 +828,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3966178105243693619, guid: d3463ee89162fbc45994bb9da6f1328e,
+        type: 3}
+      propertyPath: human
+      value: 
+      objectReference: {fileID: 2028219286}
+    - target: {fileID: 3966178105243693619, guid: d3463ee89162fbc45994bb9da6f1328e,
+        type: 3}
+      propertyPath: robot
+      value: 
+      objectReference: {fileID: 2028219286}
     - target: {fileID: 7486560743063582832, guid: d3463ee89162fbc45994bb9da6f1328e,
         type: 3}
       propertyPath: m_RootOrder
@@ -976,6 +986,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 533927998}
     m_Modifications:
+    - target: {fileID: 2257089912114560652, guid: bdc3a5abdc6a43b4c9d8f4ae3caba54a,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5123428254204717874, guid: bdc3a5abdc6a43b4c9d8f4ae3caba54a,
         type: 3}
       propertyPath: m_Name

@@ -1,4 +1,5 @@
-﻿using PlayerScripts;
+﻿using Classes;
+using PlayerScripts;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;

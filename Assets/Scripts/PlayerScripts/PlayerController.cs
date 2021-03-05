@@ -5,14 +5,16 @@ namespace PlayerScripts
 {
     public class PlayerController : MonoBehaviour
     {
-        public static PlayerController playerController;
+        [SerializeField] private Transform human;
+        [SerializeField] private Transform robot;
 
+        public static PlayerController playerController;
         private Player player;
 
         private void Awake()
         {
             playerController = this;
-            var player = new Player(new Human(10, 4), new Robot(2, 4));
+            var player = new Player(new Human(10, 4, human), new Robot(2, 4, robot));
         }
     }
 }
