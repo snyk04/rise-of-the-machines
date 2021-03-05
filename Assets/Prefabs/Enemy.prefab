@@ -116,14 +116,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 674bd1c983ac3a54a9456773e5f673d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eyezone: {fileID: 5123428254882310816}
-  player: {fileID: 0}
   checksPerSecondForFindPlayer: 5
   checksPerSecondForPursuitPlayer: 5
   fieldOfView: 180
   viewDistance: 10
-  fightStartDistance: 3
-  fightStopDistance: 5
+  fightStartDistance: 2
+  fightStopDistance: 4
   raycastObstacleLayer:
     serializedVersion: 2
     m_Bits: 256
