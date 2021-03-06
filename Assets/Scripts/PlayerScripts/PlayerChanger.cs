@@ -13,8 +13,7 @@ namespace PlayerScripts
 
         [SerializeField] private GameObject robot;
         [SerializeField] private GameObject human;
-        [SerializeField] private GameObject robotTrigger;
-        [SerializeField] private GameObject robotModel;
+        [SerializeField] private GameObject emptyRobot;
         [SerializeField] private GameObject enterText;
         [SerializeField] private GameObject exitText;
         [Space]
@@ -29,20 +28,20 @@ namespace PlayerScripts
             exitText.SetActive(false);
             robot.SetActive(false);
 
-            robotModel.transform.position = robot.transform.position;
-            robotModel.transform.eulerAngles = robot.transform.eulerAngles;
+            emptyRobot.transform.position = robot.transform.position;
+            emptyRobot.transform.eulerAngles = robot.transform.eulerAngles;
             human.transform.position = robot.transform.position + robot.transform.forward * humanSpawnDistance;
-            robotModel.SetActive(true);
+            emptyRobot.SetActive(true);
             human.SetActive(true);
         }
         private void EnterRobot()
         {
             currentState = State.Robot;
-            robotModel.SetActive(false);
+            emptyRobot.SetActive(false);
             enterText.SetActive(false);
             human.SetActive(false);
             robot.SetActive(true);
-            
+
             ActivateExit();
         }
 

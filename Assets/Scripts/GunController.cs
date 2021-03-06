@@ -13,10 +13,9 @@ public class GunController : MonoBehaviour
     public void Shoot()
     {
         var shootingRay = new Ray(muzzleHole.position, muzzleHole.forward);
-        if (!Physics.Raycast(shootingRay, out RaycastHit hitInfo, 25, damageableLayer))
+        if (Physics.Raycast(shootingRay, out RaycastHit hitInfo, 25, damageableLayer))
         {
-            return;
+            Debug.Log(hitInfo.transform.name);
         }
-        Debug.Log(hitInfo.transform.name);
     }
 }

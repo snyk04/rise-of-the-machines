@@ -32,14 +32,14 @@ namespace PlayerScripts
         {
             var moveVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-            Vector3 desiredDirection = 
-                mainCamera.transform.forward * moveVector.z + 
+            Vector3 desiredDirection =
+                mainCamera.transform.forward * moveVector.z +
                 mainCamera.transform.right * moveVector.x;
             desiredDirection.y = 0f;
             desiredDirection.Normalize();
 
             Vector3 goalPosition =
-                transform.position + 
+                transform.position +
                 desiredDirection * (Time.deltaTime * Player.player.MoveSpeed);
             rigidbodyComponent.MovePosition(goalPosition);
 
@@ -60,7 +60,7 @@ namespace PlayerScripts
                 playerToMouse.Normalize();
                 rigidbodyComponent.MoveRotation(Quaternion.LookRotation(playerToMouse));
                 if (isGunRotate)
-                { 
+                {
                     // todo Clamp rotation of gun 
                     gun.LookAt(hit.point);
                     gun.localEulerAngles += GUN_ROTATION_OFFSET;
