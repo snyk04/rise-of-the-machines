@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Damageable : MonoBehaviour
 {
+    [SerializeField] private float maxHealth;
+
     private IDamageable damageable;
 
     public void Initialize(float maxHealth, float moveSpeed, Transform transform)
@@ -12,6 +14,7 @@ public class Damageable : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        damageable = (damageable != null) ? damageable : new Breakable(maxHealth, transform);
         damageable.TakeDamage(damage);
     }
 }
