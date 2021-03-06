@@ -2,14 +2,14 @@
 
 namespace Classes
 {
-    public abstract class Person : IDamageable
+    public class Breakable : IDamageable
     {
         private float health;
         public bool IsDead() => Health.Equals(0);
         public delegate void OnHealthZero();
         public event OnHealthZero healthZero;
 
-        public float Health
+        public float Health 
         {
             get => health;
             private set
@@ -20,28 +20,22 @@ namespace Classes
             }
         }
         public float MaxHealth { get; }
-        public float MoveSpeed { get; }
         public Transform Transform { get; }
 
-        protected Person(float maxHealth, float moveSpeed, Transform transform)
+        protected Breakable(float maxhealth, Transform transform)
         {
-            MaxHealth = maxHealth;
-            health = maxHealth;
-            MoveSpeed = moveSpeed;
+            MaxHealth = maxhealth;
+            health = maxhealth;
             Transform = transform;
-            healthZero += Die;
         }
 
-        public virtual void Die() { }
-        public virtual void Attack() { }
-
+        public void Die()
+        {
+            throw new System.NotImplementedException();
+        }
         public void TakeDamage(float damage)
         {
-            Health -= damage;
-        }
-        public void RestoreHealth(float heal)
-        {
-            Health += heal;
+            health -= damage;
         }
     }
 }
