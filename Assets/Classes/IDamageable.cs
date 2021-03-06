@@ -1,12 +1,10 @@
 ﻿public interface IDamageable
 {
-    public bool IsDead();
-    public delegate void OnHealthZero();
-    public event OnHealthZero healthZero;
+    bool IsDead();
 
     // public float Health { get; private set; }
-    public float MaxHealth { get; }
+    float MaxHealth { get; }
 
-    public void Die();
-    public void TakeDamage(float damage);
+    void Die();
+    void TakeDamage(float damage);
 }

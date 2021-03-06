@@ -6,7 +6,8 @@ namespace Classes
     {
         private float health;
         public bool IsDead() => Health.Equals(0);
-        public event IDamageable.OnHealthZero healthZero;
+        public delegate void OnHealthZero();
+        public event OnHealthZero healthZero;
 
         public float Health
         {
