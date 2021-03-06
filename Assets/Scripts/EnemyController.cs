@@ -1,3 +1,4 @@
+using Classes;
 using PlayerScripts;
 using System.Collections;
 using UnityEngine;
@@ -22,12 +23,15 @@ public class EnemyController : MonoBehaviour
 
     private NavMeshAgent navMeshAgent;
     private Transform playerTransform;
+    private Damageable damageable;
 
     private State currentState;
 
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        damageable = GetComponent<Damageable>();
+        damageable.Initialize(100, 4, transform);
     }
     private void Start()
     {
