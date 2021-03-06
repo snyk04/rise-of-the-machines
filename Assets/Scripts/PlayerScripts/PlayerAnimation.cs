@@ -1,27 +1,39 @@
 ﻿using UnityEngine;
 
-namespace PlayerScripts
-{
-    public class PlayerAnimation : MonoBehaviour
-    {
-        [SerializeField] private Animator animator;
+namespace PlayerScripts {
+    public class PlayerAnimation : MonoBehaviour {
+        [SerializeField] private Animator humanAnimator;
+        [SerializeField] private Animator robotAnimator;
 
-        public void Animate(float hor, float ver, bool isDead)
-        {
+        public void Animate(float hor, float ver, bool isDead) {
             AnimateMove(hor, ver);
             AnimateDeath(isDead);
+            RobotAnimateMove(hor, ver);
+            RobotAnimateDeath(isDead);
         }
 
-        private void AnimateMove(float hor, float ver)
-        {
-            animator.SetBool("IsWalking", !hor.Equals(0) || !ver.Equals(0));
+        private void AnimateMove(float hor, float ver) {
+            humanAnimator.SetBool("IsWalking", !hor.Equals(0) || !ver.Equals(0));
 
-            animator.SetFloat("Strafe", hor);
-            animator.SetFloat("Forward", ver);
+            humanAnimator.SetFloat("Strafe", hor);
+            humanAnimator.SetFloat("Forward", ver);
         }
-        private void AnimateDeath(bool isDead)
+
+        private void AnimateDeath(bool isDead) {
+            humanAnimator.SetBool("Died", isDead);
+        }
+
+        private void RobotAnimateMove(float hor, float ver)
         {
-            animator.SetBool("Died", isDead);
+            robotAnimator.SetBool("IsWalking", !hor.Equals(0) || !ver.Equals(0));
+
+            robotAnimator.SetFloat("Strafe", hor);
+            robotAnimator.SetFloat("Forward", ver);
+        }
+
+        private void RobotAnimateDeath(bool isDead)
+        {
+            robotAnimator.SetBool("Died", isDead);
         }
     }
 }
