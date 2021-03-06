@@ -976,7 +976,7 @@ MonoBehaviour:
   enterText: {fileID: 1681091518}
   exitText: {fileID: 434905609}
   humanSpawnDistance: 3
-  keyDownChecksPerSecond: 5
+  keyDownChecksPerSecond: 2
 --- !u!1 &1477654119 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7486560743064069200, guid: d3463ee89162fbc45994bb9da6f1328e,
