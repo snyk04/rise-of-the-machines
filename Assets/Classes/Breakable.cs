@@ -33,7 +33,7 @@ namespace Classes
         public void Die()
         {
             //TODO: animation
-            Transform.gameObject.SetActive(false);
+            Object.Destroy(Transform.gameObject);
         }
         public void TakeDamage(float damage)
         {

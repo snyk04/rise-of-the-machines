@@ -38,7 +38,6 @@ namespace Classes
         public void TakeDamage(float damage)
         {
             Health -= damage;
-            Debug.Log($"Oh shit, I've got -{damage} HP. And I have {Health} HP now");
         }
         public void RestoreHealth(float heal)
         {
