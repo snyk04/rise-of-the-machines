@@ -4,6 +4,7 @@ public class GunController : MonoBehaviour
 {
     [SerializeField] private Transform muzzleHole;
     [SerializeField] private LayerMask damageableLayer;
+    [SerializeField] private float averageDamage;
 
     private void OnDrawGizmos()
     {
@@ -17,7 +18,8 @@ public class GunController : MonoBehaviour
         {
             if (hitInfo.transform.TryGetComponent(out Damageable damageable))
             {
-                damageable.TakeDamage(15);
+                float amountOfDamage = Random.Range(averageDamage * 0.9f, averageDamage * 1.1f);
+                damageable.TakeDamage(amountOfDamage);
             }
         }
     }
