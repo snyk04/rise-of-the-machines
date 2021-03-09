@@ -7,11 +7,10 @@ namespace PlayerScripts
     {
         private static readonly Vector3 GUN_ROTATION_OFFSET = 90 * Vector3.up;
 
-        [SerializeField] private CharacterController characterController;
+        // [SerializeField] private CharacterController characterController;
         [SerializeField] private PlayerChanger playerChanger;
         [SerializeField] private PlayerAnimation animationController;
         [SerializeField] private Camera mainCamera;
-        [SerializeField] private Transform gun;
         [SerializeField] private LayerMask whatIsGround;
         [SerializeField] private bool isGunRotate;
 
@@ -35,8 +34,8 @@ namespace PlayerScripts
             desiredDirection.y = 0f;
             desiredDirection.Normalize();
             var moveToPosition = desiredDirection * (Time.deltaTime * Player.player.MoveSpeed);
-            characterController.Move(moveToPosition);
-            localMoveDir = new Vector2 { x = desiredDirection.x, y = desiredDirection.z }.RotateDegrees(-transform.rotation.eulerAngles.y);
+            Player.player.CharacterController.Move(moveToPosition);
+            localMoveDir = new Vector2 { x = desiredDirection.x, y = desiredDirection.z }.RotateDegrees(-Player.player.Transform.rotation.eulerAngles.y);
         }
         private void TurnPlayer()
         {
@@ -44,12 +43,12 @@ namespace PlayerScripts
 
             if (Physics.Raycast(ray, out var hit, whatIsGround))
             {
-                transform.LookAt(hit.point);
-                transform.localEulerAngles = Vector3.up * transform.localEulerAngles.y;
+                Player.player.Transform.LookAt(hit.point);
+                Player.player.Transform.localEulerAngles = Vector3.up * Player.player.Transform.localEulerAngles.y;
                 if (isGunRotate)
                 { // todo Clamp rotation of gun 
-                    gun.LookAt(hit.point);
-                    gun.localEulerAngles += GUN_ROTATION_OFFSET;
+                    Player.player.GunTransform.LookAt(hit.point);
+                    Player.player.GunTransform.localEulerAngles += GUN_ROTATION_OFFSET;
                 }
             }
         }

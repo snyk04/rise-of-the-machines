@@ -22,13 +22,15 @@ namespace Classes
         public float MaxHealth { get; }
         public float MoveSpeed { get; }
         public Transform Transform { get; }
+        public Animator Animator { get; }
 
-        protected Person(float maxHealth, float moveSpeed, Transform transform)
+        protected Person(float maxHealth, float moveSpeed, Transform transform, Animator animator)
         {
             MaxHealth = maxHealth;
             health = maxHealth;
             MoveSpeed = moveSpeed;
             Transform = transform;
+            Animator = animator;
             healthZero += Die;
         }
 
