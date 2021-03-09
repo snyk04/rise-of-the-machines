@@ -31,6 +31,7 @@ namespace PlayerScripts
             emptyRobot.transform.position = robot.transform.position;
             emptyRobot.transform.eulerAngles = robot.transform.eulerAngles;
             human.transform.position = robot.transform.position + robot.transform.forward * humanSpawnDistance;
+
             emptyRobot.SetActive(true);
             human.SetActive(true);
         }
@@ -40,6 +41,9 @@ namespace PlayerScripts
             emptyRobot.SetActive(false);
             enterText.SetActive(false);
             human.SetActive(false);
+
+            robot.transform.position = new Vector3(robot.transform.position.x, 0, robot.transform.position.z);
+
             robot.SetActive(true);
 
             ActivateExit();
