@@ -281,12 +281,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &279605956 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5790086455605064180, guid: fbaca33496b28774c9bf4c38e2a1890c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1459103384429762946}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &384482387
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +484,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 473368214}
-  m_LocalRotation: {x: 0.37081033, y: -0.000000015979715, z: 0.000000006380304, w: 0.9287087}
+  m_LocalRotation: {x: 0.37081033, y: 0.000000015979715, z: -0.000000006380304, w: 0.9287087}
   m_LocalPosition: {x: -2.041736, y: 3.3439941, z: -6.2612085}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -516,7 +510,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 1
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 279605956}
+  m_LookAt: {fileID: 700756020}
   m_Follow: {fileID: 1164022403}
   m_Lens:
     FieldOfView: 50
@@ -621,6 +615,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7826588518825801756, guid: 373a64ccbb9b2a848ab3900d72282168,
     type: 3}
   m_PrefabInstance: {fileID: 673323207}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &700756020 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5639799342483008006, guid: fbaca33496b28774c9bf4c38e2a1890c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1459103384429762946}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
@@ -863,7 +863,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.37081033, y: -0.000000015979715, z: 0.000000006380304, w: 0.9287087}
+  m_LocalRotation: {x: 0.37081033, y: 0.000000015979715, z: -0.000000006380304, w: 0.9287087}
   m_LocalPosition: {x: -2.041736, y: 3.3439941, z: -6.2612085}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1411,6 +1411,11 @@ PrefabInstance:
       propertyPath: emptyRobot
       value: 
       objectReference: {fileID: 673323208}
+    - target: {fileID: 1459103385778355152, guid: fbaca33496b28774c9bf4c38e2a1890c,
+        type: 3}
+      propertyPath: virtualCamera
+      value: 
+      objectReference: {fileID: 473368216}
     - target: {fileID: 1459103385778355154, guid: fbaca33496b28774c9bf4c38e2a1890c,
         type: 3}
       propertyPath: m_Name
@@ -1456,10 +1461,20 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 8348087770303897849, guid: fbaca33496b28774c9bf4c38e2a1890c,
+        type: 3}
+      propertyPath: m_Name
+      value: Mesh
+      objectReference: {fileID: 0}
     - target: {fileID: 8348087770303897855, guid: fbaca33496b28774c9bf4c38e2a1890c,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8352755541510797512, guid: fbaca33496b28774c9bf4c38e2a1890c,
+        type: 3}
+      propertyPath: m_Name
+      value: Mesh
       objectReference: {fileID: 0}
     - target: {fileID: 8352755541898701910, guid: fbaca33496b28774c9bf4c38e2a1890c,
         type: 3}
