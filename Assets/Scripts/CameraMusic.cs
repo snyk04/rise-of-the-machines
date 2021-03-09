@@ -28,8 +28,11 @@ public class CameraMusic : MonoBehaviour
     }
     private void Start()
     {
-        SetClip(currentTrack);
-        PlayClip();
+        if (currentTrack != Clip.Nothing)
+        {
+            SetClip(currentTrack);
+            PlayClip();
+        }
     }
 
     public void SetClip(Clip clip)
