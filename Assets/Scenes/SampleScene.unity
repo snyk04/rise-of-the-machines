@@ -926,7 +926,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volume: 1
+  loop: 0
+  currentTrack: 0
+  mainMenu: {fileID: 8300000, guid: 9970c3d8373e19b44b0c36e47ce9f5f3, type: 3}
   ambient1: {fileID: 8300000, guid: c62270ac2805125458cf20ef835cad5a, type: 3}
+  ambient2: {fileID: 8300000, guid: 83e98767f85c60747ab8e8db9d5daa12, type: 3}
 --- !u!82 &963194232
 AudioSource:
   m_ObjectHideFlags: 0
@@ -937,7 +941,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c62270ac2805125458cf20ef835cad5a, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
