@@ -1,30 +1,36 @@
 ﻿using System.Collections;
+using Cinemachine;
+using Classes;
 using UnityEngine;
 
 namespace PlayerScripts
 {
     public class PlayerChanger : MonoBehaviour
     {
-        private enum State
-        {
-            Human,
-            Robot
-        }
 
         [SerializeField] private GameObject robot;
         [SerializeField] private GameObject human;
         [SerializeField] private GameObject emptyRobot;
         [SerializeField] private GameObject enterText;
         [SerializeField] private GameObject exitText;
+        [SerializeField] private Transform humanLookAt;
+        [SerializeField] private Transform robotLookAt;
+        [SerializeField] private Transform humanFollow;
+        [SerializeField] private Transform robotFollow;
+        [SerializeField] private CinemachineVirtualCamera virtualCamera;
         [Space]
         [SerializeField] private float humanSpawnDistance;
         [SerializeField] private int keyDownChecksPerSecond;
 
-        private State currentState;
+        private void SetVirtualCameraTarget(Transform follow, Transform lookAt) {
+            virtualCamera.LookAt = lookAt;
+            virtualCamera.Follow = follow;
+        }
+
 
         private void ExitRobot()
         {
-            currentState = State.Human;
+            Player.player.CurrentState = Player.State.Human;
             exitText.SetActive(false);
             robot.SetActive(false);
 
@@ -34,17 +40,18 @@ namespace PlayerScripts
 
             emptyRobot.SetActive(true);
             human.SetActive(true);
+            SetVirtualCameraTarget(humanFollow, humanLookAt);
+
         }
         private void EnterRobot()
         {
-            currentState = State.Robot;
+            Player.player.CurrentState = Player.State.Robot;
             emptyRobot.SetActive(false);
             enterText.SetActive(false);
+            
             human.SetActive(false);
-
-            robot.transform.position = new Vector3(robot.transform.position.x, 0, robot.transform.position.z);
-
             robot.SetActive(true);
+            SetVirtualCameraTarget(robotFollow, robotLookAt);
 
             ActivateExit();
         }
@@ -72,24 +79,26 @@ namespace PlayerScripts
 
         private IEnumerator WaitForEnter()
         {
-            while (currentState == State.Human)
+            while (Player.player.CurrentState == Player.State.Human)
             {
-                yield return new WaitForSeconds(1 / keyDownChecksPerSecond);
+                // yield return new WaitForSeconds(1f / keyDownChecksPerSecond);
                 if (Input.GetKeyDown(KeyCode.G))
                 {
                     EnterRobot();
                 }
+                yield return null;
             }
         }
         private IEnumerator WaitForExit()
         {
-            while (currentState == State.Robot)
+            while (Player.player.CurrentState == Player.State.Robot)
             {
-                yield return new WaitForSeconds(1 / keyDownChecksPerSecond);
+                // yield return new WaitForSeconds(1f / keyDownChecksPerSecond);
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     ExitRobot();
                 }
+                yield return null;
             }
         }
     }
