@@ -1,4 +1,4 @@
-using PlayerScripts;
+using Classes;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -21,18 +21,19 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private LayerMask raycastObstacleLayer;
 
     private NavMeshAgent navMeshAgent;
-    private Transform playerTransform;
+    private Damageable damageable;
 
     private State currentState;
 
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        damageable = GetComponent<Damageable>();
+        damageable.Initialize(100, 4, transform);
     }
     private void Start()
     {
         ChangeState(State.Patrol, FindPlayer());
-        playerTransform = PlayerController.playerController.transform;
     }
 
     private IEnumerator FindPlayer()
@@ -41,11 +42,11 @@ public class EnemyController : MonoBehaviour
         {
             yield return new WaitForSeconds(1 / checksPerSecondForFindPlayer);
 
-            if (Physics.Linecast(transform.position, playerTransform.position, raycastObstacleLayer))
+            if (Physics.Linecast(transform.position, Player.player.Transform.position, raycastObstacleLayer))
             {
                 continue;
             }
-            Vector3 vectorBetweenEnemyAndPlayer = playerTransform.position - transform.position;
+            Vector3 vectorBetweenEnemyAndPlayer = Player.player.Transform.position - transform.position;
             if (Vector3.Angle(transform.forward, vectorBetweenEnemyAndPlayer) > fieldOfView / 2)
             {
                 continue;
@@ -66,7 +67,7 @@ public class EnemyController : MonoBehaviour
         {
             yield return new WaitForSeconds(1 / checksPerSecondForPursuitPlayer);
 
-            float distanceVectorLength = (playerTransform.position - transform.position).magnitude;
+            float distanceVectorLength = (Player.player.Transform.position - transform.position).magnitude;
             if (distanceVectorLength > viewDistance * 1.5f)
             {
                 navMeshAgent.isStopped = true;
@@ -80,14 +81,15 @@ public class EnemyController : MonoBehaviour
                 break;
             }
 
-            navMeshAgent.destination = playerTransform.position;
+            navMeshAgent.destination = Player.player.Transform.position;
         }
     }
     private IEnumerator FightPlayer()
     {
-        while ((playerTransform.position - transform.position).magnitude <= fightStopDistance)
+        while ((Player.player.Transform.position - transform.position).magnitude <= fightStopDistance)
         {
             // TODO: Battle logic
+            Debug.Log((Player.player.Transform.position - transform.position).magnitude);
             yield return new WaitForSeconds(1);
         }
 
@@ -96,6 +98,7 @@ public class EnemyController : MonoBehaviour
 
     private void ChangeState(State state, IEnumerator coroutine)
     {
+        Debug.Log(state);
         currentState = state;
         StartCoroutine(coroutine);
     }

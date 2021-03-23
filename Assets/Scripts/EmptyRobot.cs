@@ -7,14 +7,14 @@ public class EmptyRobot : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out PlayerController playerController))
+        if (other.TryGetComponent<CharacterController>(out _))
         {
             playerChanger.ActivateEnter();
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out PlayerController playerController))
+        if (other.TryGetComponent<CharacterController>(out _))
         {
             playerChanger.DeactivateEnter();
         }

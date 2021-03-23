@@ -4,6 +4,7 @@ public class GunController : MonoBehaviour
 {
     [SerializeField] private Transform muzzleHole;
     [SerializeField] private LayerMask damageableLayer;
+    [SerializeField] private float averageDamage;
 
     private void OnDrawGizmos()
     {
@@ -13,10 +14,13 @@ public class GunController : MonoBehaviour
     public void Shoot()
     {
         var shootingRay = new Ray(muzzleHole.position, muzzleHole.forward);
-        if (!Physics.Raycast(shootingRay, out RaycastHit hitInfo, 25, damageableLayer))
+        if (Physics.Raycast(shootingRay, out RaycastHit hitInfo, 25))
         {
-            return;
+            if (hitInfo.transform.TryGetComponent(out Damageable damageable))
+            {
+                float amountOfDamage = Random.Range(averageDamage * 0.9f, averageDamage * 1.1f);
+                damageable.TakeDamage(amountOfDamage);
+            }
         }
-        Debug.Log(hitInfo.transform.name);
     }
 }

@@ -19,6 +19,9 @@ namespace Classes
         private RestoreHealth restoreHealth;
         public float MoveSpeed { get; private set; }
         public Transform Transform { get; private set; }
+        public Animator Animator { get; private set; }
+        public CharacterController CharacterController { get; private set; }
+        public Transform GunTransform { get; private set; }
 
         private State currentState;
         private Human human;
@@ -68,18 +71,21 @@ namespace Classes
 
         private void TransformIntoHuman()
         {
-            TransformIntoObject(Human.TakeDamage, Human.RestoreHealth, Human.MoveSpeed, Human.Transform);
+            TransformIntoObject(Human.TakeDamage, Human.RestoreHealth, Human.MoveSpeed, Human.Transform, Human.Animator, Human.CharacterController, human.GunTransform);
         }
         private void TransformIntoRobot()
         {
-            TransformIntoObject(Robot.TakeDamage, Robot.RestoreHealth, Robot.MoveSpeed, Robot.Transform);
+            TransformIntoObject(Robot.TakeDamage, Robot.RestoreHealth, Robot.MoveSpeed, Robot.Transform, Robot.Animator, Robot.CharacterController, Robot.GunTransform);
         }
-        private void TransformIntoObject(TakeDamage objTakeDamage, RestoreHealth objRestoreHealth, float objMoveSpeed, Transform objTransform)
+        private void TransformIntoObject(TakeDamage objTakeDamage, RestoreHealth objRestoreHealth, float objMoveSpeed, Transform objTransform, Animator objAnimator, CharacterController objCharacterController, Transform objGunTransform)
         {
             takeDamage = objTakeDamage;
             restoreHealth = objRestoreHealth;
             MoveSpeed = objMoveSpeed;
             Transform = objTransform;
+            Animator = objAnimator;
+            CharacterController = objCharacterController;
+            GunTransform = objGunTransform;
         }
     }
 }

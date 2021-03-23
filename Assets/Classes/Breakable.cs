@@ -15,27 +15,29 @@ namespace Classes
             private set
             {
                 health = Mathf.Clamp(value, 0, MaxHealth);
-                if (health.Equals(0))
+                if (health <= 0)
                     healthZero?.Invoke();
             }
         }
         public float MaxHealth { get; }
         public Transform Transform { get; }
 
-        protected Breakable(float maxhealth, Transform transform)
+        public Breakable(float maxhealth, Transform transform)
         {
             MaxHealth = maxhealth;
             health = maxhealth;
             Transform = transform;
+            healthZero += Die;
         }
 
         public void Die()
         {
-            throw new System.NotImplementedException();
+            //TODO: animation
+            Object.Destroy(Transform.gameObject);
         }
         public void TakeDamage(float damage)
         {
-            health -= damage;
+            Health -= damage;
         }
     }
 }
