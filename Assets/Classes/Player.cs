@@ -23,7 +23,6 @@ namespace Classes
         public CharacterController CharacterController { get; private set; }
         public Transform GunTransform { get; private set; }
 
-
         private State currentState;
         private Human human;
         private Robot robot;
@@ -49,7 +48,6 @@ namespace Classes
                 OnChangeState();
             }
         }
-
 
         public Player(Human human, Robot robot)
         {
