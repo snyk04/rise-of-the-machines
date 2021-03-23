@@ -10,7 +10,7 @@ namespace Classes
             Robot
         }
 
-        public static Player player;
+        public static Player player { get; private set; }
 
         private delegate void TakeDamage(float damage);
         private delegate void RestoreHealth(float heal);
