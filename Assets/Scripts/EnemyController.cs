@@ -89,7 +89,6 @@ public class EnemyController : MonoBehaviour
         while ((Player.player.Transform.position - transform.position).magnitude <= fightStopDistance)
         {
             // TODO: Battle logic
-            Debug.Log((Player.player.Transform.position - transform.position).magnitude);
             yield return new WaitForSeconds(1);
         }
 
@@ -98,7 +97,6 @@ public class EnemyController : MonoBehaviour
 
     private void ChangeState(State state, IEnumerator coroutine)
     {
-        Debug.Log(state);
         currentState = state;
         StartCoroutine(coroutine);
     }

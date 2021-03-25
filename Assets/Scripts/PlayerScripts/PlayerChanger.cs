@@ -81,7 +81,7 @@ namespace PlayerScripts
         {
             while (Player.player.CurrentState == Player.State.Human)
             {
-                // yield return new WaitForSeconds(1f / keyDownChecksPerSecond);
+                yield return new WaitForSeconds(1f / keyDownChecksPerSecond);
                 if (Input.GetKeyDown(KeyCode.G))
                 {
                     EnterRobot();
@@ -93,7 +93,7 @@ namespace PlayerScripts
         {
             while (Player.player.CurrentState == Player.State.Robot)
             {
-                // yield return new WaitForSeconds(1f / keyDownChecksPerSecond);
+                yield return new WaitForSeconds(1f / keyDownChecksPerSecond);
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     ExitRobot();

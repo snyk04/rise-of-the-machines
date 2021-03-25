@@ -233,10 +233,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440ee5a23e4caf3469848b831c6ff73e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapTrigger: {fileID: 86674023}
-  scrapModel: {fileID: 86674020}
-  player: {fileID: 535012964}
-  ScrapInventoryController: {fileID: 535012968}
 --- !u!135 &86674023
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -594,7 +590,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 473368214}
-  m_LocalRotation: {x: 0.37081033, y: -0.000000015979715, z: 0.000000006380304, w: 0.9287087}
+  m_LocalRotation: {x: 0.37081033, y: 0.000000015979715, z: -0.000000006380304, w: 0.9287087}
   m_LocalPosition: {x: -2.041736, y: 3.3439941, z: -6.2612085}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -670,25 +666,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &535012964 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1459103385778355154, guid: fbaca33496b28774c9bf4c38e2a1890c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1459103384429762946}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &535012968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 535012964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f1b856a86f1fcf48846a0c393c6a443, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrapCounter: 0
 --- !u!1001 &673323207
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -889,10 +866,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440ee5a23e4caf3469848b831c6ff73e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapTrigger: {fileID: 791057045}
-  scrapModel: {fileID: 791057042}
-  player: {fileID: 535012964}
-  ScrapInventoryController: {fileID: 535012968}
 --- !u!135 &791057045
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -999,10 +972,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440ee5a23e4caf3469848b831c6ff73e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapTrigger: {fileID: 869758714}
-  scrapModel: {fileID: 869758711}
-  player: {fileID: 535012964}
-  ScrapInventoryController: {fileID: 535012968}
 --- !u!135 &869758714
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1212,7 +1181,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.37081033, y: -0.000000015979715, z: 0.000000006380304, w: 0.9287087}
+  m_LocalRotation: {x: 0.37081033, y: 0.000000015979715, z: -0.000000006380304, w: 0.9287087}
   m_LocalPosition: {x: -2.041736, y: 3.3439941, z: -6.2612085}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1521,7 +1490,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1459103384429762946}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 535012964}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96cda6a5b3209e147bd4ba8770478c5e, type: 3}
@@ -1878,10 +1847,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440ee5a23e4caf3469848b831c6ff73e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapTrigger: {fileID: 2105664782}
-  scrapModel: {fileID: 2105664781}
-  player: {fileID: 535012964}
-  ScrapInventoryController: {fileID: 535012968}
 --- !u!1001 &1459103384429762946
 PrefabInstance:
   m_ObjectHideFlags: 0
