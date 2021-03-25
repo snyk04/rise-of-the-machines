@@ -10,7 +10,7 @@ namespace Classes
             Robot
         }
 
-        public static Player player;
+        public static Player player { get; private set; }
 
         private delegate void TakeDamage(float damage);
         private delegate void RestoreHealth(float heal);
@@ -22,7 +22,6 @@ namespace Classes
         public Animator Animator { get; private set; }
         public CharacterController CharacterController { get; private set; }
         public Transform GunTransform { get; private set; }
-
 
         private State currentState;
         private Human human;
@@ -49,7 +48,6 @@ namespace Classes
                 OnChangeState();
             }
         }
-
 
         public Player(Human human, Robot robot)
         {
