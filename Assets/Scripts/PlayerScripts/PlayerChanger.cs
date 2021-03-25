@@ -7,7 +7,6 @@ namespace PlayerScripts
 {
     public class PlayerChanger : MonoBehaviour
     {
-
         [SerializeField] private GameObject robot;
         [SerializeField] private GameObject human;
         [SerializeField] private GameObject emptyRobot;
@@ -20,13 +19,12 @@ namespace PlayerScripts
         [SerializeField] private CinemachineVirtualCamera virtualCamera;
         [Space]
         [SerializeField] private float humanSpawnDistance;
-        [SerializeField] private int keyDownChecksPerSecond;
 
-        private void SetVirtualCameraTarget(Transform follow, Transform lookAt) {
+        private void SetVirtualCameraTarget(Transform follow, Transform lookAt)
+        {
             virtualCamera.LookAt = lookAt;
             virtualCamera.Follow = follow;
         }
-
 
         private void ExitRobot()
         {
@@ -48,7 +46,7 @@ namespace PlayerScripts
             Player.player.CurrentState = Player.State.Robot;
             emptyRobot.SetActive(false);
             enterText.SetActive(false);
-            
+
             human.SetActive(false);
             robot.SetActive(true);
             SetVirtualCameraTarget(robotFollow, robotLookAt);
@@ -81,7 +79,6 @@ namespace PlayerScripts
         {
             while (Player.player.CurrentState == Player.State.Human)
             {
-                yield return new WaitForSeconds(1f / keyDownChecksPerSecond);
                 if (Input.GetKeyDown(KeyCode.G))
                 {
                     EnterRobot();
@@ -93,7 +90,6 @@ namespace PlayerScripts
         {
             while (Player.player.CurrentState == Player.State.Robot)
             {
-                yield return new WaitForSeconds(1f / keyDownChecksPerSecond);
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     ExitRobot();
