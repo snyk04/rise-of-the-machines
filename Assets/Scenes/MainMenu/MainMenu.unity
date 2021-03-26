@@ -2977,7 +2977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 815685367ba18d348842cf19e0e02922, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 3803c8136088a7240bddb27a174351fa, type: 2}
   isGlobal: 1
   blendDistance: 1
   weight: 0.978
@@ -8045,6 +8045,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400092, guid: 8daa50189dd68ef46b8bd15dad17a34c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 8daa50189dd68ef46b8bd15dad17a34c, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 50de72e24196d5a4c9ee06afd595442e, type: 2}
+    - target: {fileID: 9500000, guid: 8daa50189dd68ef46b8bd15dad17a34c, type: 3}
+      propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
