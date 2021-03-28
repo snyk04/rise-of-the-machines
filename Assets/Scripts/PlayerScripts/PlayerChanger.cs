@@ -17,6 +17,9 @@ namespace PlayerScripts
         [SerializeField] private Transform humanFollow;
         [SerializeField] private Transform robotFollow;
         [SerializeField] private CinemachineVirtualCamera virtualCamera;
+        [SerializeField] private AudioClip robotEnterSnd;
+        [SerializeField] private AudioClip robotExitSnd;
+        [SerializeField] private GameObject soundSource;
         [Space]
         [SerializeField] private float humanSpawnDistance;
 
@@ -39,6 +42,7 @@ namespace PlayerScripts
             emptyRobot.SetActive(true);
             human.SetActive(true);
             SetVirtualCameraTarget(humanFollow, humanLookAt);
+            StartCoroutine(exitSound());
 
         }
         private void EnterRobot()
@@ -52,6 +56,7 @@ namespace PlayerScripts
             SetVirtualCameraTarget(robotFollow, robotLookAt);
 
             ActivateExit();
+            StartCoroutine(enterSound());
         }
 
         public void ActivateEnter()
@@ -96,6 +101,34 @@ namespace PlayerScripts
                 }
                 yield return null;
             }
+        }
+        IEnumerator enterSound()
+        {
+            AudioSource source = soundSource.AddComponent<AudioSource>();
+
+            source.clip = robotEnterSnd;
+            source.minDistance = 1;
+            source.maxDistance = 50;
+            source.volume = 1f;
+            source.spatialBlend = 1f;
+            source.Play();
+
+            yield return new WaitForSeconds(source.clip.length);
+            Destroy(source);
+        }
+        IEnumerator exitSound()
+        {
+            AudioSource source = soundSource.AddComponent<AudioSource>();
+
+            source.clip = robotExitSnd;
+            source.minDistance = 1;
+            source.maxDistance = 50;
+            source.volume = 1f;
+            source.spatialBlend = 1f;
+            source.Play();
+
+            yield return new WaitForSeconds(source.clip.length);
+            Destroy(source);
         }
     }
 }

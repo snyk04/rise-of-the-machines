@@ -1,5 +1,6 @@
 ﻿using Character;
 using UnityEngine;
+using System.Collections;
 
 namespace Objects
 {
@@ -8,6 +9,8 @@ namespace Objects
         [SerializeField] private Transform muzzleHole;
         [SerializeField] private LayerMask damageableLayer;
         [SerializeField] private float averageDamage;
+        [SerializeField] private AudioClip shootSound;
+        [SerializeField] private GameObject shootPoint;
 
         private void OnDrawGizmos()
         {
@@ -17,6 +20,7 @@ namespace Objects
         public void Shoot()
         {
             var shootingRay = new Ray(muzzleHole.position, muzzleHole.forward);
+            StartCoroutine(ShootSoundManager());
             if (Physics.Raycast(shootingRay, out RaycastHit hitInfo, 25))
             {
                 if (hitInfo.transform.TryGetComponent(out Damageable damageable))
@@ -25,6 +29,20 @@ namespace Objects
                     damageable.TakeDamage(amountOfDamage);
                 }
             }
+        }
+        IEnumerator ShootSoundManager()
+        {
+            AudioSource source = shootPoint.AddComponent<AudioSource>();
+
+            source.clip = shootSound;
+            source.minDistance = 1;
+            source.maxDistance = 50;
+            source.volume = 1f;
+            source.spatialBlend = 1f;
+            source.Play();
+
+            yield return new WaitForSeconds(source.clip.length);
+            Destroy(source);
         }
     }
 }
