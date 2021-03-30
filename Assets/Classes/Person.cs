@@ -4,13 +4,14 @@ using UnityEngine;
 namespace Classes {
     public abstract class Person {
         public Health Health { get; }
-        public float MoveSpeed { get; }
+
+        public SpeedCharacteristic MoveSpeed { get; protected set; }
         public Transform Transform { get; }
         public Animator Animator { get; }
 
         protected Person(float maxHealth, float moveSpeed, Transform transform, Animator animator) {
             Health = new Health(maxHealth, Die);
-            MoveSpeed = moveSpeed;
+            MoveSpeed = new SpeedCharacteristic(moveSpeed);
             Transform = transform;
             Animator = animator;
         }

@@ -18,9 +18,8 @@ namespace Classes.TryInHierarchie {
             }
         }
 
-        public Health(float maxHp, HealthZero healthZeroMethod) {
+        public Health(float maxHp, HealthZero healthZeroMethod) : base(maxHp) {
             MaxHP = maxHp;
-            HP = MaxHP;
             HealthZeroEvent += healthZeroMethod;
         }
 

@@ -2,8 +2,8 @@
     public abstract class LegsArmor : Equipment {
         public ArmorCharacteristic Armor { get; protected set; }
 
-        protected LegsArmor(string name, Health health, ArmorCharacteristic armor) : base(name, health) {
-            Armor = armor;
+        protected LegsArmor(string name, float armor) : base(name) {
+            Armor = new ArmorCharacteristic(armor);
         }
     }
 }

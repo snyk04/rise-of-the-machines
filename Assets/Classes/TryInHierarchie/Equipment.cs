@@ -5,12 +5,9 @@ namespace Classes.TryInHierarchie {
         public string Name { get; }
 
         public int Level { get; private set; }
-
-        private Health health;
-
-        protected Equipment(string name, Health health) {
+        
+        protected Equipment(string name) {
             Name = name;
-            this.health = health;
         }
 
         public virtual void Upgrade() {

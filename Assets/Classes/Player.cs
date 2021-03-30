@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Classes.TryInHierarchie;
+using UnityEngine;
 
 namespace Classes
 {
@@ -10,14 +11,14 @@ namespace Classes
             Robot
         }
 
-        public static Player player { get; private set; }
+        public static Player Instance { get; private set; }
 
         private delegate void TakeDamage(float damage);
         private delegate void RestoreHealth(float heal);
 
         private TakeDamage takeDamage;
         private RestoreHealth restoreHealth;
-        public float MoveSpeed { get; private set; }
+        public SpeedCharacteristic MoveSpeed { get; private set; }
         public Transform Transform { get; private set; }
         public Animator Animator { get; private set; }
         public CharacterController CharacterController { get; private set; }
@@ -54,7 +55,7 @@ namespace Classes
             Human = human;
             Robot = robot;
             TransformIntoHuman();
-            player = this;
+            Instance = this;
         }
 
         private void OnChangeState()
@@ -77,7 +78,7 @@ namespace Classes
         {
             TransformIntoObject(Robot.TakeDamage, Robot.RestoreHealth, Robot.MoveSpeed, Robot.Transform, Robot.Animator, Robot.CharacterController, Robot.GunTransform);
         }
-        private void TransformIntoObject(TakeDamage objTakeDamage, RestoreHealth objRestoreHealth, float objMoveSpeed, Transform objTransform, Animator objAnimator, CharacterController objCharacterController, Transform objGunTransform)
+        private void TransformIntoObject(TakeDamage objTakeDamage, RestoreHealth objRestoreHealth, SpeedCharacteristic objMoveSpeed, Transform objTransform, Animator objAnimator, CharacterController objCharacterController, Transform objGunTransform)
         {
             takeDamage = objTakeDamage;
             restoreHealth = objRestoreHealth;

@@ -2,6 +2,8 @@
     public abstract class EquipmentSlot {
         public Equipment SlotItem { get; protected set; }
 
+        protected EquipmentSlot() { }
+
         protected EquipmentSlot(Equipment slotItem) {
             SlotItem = slotItem;
         }
@@ -11,6 +13,6 @@
             SlotItem = null;
         }
 
-        public abstract bool TryChangeItem(Equipment slotItem);
+        public abstract bool TryChangeItem(Equipment slotItem, out Equipment oldItem);
     }
 }

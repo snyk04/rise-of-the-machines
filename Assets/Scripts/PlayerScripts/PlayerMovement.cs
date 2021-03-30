@@ -33,9 +33,9 @@ namespace PlayerScripts
                 mainCamera.transform.forward * moveVector.z + mainCamera.transform.right * moveVector.x;
             desiredDirection.y = 0f;
             desiredDirection.Normalize();
-            var moveToPosition = desiredDirection * (Time.deltaTime * Player.player.MoveSpeed);
-            Player.player.CharacterController.Move(moveToPosition);
-            localMoveDir = new Vector2 { x = desiredDirection.x, y = desiredDirection.z }.RotateDegrees(-Player.player.Transform.rotation.eulerAngles.y);
+            var moveToPosition = desiredDirection * (Time.deltaTime * Player.Instance.MoveSpeed.Value);
+            Player.Instance.CharacterController.Move(moveToPosition);
+            localMoveDir = new Vector2 { x = desiredDirection.x, y = desiredDirection.z }.RotateDegrees(-Player.Instance.Transform.rotation.eulerAngles.y);
         }
         private void TurnPlayer()
         {
@@ -43,12 +43,12 @@ namespace PlayerScripts
 
             if (Physics.Raycast(ray, out var hit, whatIsGround))
             {
-                Player.player.Transform.LookAt(hit.point);
-                Player.player.Transform.localEulerAngles = Vector3.up * Player.player.Transform.localEulerAngles.y;
+                Player.Instance.Transform.LookAt(hit.point);
+                Player.Instance.Transform.localEulerAngles = Vector3.up * Player.Instance.Transform.localEulerAngles.y;
                 if (isGunRotate)
                 { // todo Clamp rotation of gun 
-                    Player.player.GunTransform.LookAt(hit.point);
-                    Player.player.GunTransform.localEulerAngles += GUN_ROTATION_OFFSET;
+                    Player.Instance.GunTransform.LookAt(hit.point);
+                    Player.Instance.GunTransform.localEulerAngles += GUN_ROTATION_OFFSET;
                 }
             }
         }
