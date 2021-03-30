@@ -1,49 +1,30 @@
-﻿using UnityEngine;
+﻿using Classes.TryInHierarchie;
+using UnityEngine;
 
-namespace Classes
-{
-    public abstract class Person : IDamageable
-    {
-        private float health;
-        public bool IsDead() => Health.Equals(0);
-        public delegate void OnHealthZero();
-        public event OnHealthZero healthZero;
-
-        public float Health
-        {
-            get => health;
-            private set
-            {
-                health = Mathf.Clamp(value, 0, MaxHealth);
-                if (health.Equals(0))
-                    healthZero?.Invoke();
-            }
-        }
-        public float MaxHealth { get; }
+namespace Classes {
+    public abstract class Person {
+        public Health Health { get; }
         public float MoveSpeed { get; }
         public Transform Transform { get; }
         public Animator Animator { get; }
 
-        protected Person(float maxHealth, float moveSpeed, Transform transform, Animator animator)
-        {
-            MaxHealth = maxHealth;
-            health = maxHealth;
+        protected Person(float maxHealth, float moveSpeed, Transform transform, Animator animator) {
+            Health = new Health(maxHealth, Die);
             MoveSpeed = moveSpeed;
             Transform = transform;
             Animator = animator;
-            healthZero += Die;
         }
 
-        public virtual void Die() { }
-        public virtual void Attack() { }
+        protected virtual void Die() { }
 
-        public void TakeDamage(float damage)
-        {
-            Health -= damage;
+        protected virtual void Attack() { }
+
+        public void TakeDamage(float damage) {
+            Health.TakeDamage(damage);
         }
-        public void RestoreHealth(float heal)
-        {
-            Health += heal;
+
+        public void RestoreHealth(float heal) {
+            Health.RestoreHealth(heal);
         }
     }
 }
