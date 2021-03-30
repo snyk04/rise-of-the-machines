@@ -11,6 +11,9 @@ namespace Objects
         [SerializeField] private float averageDamage;
         [SerializeField] private AudioClip shootSound;
         [SerializeField] private GameObject shootPoint;
+        [SerializeField] private ParticleSystem shotParticle_1;
+        [SerializeField] private ParticleSystem shotParticle_2;
+        [SerializeField] private ParticleSystem shotParticle_3;
 
         private void OnDrawGizmos()
         {
@@ -19,6 +22,9 @@ namespace Objects
 
         public void Shoot()
         {
+            shotParticle_1.Emit(1);
+            shotParticle_2.Emit(1);
+            shotParticle_3.Emit(1);
             var shootingRay = new Ray(muzzleHole.position, muzzleHole.forward);
             StartCoroutine(ShootSoundManager());
             if (Physics.Raycast(shootingRay, out RaycastHit hitInfo, 25))
