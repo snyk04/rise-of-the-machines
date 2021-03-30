@@ -6,7 +6,7 @@ namespace Classes
     {
         public Enemy(float maxHealth, float moveSpeed, Transform transform, Animator animator) : base(maxHealth, moveSpeed, transform, animator) { }
 
-        public override void Die()
+        protected override void Die()
         {
             //TODO: animation
             Object.Destroy(Transform.gameObject);

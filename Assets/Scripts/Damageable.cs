@@ -1,20 +1,21 @@
 ﻿using Classes;
+using Classes.TryInHierarchie;
 using UnityEngine;
 
 public class Damageable : MonoBehaviour
 {
     [SerializeField] private float maxHealth;
 
-    private IDamageable damageable;
+    private Health health;
 
     public void Initialize(float maxHealth, float moveSpeed, Transform transform, Animator animator = null)
     {
-        damageable = new Enemy(maxHealth, moveSpeed, transform, animator);
+        health = new Enemy(maxHealth, moveSpeed, transform, animator).Health;
     }
 
     public void TakeDamage(float damage)
     {
-        damageable = damageable ?? new Breakable(maxHealth, transform);
-        damageable.TakeDamage(damage);
+        health = health ?? new Breakable(maxHealth, transform).Health;
+        health.TakeDamage(damage);
     }
 }
