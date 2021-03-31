@@ -31,7 +31,7 @@ namespace PlayerScripts
 
         private void ExitRobot()
         {
-            Player.player.CurrentState = Player.State.Human;
+            Player.Instance.CurrentState = Player.State.Human;
             exitText.SetActive(false);
             robot.SetActive(false);
 
@@ -47,7 +47,7 @@ namespace PlayerScripts
         }
         private void EnterRobot()
         {
-            Player.player.CurrentState = Player.State.Robot;
+            Player.Instance.CurrentState = Player.State.Robot;
             emptyRobot.SetActive(false);
             enterText.SetActive(false);
 
@@ -82,7 +82,7 @@ namespace PlayerScripts
 
         private IEnumerator WaitForEnter()
         {
-            while (Player.player.CurrentState == Player.State.Human)
+            while (Player.Instance.CurrentState == Player.State.Human)
             {
                 if (Input.GetKeyDown(KeyCode.G))
                 {
@@ -93,7 +93,7 @@ namespace PlayerScripts
         }
         private IEnumerator WaitForExit()
         {
-            while (Player.player.CurrentState == Player.State.Robot)
+            while (Player.Instance.CurrentState == Player.State.Robot)
             {
                 if (Input.GetKeyDown(KeyCode.F))
                 {

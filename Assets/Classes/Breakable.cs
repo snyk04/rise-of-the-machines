@@ -1,43 +1,24 @@
-﻿using UnityEngine;
+﻿using Classes.TryInHierarchie;
+using UnityEngine;
 
-namespace Classes
-{
-    public class Breakable : IDamageable
-    {
-        private float health;
-        public bool IsDead() => Health.Equals(0);
-        public delegate void OnHealthZero();
-        public event OnHealthZero healthZero;
+namespace Classes {
+    public class Breakable {
+        public Health Health { get; }
 
-        public float Health 
-        {
-            get => health;
-            private set
-            {
-                health = Mathf.Clamp(value, 0, MaxHealth);
-                if (health <= 0)
-                    healthZero?.Invoke();
-            }
-        }
-        public float MaxHealth { get; }
         public Transform Transform { get; }
 
-        public Breakable(float maxhealth, Transform transform)
-        {
-            MaxHealth = maxhealth;
-            health = maxhealth;
+        public Breakable(float maxHealth, Transform transform) {
+            Health = new Health(maxHealth, Die);
             Transform = transform;
-            healthZero += Die;
         }
 
-        public void Die()
-        {
+        private void Die() {
             //TODO: animation
             Object.Destroy(Transform.gameObject);
         }
-        public void TakeDamage(float damage)
-        {
-            Health -= damage;
+
+        public void TakeDamage(float damage) {
+            Health.TakeDamage(damage);
         }
     }
 }

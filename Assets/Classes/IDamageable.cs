@@ -1,10 +1,8 @@
-﻿public interface IDamageable
-{
+﻿public interface IDamageable {
     bool IsDead();
 
-    // public float Health { get; private set; }
-    float MaxHealth { get; }
+    float HP { get; }
 
-    void Die();
+    // void Die();
     void TakeDamage(float damage);
 }

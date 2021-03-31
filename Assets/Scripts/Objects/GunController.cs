@@ -1,5 +1,4 @@
-﻿using Character;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 namespace Objects

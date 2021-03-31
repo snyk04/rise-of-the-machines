@@ -1,4 +1,3 @@
-using Character;
 using Classes;
 using System.Collections;
 using UnityEngine;
@@ -45,11 +44,11 @@ namespace Characters
             {
                 yield return new WaitForSeconds(1 / checksPerSecondForFindPlayer);
 
-                if (Physics.Linecast(transform.position, Player.player.Transform.position, raycastObstacleLayer))
+                if (Physics.Linecast(transform.position, Player.Instance.Transform.position, raycastObstacleLayer))
                 {
                     continue;
                 }
-                Vector3 vectorBetweenEnemyAndPlayer = Player.player.Transform.position - transform.position;
+                Vector3 vectorBetweenEnemyAndPlayer = Player.Instance.Transform.position - transform.position;
                 if (Vector3.Angle(transform.forward, vectorBetweenEnemyAndPlayer) > fieldOfView / 2)
                 {
                     continue;
@@ -70,7 +69,7 @@ namespace Characters
             {
                 yield return new WaitForSeconds(1 / checksPerSecondForPursuitPlayer);
 
-                float distanceVectorLength = (Player.player.Transform.position - transform.position).magnitude;
+                float distanceVectorLength = (Player.Instance.Transform.position - transform.position).magnitude;
                 if (distanceVectorLength > viewDistance * 1.5f)
                 {
                     navMeshAgent.isStopped = true;
@@ -84,12 +83,12 @@ namespace Characters
                     break;
                 }
 
-                navMeshAgent.destination = Player.player.Transform.position;
+                navMeshAgent.destination = Player.Instance.Transform.position;
             }
         }
         private IEnumerator FightPlayer()
         {
-            while ((Player.player.Transform.position - transform.position).magnitude <= fightStopDistance)
+            while ((Player.Instance.Transform.position - transform.position).magnitude <= fightStopDistance)
             {
                 // TODO: Battle logic
                 yield return new WaitForSeconds(1);
