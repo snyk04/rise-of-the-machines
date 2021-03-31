@@ -2,6 +2,7 @@
 using Cinemachine;
 using Classes;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace PlayerScripts
 {
@@ -20,8 +21,7 @@ namespace PlayerScripts
         [SerializeField] private AudioClip robotEnterSnd;
         [SerializeField] private AudioClip robotExitSnd;
         [SerializeField] private GameObject soundSource;
-        [Space]
-        [SerializeField] private float humanSpawnDistance;
+        [Space] [SerializeField] private float humanSpawnDistance;
 
         private void SetVirtualCameraTarget(Transform follow, Transform lookAt)
         {
@@ -43,8 +43,8 @@ namespace PlayerScripts
             human.SetActive(true);
             SetVirtualCameraTarget(humanFollow, humanLookAt);
             StartCoroutine(exitSound());
-
         }
+
         private void EnterRobot()
         {
             Player.Instance.CurrentState = Player.State.Robot;
@@ -64,16 +64,19 @@ namespace PlayerScripts
             enterText.SetActive(true);
             StartCoroutine(WaitForEnter());
         }
+
         public void ActivateExit()
         {
             exitText.SetActive(true);
             StartCoroutine(WaitForExit());
         }
+
         public void DeactivateEnter()
         {
             enterText.SetActive(false);
             StopCoroutine(WaitForEnter());
         }
+
         public void DeactivateExit()
         {
             enterText.SetActive(true);
@@ -84,27 +87,31 @@ namespace PlayerScripts
         {
             while (Player.Instance.CurrentState == Player.State.Human)
             {
-                if (Input.GetKeyDown(KeyCode.G))
+                if (Keyboard.current[Key.G].wasPressedThisFrame)
                 {
                     EnterRobot();
                 }
+
                 yield return null;
             }
         }
+
         private IEnumerator WaitForExit()
         {
             while (Player.Instance.CurrentState == Player.State.Robot)
             {
-                if (Input.GetKeyDown(KeyCode.F))
+                if (Keyboard.current[Key.F].wasPressedThisFrame)
                 {
                     ExitRobot();
                 }
+
                 yield return null;
             }
         }
+
         IEnumerator enterSound()
         {
-            AudioSource source = soundSource.AddComponent<AudioSource>();
+            var source = soundSource.AddComponent<AudioSource>();
 
             source.clip = robotEnterSnd;
             source.minDistance = 1;
@@ -116,9 +123,10 @@ namespace PlayerScripts
             yield return new WaitForSeconds(source.clip.length);
             Destroy(source);
         }
+
         IEnumerator exitSound()
         {
-            AudioSource source = soundSource.AddComponent<AudioSource>();
+            var source = soundSource.AddComponent<AudioSource>();
 
             source.clip = robotExitSnd;
             source.minDistance = 1;

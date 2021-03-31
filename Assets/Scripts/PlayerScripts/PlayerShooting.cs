@@ -1,15 +1,19 @@
 ﻿using Objects;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PlayerShooting : MonoBehaviour
+namespace PlayerScripts
 {
-    [SerializeField] private GunController gun;
-
-    private void Update()
+    public class PlayerShooting : MonoBehaviour
     {
-        if (Input.GetMouseButtonDown(0))
+        [SerializeField] private GunController gun;
+
+        private void Update()
         {
-            gun.Shoot();
+            if (Mouse.current.leftButton.wasPressedThisFrame)
+            {
+                gun.Shoot();
+            }
         }
     }
 }
