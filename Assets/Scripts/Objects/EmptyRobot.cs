@@ -11,14 +11,14 @@ namespace Objects
         {
             if (other.TryGetComponent<CharacterController>(out _))
             {
-                playerChanger.ActivateEnter();
+                playerChanger.ActivateEnterText();
             }
         }
         private void OnTriggerExit(Collider other)
         {
             if (other.TryGetComponent<CharacterController>(out _))
             {
-                playerChanger.DeactivateEnter();
+                playerChanger.DeactivateEnterText();
             }
         }
     }

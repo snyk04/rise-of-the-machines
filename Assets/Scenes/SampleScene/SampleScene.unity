@@ -589,7 +589,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 473368214}
-  m_LocalRotation: {x: 0.37081033, y: -0.000000015979715, z: 0.000000006380304, w: 0.9287087}
+  m_LocalRotation: {x: 0.37081033, y: 0.000000015979715, z: -0.000000006380304, w: 0.9287087}
   m_LocalPosition: {x: -2.041736, y: 3.3439941, z: -6.2612085}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1178,7 +1178,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.37081033, y: -0.000000015979715, z: 0.000000006380304, w: 0.9287087}
+  m_LocalRotation: {x: 0.37081033, y: 0.000000015979715, z: -0.000000006380304, w: 0.9287087}
   m_LocalPosition: {x: -2.041736, y: 3.3439941, z: -6.2612085}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1846,58 +1846,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1459103384429762946}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1657690069 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4929464958797153170, guid: fbaca33496b28774c9bf4c38e2a1890c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1459103384429762946}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1657690066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e8554918069a0647a212e9c8661a06d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1657690071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1657690066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2aa9e23233b59a47bbccd4d5c39fc9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoveInputEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1657690069}
-        m_MethodName: OnMoveInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  RotateInputEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1657690069}
-        m_MethodName: OnRotateInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &1675644514
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2468,6 +2416,11 @@ PrefabInstance:
       objectReference: {fileID: 673323208}
     - target: {fileID: 1459103385778355152, guid: fbaca33496b28774c9bf4c38e2a1890c,
         type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1459103384429762947}
+    - target: {fileID: 1459103385778355152, guid: fbaca33496b28774c9bf4c38e2a1890c,
+        type: 3}
       propertyPath: soundSource
       value: 
       objectReference: {fileID: 1657690066}
@@ -2649,6 +2602,12 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2523660955366305453, guid: fbaca33496b28774c9bf4c38e2a1890c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fbaca33496b28774c9bf4c38e2a1890c, type: 3}
+--- !u!82 &1459103384429762947 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 545817430553012377, guid: fbaca33496b28774c9bf4c38e2a1890c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1459103384429762946}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1792025990949254632
 PrefabInstance:
   m_ObjectHideFlags: 0
