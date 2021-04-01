@@ -7,7 +7,7 @@ namespace Objects
     {
         private PlayerScrapController scrapInventoryController;
 
-        private void Awake()
+        private void Start()
         {
             scrapInventoryController = PlayerController.playerController.GetComponent<PlayerScrapController>();
         }

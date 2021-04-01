@@ -508,7 +508,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 473368214}
-  m_LocalRotation: {x: 0.37081033, y: 0.000000015979715, z: -0.000000006380304, w: 0.9287087}
+  m_LocalRotation: {x: 0.37081033, y: -0.000000015979715, z: 0.000000006380304, w: 0.9287087}
   m_LocalPosition: {x: -2.041736, y: 3.3439941, z: -6.2612085}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -953,7 +953,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.37081033, y: 0.000000015979715, z: -0.000000006380304, w: 0.9287087}
+  m_LocalRotation: {x: 0.37081033, y: -0.000000015979715, z: 0.000000006380304, w: 0.9287087}
   m_LocalPosition: {x: -2.041736, y: 3.3439941, z: -6.2612085}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2036,11 +2036,6 @@ PrefabInstance:
       objectReference: {fileID: 1348657746}
     - target: {fileID: 8576996361051769252, guid: fbaca33496b28774c9bf4c38e2a1890c,
         type: 3}
-      propertyPath: shotParticle.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8576996361051769252, guid: fbaca33496b28774c9bf4c38e2a1890c,
-        type: 3}
       propertyPath: vladLoh
       value: 3
       objectReference: {fileID: 0}
@@ -2074,6 +2069,11 @@ PrefabInstance:
       propertyPath: shotParticle_3
       value: 
       objectReference: {fileID: 28609682}
+    - target: {fileID: 8576996361051769252, guid: fbaca33496b28774c9bf4c38e2a1890c,
+        type: 3}
+      propertyPath: shotParticle.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8576996361051769252, guid: fbaca33496b28774c9bf4c38e2a1890c,
         type: 3}
       propertyPath: shotParticle.Array.data[0]
