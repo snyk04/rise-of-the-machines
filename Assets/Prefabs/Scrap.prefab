@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5926700414644198507}
   - component: {fileID: 5926700414644198506}
   - component: {fileID: 5926700414644198517}
-  - component: {fileID: 5926700414644198516}
+  - component: {fileID: 1205332893371038357}
   - component: {fileID: 5926700414644198504}
   m_Layer: 0
   m_Name: Scrap
@@ -27,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5926700414644198519}
-  m_LocalRotation: {x: 0.50960666, y: 0.17477658, z: 0.16298172, w: 0.8265538}
-  m_LocalPosition: {x: 19.703516, y: 16.854267, z: -11.187228}
-  m_LocalScale: {x: 1.7759898, y: 1.7759898, z: 1.7759899}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 51.764004, y: 47.326004, z: 46.315002}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5926700414644198506
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -81,8 +81,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &5926700414644198516
-SphereCollider:
+--- !u!65 &1205332893371038357
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,7 +92,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5926700414644198504
 MonoBehaviour:
@@ -106,3 +106,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440ee5a23e4caf3469848b831c6ff73e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  amountOfScrap: 1
