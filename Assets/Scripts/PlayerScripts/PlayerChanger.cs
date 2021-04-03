@@ -52,6 +52,7 @@ namespace PlayerScripts
         private IEnumerator EnterRobot()
         {
             // TODO: блокировать управление
+            DeactivateEnterText();
             yield return StartCoroutine(canvasController.FadeScreen());
 
             PlaySound(enterRobotSound);
@@ -64,18 +65,18 @@ namespace PlayerScripts
             human.SetActive(false);
             robot.SetActive(true);
             SetVirtualCameraTarget(robotFollow, robotLookAt);
-            DeactivateEnterText();
-            ActivateExitText();
 
             yield return new WaitForSeconds(enterRobotSound.length);
             canvasController.StopAnimation();
 
             // TODO: разблокировать управление
+            ActivateExitText();
             yield return StartCoroutine(canvasController.UnfadeScreen());
         }
         private IEnumerator ExitRobot()
         {
             // TODO: блокировать управление
+            DeactivateExitText();
             yield return StartCoroutine(canvasController.FadeScreen());
 
             PlaySound(exitRobotSound);
@@ -91,7 +92,6 @@ namespace PlayerScripts
             emptyRobot.transform.eulerAngles = robot.transform.eulerAngles;
             human.transform.position = robot.transform.position + robot.transform.forward * humanSpawnDistance;
             SetVirtualCameraTarget(humanFollow, humanLookAt);
-            DeactivateExitText();
 
             yield return new WaitForSeconds(exitRobotSound.length);
             canvasController.StopAnimation();

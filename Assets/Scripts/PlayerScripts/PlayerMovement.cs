@@ -1,8 +1,5 @@
 ﻿using Classes;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.InputSystem;
-
 
 namespace PlayerScripts
 {
@@ -11,11 +8,14 @@ namespace PlayerScripts
         private static readonly Vector3 GUN_ROTATION_OFFSET = 90 * Vector3.up;
 
         // [SerializeField] private CharacterController characterController;
+        [Header("Components")]
         [SerializeField] private PlayerChanger playerChanger;
         [SerializeField] private PlayerAnimation animationController;
         [SerializeField] private Camera mainCamera;
+        [Header("Settings")]
         [SerializeField] private LayerMask whatIsGround;
         [SerializeField] private bool isGunRotate;
+        [SerializeField] private float rotationSensitivity;
 
         private Vector2 moveDirection;
         private Vector2 rotateDirection;
@@ -25,7 +25,6 @@ namespace PlayerScripts
             animationController = GetComponent<PlayerAnimation>();
             mainCamera = mainCamera ? mainCamera : Camera.main;
         }
-
         private void FixedUpdate()
         {
             MovePlayer(moveDirection, out var localMoveDir);
@@ -38,7 +37,6 @@ namespace PlayerScripts
             moveDirection.x = x;
             moveDirection.y = y;
         }
-
         public void OnRotateInput(float x, float y)
         {
             rotateDirection.x = x;
@@ -55,18 +53,18 @@ namespace PlayerScripts
 
             var moveToPosition = desiredDirection * (Time.deltaTime * Player.Instance.MoveSpeed.Value);
             Player.Instance.CharacterController.Move(moveToPosition);
-            localMoveDir = new Vector2 {x = desiredDirection.x, y = desiredDirection.z}.RotateDegrees(-Player.Instance
+            localMoveDir = new Vector2 { x = desiredDirection.x, y = desiredDirection.z }.RotateDegrees(-Player.Instance
                 .Transform
                 .rotation.eulerAngles.y);
         }
-
         private void TurnPlayer()
         {
             var ray = mainCamera.ScreenPointToRay(rotateDirection);
 
             if (Physics.Raycast(ray, out var hit, whatIsGround))
             {
-                Player.Instance.Transform.LookAt(hit.point);
+                Vector3 currentRotateVector = Vector3.Lerp(Player.Instance.Transform.forward, hit.point - Player.Instance.Transform.position, Time.deltaTime * rotationSensitivity);
+                Player.Instance.Transform.forward = currentRotateVector;
                 Player.Instance.Transform.localEulerAngles = Vector3.up * Player.Instance.Transform.localEulerAngles.y;
                 if (isGunRotate)
                 {
