@@ -1,11 +1,14 @@
 ﻿using PlayerScripts;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Objects
 {
     public class Scrap : MonoBehaviour
     {
         [SerializeField] private int amountOfScrap;
+        
+        public UnityEvent pickedUp;
 
         private PlayerScrapController scrapInventoryController;
 
@@ -15,8 +18,10 @@ namespace Objects
         }
         private void OnTriggerEnter(Collider other)
         {
-            Destroy(gameObject);
             scrapInventoryController.AmountOfScrap += amountOfScrap;
+
+            pickedUp.Invoke();
+            Destroy(gameObject);
         }
     }
 }
