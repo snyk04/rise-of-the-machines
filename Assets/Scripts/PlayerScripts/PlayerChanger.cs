@@ -10,11 +10,12 @@ namespace PlayerScripts
     {
         #region Properties
 
-        [Header("Gameobjects and transforms")]
+        [Header("Gameobjects")]
         [SerializeField] private GameObject robot;
         [SerializeField] private GameObject human;
         [SerializeField] private GameObject emptyRobot;
-        [Space]
+
+        [Header("Cinemachine points")]
         [SerializeField] private Transform humanLookAt;
         [SerializeField] private Transform robotLookAt;
         [SerializeField] private Transform humanFollow;
