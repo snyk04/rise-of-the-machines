@@ -8,25 +8,31 @@ namespace PlayerScripts
 {
     public class PlayerChanger : MonoBehaviour
     {
+        #region Properties
+
+        [Header("Gameobjects and transforms")]
         [SerializeField] private GameObject robot;
         [SerializeField] private GameObject human;
         [SerializeField] private GameObject emptyRobot;
-        [Space]
-        [SerializeField] private GameObject enterText;
-        [SerializeField] private GameObject exitText;
         [Space]
         [SerializeField] private Transform humanLookAt;
         [SerializeField] private Transform robotLookAt;
         [SerializeField] private Transform humanFollow;
         [SerializeField] private Transform robotFollow;
-        [Space]
+        
+        [Header("Components")]
         [SerializeField] private CinemachineVirtualCamera virtualCamera;
         [SerializeField] private AudioSource audioSource;
-        [Space]
+        [SerializeField] private CanvasController canvasController;
+        
+        [Header("Sound")]
         [SerializeField] private AudioClip enterRobotSound;
         [SerializeField] private AudioClip exitRobotSound;
-        [Space] 
+        
+        [Header("Settings")]
         [SerializeField] private float humanSpawnDistance;
+
+        #endregion
 
         private void Start()
         {
@@ -41,65 +47,87 @@ namespace PlayerScripts
             virtualCamera.LookAt = lookAt;
             virtualCamera.Follow = follow;
         }
-       
-        private void EnterRobot()
-        {
-            Player.Instance.CurrentState = Player.State.Robot;
-            emptyRobot.SetActive(false);
-            enterText.SetActive(false);
 
+        private IEnumerator EnterRobot()
+        {
+            // TODO: блокировать управление
+            yield return StartCoroutine(canvasController.FadeScreen());
+
+            PlaySound(enterRobotSound);
+
+            string[] textQuery = { "Одеваемся.", "Одеваемся..", "Одеваемся..." };
+            canvasController.StartAnimation(textQuery);
+
+            ChangePlayerState(Player.State.Robot);
+            emptyRobot.SetActive(false);
             human.SetActive(false);
             robot.SetActive(true);
             SetVirtualCameraTarget(robotFollow, robotLookAt);
-
+            DeactivateEnterText();
             ActivateExitText();
-            PlaySound(enterRobotSound);
-        }
-        private void ExitRobot()
-        {
-            Player.Instance.CurrentState = Player.State.Human;
-            exitText.SetActive(false);
-            robot.SetActive(false);
 
+            yield return new WaitForSeconds(enterRobotSound.length);
+            canvasController.StopAnimation();
+
+            // TODO: разблокировать управление
+            yield return StartCoroutine(canvasController.UnfadeScreen());
+        }
+        private IEnumerator ExitRobot()
+        {
+            // TODO: блокировать управление
+            yield return StartCoroutine(canvasController.FadeScreen());
+
+            PlaySound(exitRobotSound);
+
+            string[] textQuery = { "Раздеваемся.", "Раздеваемся..", "Раздеваемся..." };
+            canvasController.StartAnimation(textQuery);
+
+            ChangePlayerState(Player.State.Human);
+            emptyRobot.SetActive(true);
+            human.SetActive(true);
+            robot.SetActive(false);
             emptyRobot.transform.position = robot.transform.position;
             emptyRobot.transform.eulerAngles = robot.transform.eulerAngles;
             human.transform.position = robot.transform.position + robot.transform.forward * humanSpawnDistance;
-
-            emptyRobot.SetActive(true);
-            human.SetActive(true);
             SetVirtualCameraTarget(humanFollow, humanLookAt);
-            PlaySound(exitRobotSound);
+            DeactivateExitText();
+
+            yield return new WaitForSeconds(exitRobotSound.length);
+            canvasController.StopAnimation();
+
+            // TODO: разблокировать управление
+            yield return StartCoroutine(canvasController.UnfadeScreen());
         }
 
         public void ActivateEnterText()
         {
-            enterText.SetActive(true);
+            canvasController.EnterText.SetActive(true);
             StartCoroutine(WaitForEnter());
         }
         public void ActivateExitText()
         {
-            exitText.SetActive(true);
+            canvasController.ExitText.SetActive(true);
             StartCoroutine(WaitForExit());
         }
-
         public void DeactivateEnterText()
         {
-            enterText.SetActive(false);
+            canvasController.EnterText.SetActive(false);
             StopCoroutine(WaitForEnter());
         }
         public void DeactivateExitText()
         {
-            enterText.SetActive(true);
+            canvasController.ExitText.SetActive(false);
             StopCoroutine(WaitForExit());
         }
 
+        // TODO: Заменить это на ивентики там хз, ну без корутин чтобы было, по православному чтобы
         private IEnumerator WaitForEnter()
         {
             while (Player.Instance.CurrentState == Player.State.Human)
             {
                 if (Keyboard.current[Key.G].wasPressedThisFrame)
                 {
-                    EnterRobot();
+                    StartCoroutine(EnterRobot());
                 }
 
                 yield return null;
@@ -111,7 +139,7 @@ namespace PlayerScripts
             {
                 if (Keyboard.current[Key.F].wasPressedThisFrame)
                 {
-                    ExitRobot();
+                    StartCoroutine(ExitRobot());
                 }
 
                 yield return null;
@@ -123,6 +151,10 @@ namespace PlayerScripts
             audioSource.Stop();
             audioSource.clip = clip;
             audioSource.Play();
+        }
+        private void ChangePlayerState(Player.State state)
+        {
+            Player.Instance.CurrentState = state;
         }
     }
 }
