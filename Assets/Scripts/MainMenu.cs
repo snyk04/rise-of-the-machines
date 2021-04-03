@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    [Header("UI elements")]
     [SerializeField] private GameObject humanText;
     [SerializeField] private GameObject robotText;
     [SerializeField] private GameObject humanObject;
@@ -21,7 +22,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayButton()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
     public void ExitButton()
     {
