@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace Classes {
-    public class Breakable {
+    public class Breakable : IDamageable {
         public Health Health { get; }
 
         public Transform Transform { get; }

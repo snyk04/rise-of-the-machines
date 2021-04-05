@@ -17,8 +17,8 @@ namespace PlayerScripts {
 
         private void Awake() {
             playerController = this;
-            var player = new Player(new Human(10, 4, human, humanAnimator, humanCharacterController, humanGunTransform),
-                                    new Robot(20, 4, robot, robotAnimator, robotCharacterController, robotGunTransform)); // todo add HumanSO, RobotSO
+            var player = new Player(new Human(10, 4, 20, human, humanAnimator, humanCharacterController, humanGunTransform),
+                                    new Robot(20, 4, 20, robot, robotAnimator, robotCharacterController, robotGunTransform)); // todo add HumanSO, RobotSO
         }
     }
 }

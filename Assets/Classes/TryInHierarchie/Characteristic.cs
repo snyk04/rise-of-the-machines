@@ -3,9 +3,10 @@
         public enum Type {
             Health,
             Speed,
-            Armor
+            Armor,
+            Damage
         }
-        public float Value { get; protected set; }
+        public float Value { get; set; }
         protected Characteristic(float value) {
             Value = value;
         }

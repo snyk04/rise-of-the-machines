@@ -31,7 +31,7 @@ namespace Characters
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
             damageable = GetComponent<Damageable>();
-            damageable.Initialize(100, 4, transform);
+            damageable.Initialize(100, 4, 20, transform);
         }
         private void Start()
         {
@@ -42,7 +42,7 @@ namespace Characters
         {
             while (currentState == State.Patrol)
             {
-                yield return new WaitForSeconds(1 / checksPerSecondForFindPlayer);
+                yield return new WaitForSeconds(1f / checksPerSecondForFindPlayer);
 
                 if (Physics.Linecast(transform.position, Player.Instance.Transform.position, raycastObstacleLayer))
                 {
@@ -67,7 +67,7 @@ namespace Characters
 
             while (currentState == State.Pursuit)
             {
-                yield return new WaitForSeconds(1 / checksPerSecondForPursuitPlayer);
+                yield return new WaitForSeconds(1f / checksPerSecondForPursuitPlayer);
 
                 float distanceVectorLength = (Player.Instance.Transform.position - transform.position).magnitude;
                 if (distanceVectorLength > viewDistance * 1.5f)
