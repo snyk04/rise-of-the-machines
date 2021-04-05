@@ -19,17 +19,17 @@ public class MusicController : MonoBehaviour
     [SerializeField] private AudioSource combatAudioSource;
 
     [Header("Settings")]
-    [SerializeField] private float ambientVolume;
-    [SerializeField] private float combatVolume;
-    [Space]
-    [SerializeField] private Clip ambientByDefault = Clip.Nothing;
-    [SerializeField] private Clip combatByDefault = Clip.Nothing;
+    [SerializeField] private Clip ambient = Clip.Nothing;
+    [SerializeField] private Clip combatMusic = Clip.Nothing;
     [Space]
     [SerializeField] private bool ambientLoop;
     [SerializeField] private bool combatLoop;
     [Space]
-    [SerializeField] private float fromAmbientToCombatChangeSpeed;
-    [SerializeField] private float fromCombatToAmbientChangeSpeed;
+    [Range(0, 1)] [SerializeField] private float ambientVolume;
+    [Range(0, 1)] [SerializeField] private float combatVolume;
+    [Space]
+    [Range(0, 5)] [SerializeField] private float ambientToCombatChangeSpeed;
+    [Range(0, 5)] [SerializeField] private float combatToAmbientChangeSpeed;
 
     [Header("Music")]
     [SerializeField] private AudioClip mainMenu;
@@ -47,14 +47,14 @@ public class MusicController : MonoBehaviour
         combatAudioSource.volume = combatVolume;
         combatAudioSource.loop = combatLoop;
 
-        if (ambientByDefault != Clip.Nothing)
+        if (ambient != Clip.Nothing)
         {
-            SetClip(ambientAudioSource, ambientByDefault);
+            SetClip(ambientAudioSource, ambient);
             ambientAudioSource.Play();
         }
-        else if (combatByDefault != Clip.Nothing)
+        else if (combatMusic != Clip.Nothing)
         {
-            SetClip(combatAudioSource, combatByDefault);
+            SetClip(combatAudioSource, combatMusic);
             combatAudioSource.Play();
         }
     }
@@ -103,8 +103,8 @@ public class MusicController : MonoBehaviour
         SetClip(combatAudioSource, nextClip);
         combatAudioSource.Play();
 
-        StartCoroutine(VolumeUp(combatAudioSource, fromAmbientToCombatChangeSpeed, combatVolume));
-        yield return StartCoroutine(VolumeDown(ambientAudioSource, fromAmbientToCombatChangeSpeed, ambientVolume));
+        StartCoroutine(VolumeUp(combatAudioSource, ambientToCombatChangeSpeed, combatVolume));
+        yield return StartCoroutine(VolumeDown(ambientAudioSource, ambientToCombatChangeSpeed, ambientVolume));
 
         ambientAudioSource.Pause();
     }
@@ -113,18 +113,18 @@ public class MusicController : MonoBehaviour
         SetClip(ambientAudioSource, nextClip);
         ambientAudioSource.UnPause();
 
-        StartCoroutine(VolumeUp(ambientAudioSource, fromCombatToAmbientChangeSpeed, ambientVolume));
-        yield return StartCoroutine(VolumeDown(combatAudioSource, fromCombatToAmbientChangeSpeed, combatVolume));
+        StartCoroutine(VolumeUp(ambientAudioSource, combatToAmbientChangeSpeed, ambientVolume));
+        yield return StartCoroutine(VolumeDown(combatAudioSource, combatToAmbientChangeSpeed, combatVolume));
 
         combatAudioSource.Pause();
     }
 
     public void TEST1()
     {
-        StartCoroutine(SwitchFromAmbientToCombat(combatByDefault));
+        StartCoroutine(SwitchFromAmbientToCombat(combatMusic));
     }
     public void TEST2()
     {
-        StartCoroutine(SwitchFromCombatToAmbient(ambientByDefault));
+        StartCoroutine(SwitchFromCombatToAmbient(ambient));
     }
 }

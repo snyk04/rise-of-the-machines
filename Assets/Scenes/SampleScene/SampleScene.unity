@@ -693,7 +693,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 473368214}
-  m_LocalRotation: {x: 0.33402506, y: 0.000000039726107, z: -0.000000014078102, w: 0.9425642}
+  m_LocalRotation: {x: 0.33402508, y: 9.772742e-16, z: 3.9835306e-16, w: 0.9425642}
   m_LocalPosition: {x: -2.041748, y: 9.130005, z: -15.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1308,7 +1308,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.33402506, y: 0.000000039726107, z: -0.000000014078102, w: 0.9425642}
+  m_LocalRotation: {x: 0.33402508, y: 9.772742e-16, z: 3.9835306e-16, w: 0.9425642}
   m_LocalPosition: {x: -2.041748, y: 9.130005, z: -15.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1423,14 +1423,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ambientAudioSource: {fileID: 963194232}
   combatAudioSource: {fileID: 963194233}
-  ambientVolume: 0.1
-  combatVolume: 0.5
-  ambientByDefault: 2
-  combatByDefault: 4
+  ambient: 2
+  combatMusic: 4
   ambientLoop: 1
   combatLoop: 1
-  fromAmbientToCombatChangeSpeed: 1.5
-  fromCombatToAmbientChangeSpeed: 0.5
+  ambientVolume: 0.1
+  combatVolume: 0.5
+  ambientToCombatChangeSpeed: 1.5
+  combatToAmbientChangeSpeed: 0.5
   mainMenu: {fileID: 8300000, guid: 9970c3d8373e19b44b0c36e47ce9f5f3, type: 3}
   ambient1: {fileID: 8300000, guid: c62270ac2805125458cf20ef835cad5a, type: 3}
   ambient2: {fileID: 8300000, guid: 83e98767f85c60747ab8e8db9d5daa12, type: 3}
