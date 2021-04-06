@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ScriptableObjects;
+using Classes.ScriptableObjects;
 
 namespace Classes.TryInHierarchie {
     using Type = Classes.TryInHierarchie.Characteristic.Type;

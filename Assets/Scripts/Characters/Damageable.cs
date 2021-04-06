@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Damageable : MonoBehaviour
 {
-    [SerializeField] private float maxHealth;
+    private float maxHealth;
 
     private IDamageable damageble;
 
     public void Initialize(float maxHealth, float moveSpeed, float armor, Transform transform, Animator animator = null)
     {
+        this.maxHealth = maxHealth;
         damageble = new Enemy(maxHealth, armor, moveSpeed, transform, animator);
     }
 

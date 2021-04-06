@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 5123428254204717878}
   - component: {fileID: 5123428254204717873}
   - component: {fileID: 5123428254204717872}
+  - component: {fileID: 2257089912114560652}
   - component: {fileID: 5010959427026520669}
   - component: {fileID: 5123428254204717875}
-  - component: {fileID: 2257089912114560652}
+  - component: {fileID: 2532626879060587825}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
@@ -105,6 +106,19 @@ NavMeshAgent:
   m_BaseOffset: 0.2
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &2257089912114560652
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5123428254204717874}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.32973868, y: 3, z: 2.721244}
+  m_Center: {x: 0.00000018626451, y: 1.34, z: -0.42603958}
 --- !u!114 &5010959427026520669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,25 +143,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 674bd1c983ac3a54a9456773e5f673d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checksPerSecondForFindPlayer: 5
-  checksPerSecondForPursuitPlayer: 5
-  fieldOfView: 180
-  viewDistance: 10
-  fightStartDistance: 2
-  fightStopDistance: 4
-  raycastObstacleLayer:
-    serializedVersion: 2
-    m_Bits: 256
---- !u!65 &2257089912114560652
-BoxCollider:
+  enemy: {fileID: 11400000, guid: 0192418eccb43f744a669df61f6f4144, type: 2}
+--- !u!114 &2532626879060587825
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5123428254204717874}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.32973868, y: 3, z: 2.721244}
-  m_Center: {x: 0.00000018626451, y: 1.34, z: -0.42603958}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84c46169438281748b8b822ae9b3489c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fieldOfView: 180
+  viewDistance: 5
+  raycastObstacleLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  checksPerSecondForFindPlayer: 5
+  checksPerSecondForPursuitPlayer: 5
+  fightStartDistance: 3
+  fightStopDistance: 5

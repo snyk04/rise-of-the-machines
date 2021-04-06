@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 
-namespace ScriptableObjects {
+namespace Classes.ScriptableObjects
+{
     [CreateAssetMenu(fileName = "New Weapon", menuName = "ScriptableObject/Weapon", order = 0)]
-    public class WeaponSO : ScriptableObject {
+    public class WeaponSO : ScriptableObject
+    {
         public string name;
         public int weaponID;
         public float damage;
