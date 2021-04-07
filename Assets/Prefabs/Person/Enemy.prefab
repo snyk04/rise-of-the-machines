@@ -156,12 +156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c46169438281748b8b822ae9b3489c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fieldOfView: 180
-  viewDistance: 5
   raycastObstacleLayer:
     serializedVersion: 2
     m_Bits: 256
-  checksPerSecondForFindPlayer: 5
-  checksPerSecondForPursuitPlayer: 5
-  fightStartDistance: 3
-  fightStopDistance: 5
+  checksPerSecondForFindPlayer: 1
+  checksPerSecondForPursuitPlayer: 1
