@@ -159,5 +159,6 @@ MonoBehaviour:
   raycastObstacleLayer:
     serializedVersion: 2
     m_Bits: 256
-  checksPerSecondForFindPlayer: 1
-  checksPerSecondForPursuitPlayer: 1
+  checksPerSecondForFindPlayer: 3
+  checksPerSecondForPursuitPlayer: 3
+  damageError: 0.25

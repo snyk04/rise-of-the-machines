@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Test Enemy
   m_EditorClassIdentifier: 
   health: 100
-  moveSpeed: 2
   armor: 20
+  moveSpeed: 2
   fieldOfView: 180
   viewDistance: 25
-  fightStartDistance: 5
-  fightStopDistance: 3
+  fightStartDistance: 4
+  fightStopDistance: 2
+  damagePerHit: 10
+  attackInterval: 1

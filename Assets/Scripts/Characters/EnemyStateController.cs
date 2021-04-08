@@ -1,4 +1,5 @@
 ﻿using Classes;
+using Classes.ScriptableObjects;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -23,8 +24,12 @@ namespace Characters
         [Header("Pursuit settings")]
         [SerializeField] private int checksPerSecondForPursuitPlayer;
 
+        [Header("Fight settings")]
+        [Range(0, 1)] [SerializeField] private float damageError; 
+
         private NavMeshAgent navMeshAgent;
         private EnemyController enemyController;
+        private EnemySO enemy;
 
         private State currentState;
 
@@ -34,6 +39,7 @@ namespace Characters
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
             enemyController = GetComponent<EnemyController>();
+            enemy = enemyController.GetEnemySO();
         }
         private void Start()
         {
@@ -51,11 +57,11 @@ namespace Characters
                     continue;
                 }
                 Vector3 vectorBetweenEnemyAndPlayer = Player.Instance.Transform.position - transform.position;
-                if (Vector3.Angle(transform.forward, vectorBetweenEnemyAndPlayer) > enemyController.GetEnemySO().fieldOfView / 2)
+                if (Vector3.Angle(transform.forward, vectorBetweenEnemyAndPlayer) > enemy.fieldOfView / 2)
                 {
                     continue;
                 }
-                if (vectorBetweenEnemyAndPlayer.magnitude > enemyController.GetEnemySO().viewDistance)
+                if (vectorBetweenEnemyAndPlayer.magnitude > enemy.viewDistance)
                 {
                     continue;
                 }
@@ -72,13 +78,13 @@ namespace Characters
                 yield return new WaitForSeconds(1f / checksPerSecondForPursuitPlayer);
 
                 float distanceVectorLength = (Player.Instance.Transform.position - transform.position).magnitude;
-                if (distanceVectorLength > enemyController.GetEnemySO().viewDistance * 1.5f)
+                if (distanceVectorLength > enemy.viewDistance * 1.5f)
                 {
                     navMeshAgent.isStopped = true;
                     ChangeState(State.Patrol, FindPlayer());
                     break;
                 }
-                else if (distanceVectorLength <= enemyController.GetEnemySO().fightStartDistance)
+                else if (distanceVectorLength <= enemy.fightStartDistance)
                 {
                     navMeshAgent.isStopped = true;
                     ChangeState(State.Battle, FightPlayer());
@@ -90,10 +96,12 @@ namespace Characters
         }
         private IEnumerator FightPlayer()
         {
-            while ((Player.Instance.Transform.position - transform.position).magnitude <= enemyController.GetEnemySO().fightStopDistance)
+            while ((Player.Instance.Transform.position - transform.position).magnitude <= enemy.fightStopDistance)
             {
-                // TODO: Battle logic
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(enemy.attackInterval);
+                float amountOfDamage = enemy.damagePerHit;
+                amountOfDamage += amountOfDamage * (2 * Random.value - 1) * damageError;
+                // Player.TakeDamage(amountOfDamage);
             }
 
             ChangeState(State.Pursuit, PursuitPlayer());
