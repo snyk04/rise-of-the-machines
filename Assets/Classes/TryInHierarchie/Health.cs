@@ -1,13 +1,21 @@
 ﻿using UnityEngine;
 
 namespace Classes.TryInHierarchie {
-    public class Health : Characteristic, IDamageable {
+    public class Health : Characteristic {
         public delegate void HealthZero();
 
         private event HealthZero HealthZeroEvent;
 
-        private float MaxHP { get; }
-        
+        private float maxHP;
+        public float MaxHP {
+            get => maxHP;
+            private set {
+                var percentHP = HP / maxHP;
+                maxHP = value > 0 ? value : 0;
+                HP = maxHP * percentHP;
+            }
+        }
+
         public float HP {
             get => Value;
             private set {

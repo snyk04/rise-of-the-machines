@@ -1,8 +1,5 @@
-﻿public interface IDamageable {
-    bool IsDead();
+﻿using Classes.TryInHierarchie;
 
-    float HP { get; }
-
-    // void Die();
-    void TakeDamage(float damage);
+public interface IDamageable {
+    Health Health { get; }
 }

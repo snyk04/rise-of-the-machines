@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class Damageable : MonoBehaviour
 {
-    [SerializeField] private float maxHealth;
+    private float maxHealth;
 
-    private Health health;
+    private IDamageable damageble;
 
-    public void Initialize(float maxHealth, float moveSpeed, Transform transform, Animator animator = null)
+    public void Initialize(float maxHealth, float moveSpeed, float armor, Transform transform, Animator animator = null)
     {
-        health = new Enemy(maxHealth, moveSpeed, transform, animator).Health;
+        this.maxHealth = maxHealth;
+        damageble = new Enemy(maxHealth, armor, moveSpeed, transform, animator);
     }
 
     public void TakeDamage(float damage)
     {
-        health = health ?? new Breakable(maxHealth, transform).Health;
-        health.TakeDamage(damage);
+        damageble = damageble ?? new Breakable(maxHealth, transform);
+        damageble.Health.TakeDamage(damage);
     }
 }

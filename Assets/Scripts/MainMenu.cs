@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    [Header("UI elements")]
     [SerializeField] private GameObject humanText;
     [SerializeField] private GameObject robotText;
     [SerializeField] private GameObject humanObject;

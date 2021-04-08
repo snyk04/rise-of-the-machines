@@ -1,5 +1,12 @@
 ﻿namespace Classes.TryInHierarchie {
     public abstract class EquipmentSlot {
+        public enum Type {
+            Head,
+            Chest,
+            Legs,
+            Weapon
+        }
+
         public Equipment SlotItem { get; protected set; }
 
         protected EquipmentSlot() { }
