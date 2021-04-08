@@ -101,7 +101,7 @@ namespace Characters
                 yield return new WaitForSeconds(enemy.attackInterval);
                 float amountOfDamage = enemy.damagePerHit;
                 amountOfDamage += amountOfDamage * (2 * Random.value - 1) * damageError;
-                // Player.TakeDamage(amountOfDamage);
+                Player.Instance.takeDamage(amountOfDamage);
             }
 
             ChangeState(State.Pursuit, PursuitPlayer());
