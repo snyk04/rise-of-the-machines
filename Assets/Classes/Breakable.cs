@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace Classes {
     public class Breakable : IDamageable {
-        public Health Health { get; }
+        public HealthCharacteristic Health { get; }
 
         public Transform Transform { get; }
 
         public Breakable(float maxHealth, Transform transform) {
-            Health = new Health(maxHealth, Die);
+            Health = new HealthCharacteristic(maxHealth, Die);
             Transform = transform;
         }
 

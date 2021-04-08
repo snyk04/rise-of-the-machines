@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 namespace Classes.TryInHierarchie {
-    public class Health : Characteristic {
+    public class HealthCharacteristic : Characteristic {
         public delegate void HealthZero();
 
         private event HealthZero HealthZeroEvent;
@@ -26,7 +26,7 @@ namespace Classes.TryInHierarchie {
             }
         }
 
-        public Health(float maxHp, HealthZero healthZeroMethod) : base(maxHp) {
+        public HealthCharacteristic(float maxHp, HealthZero healthZeroMethod) : base(maxHp) {
             MaxHP = maxHp;
             HealthZeroEvent += healthZeroMethod;
         }

@@ -1,4 +1,5 @@
-﻿using Classes;
+﻿using System;
+using Classes;
 using UnityEngine;
 
 namespace PlayerScripts {
@@ -20,5 +21,9 @@ namespace PlayerScripts {
             var player = new Player(new Human(10, 4, 20, human, humanAnimator, humanCharacterController, humanGunTransform),
                                     new Robot(20, 4, 20, robot, robotAnimator, robotCharacterController, robotGunTransform)); // todo add HumanSO, RobotSO
         }
+
+        // private void Update() {
+        //     Debug.Log(Player.Instance.Health.HP);   
+        // }
     }
 }

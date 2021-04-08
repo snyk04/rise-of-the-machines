@@ -20,9 +20,6 @@ namespace Classes {
             animator) {
             CharacterController = characterController;
             GunTransform = gunTransform;
-            Stats.Add(Type.Health, Health);
-            Stats.Add(Type.Speed, MoveSpeed);
-            Stats.Add(Type.Armor, Armor);
         }
 
         public void ChangeSlotsEquipment(Equipment newItem) {
