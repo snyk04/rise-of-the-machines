@@ -7,18 +7,21 @@ namespace Classes {
     public abstract class Person : IDamageable, IHasCharacteristics {
 
         public Dictionary<Type, Characteristic> Stats { get; private set; } = new Dictionary<Type, Characteristic>();
-        public Health Health { get; }
+        public HealthCharacteristic Health { get; }
         public SpeedCharacteristic MoveSpeed { get; protected set; }
         public ArmorCharacteristic Armor { get; protected set; }
         public Transform Transform { get; }
         public Animator Animator { get; }
 
         protected Person(float maxHealth, float moveSpeed, float armor, Transform transform, Animator animator) {
-            Health = new Health(maxHealth, Die);
+            Health = new HealthCharacteristic(maxHealth, Die);
             MoveSpeed = new SpeedCharacteristic(moveSpeed);
             Armor = new ArmorCharacteristic(armor);
             Transform = transform;
             Animator = animator;
+            Stats.Add(Type.Health, Health);
+            Stats.Add(Type.Speed, MoveSpeed);
+            Stats.Add(Type.Armor, Armor);
         }
 
         protected virtual void Die() { }

@@ -11,9 +11,6 @@ namespace Classes {
             CharacterController characterController, Transform gunTransform) : base(maxHealth, moveSpeed, armor, transform, animator) {
             CharacterController = characterController;
             GunTransform = gunTransform;
-            Stats.Add(Type.Health, Health);
-            Stats.Add(Type.Speed, MoveSpeed);
-            Stats.Add(Type.Armor, Armor);
         }
     }
 }
