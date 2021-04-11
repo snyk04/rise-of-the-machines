@@ -1,7 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Classes.TryInHierarchie;
 using UnityEngine;
-using Type = Classes.TryInHierarchie.Characteristic.Type;
+using Type = Classes.TryInHierarchie.EquipmentSlot.Type;
 
 namespace Classes {
     public class Robot : Person {
@@ -12,7 +13,15 @@ namespace Classes {
         public CharacterController CharacterController { get; }
         public Transform GunTransform { get; }
 
-        private readonly EquipmentSlot[] slots = {new HeadSlot(), new ChestSlot(), new LegsSlot(), new WeaponSlot()};
+        private readonly Dictionary<Type, EquipmentSlot> equipmentSlots = new Dictionary<Type, EquipmentSlot> {
+            {Type.Head, new HeadSlot()},
+            {Type.Chest, new ChestSlot()},
+            {Type.Legs, new LegsSlot()}
+        };
+
+        private readonly WeaponsSlot weaponsSlot = new WeaponsSlot(new Dictionary<WeaponSlot.Type, WeaponSlot> {
+            {WeaponSlot.Type.TwoHands, new WeaponSlot(WeaponSlot.Type.TwoHands)}
+        });
 
         public Robot(float maxHealth, float moveSpeed, float armor, Transform transform, Animator animator,
             CharacterController characterController, Transform gunTransform) : base(maxHealth, armor, moveSpeed,
@@ -22,32 +31,33 @@ namespace Classes {
             GunTransform = gunTransform;
         }
 
-        public void ChangeSlotsEquipment(Equipment newItem) {
+        public void ChangeEquipment(Equipment newItem) {
             Equipment oldItem;
             switch (newItem) {
                 case HeadArmor _:
-                    if (slots.First(slot => slot is HeadSlot).TryChangeItem(newItem, out oldItem)) {
+
+                    if (equipmentSlots[Type.Head].TryChangeItem(newItem, out oldItem)) {
                         RecalculateCharacteristics(oldItem, newItem);
                     }
 
                     break;
                 case ChestArmor _:
-                    if (slots.First(slot => slot is ChestSlot).TryChangeItem(newItem, out oldItem)) {
+                    if (equipmentSlots[Type.Chest].TryChangeItem(newItem, out oldItem)) {
                         RecalculateCharacteristics(oldItem, newItem);
                     }
 
                     break;
                 case LegsArmor _:
-                    if (slots.First(slot => slot is LegsSlot).TryChangeItem(newItem, out oldItem)) {
+                    if (equipmentSlots[Type.Legs].TryChangeItem(newItem, out oldItem)) {
                         RecalculateCharacteristics(oldItem, newItem);
                     }
 
                     break;
-                case Weapon _:
-                    if (slots.First(slot => slot is WeaponSlot).TryChangeItem(newItem, out oldItem)) {
-                        RecalculateCharacteristics(oldItem, newItem);
-                    }
-
+                case Weapon item:
+                    weaponsSlot.TryChangeItem(item);
+                    break;
+                default:
+                    Debug.Log("There is no such slot");
                     break;
             }
         }

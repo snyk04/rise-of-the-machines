@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Classes.TryInHierarchie;
+using UnityEngine;
 
 namespace Classes.ScriptableObjects
 {
@@ -19,5 +20,6 @@ namespace Classes.ScriptableObjects
         public AudioClip reloadSound;
         public float fireRate; // shoots in second
         public bool isAutomatic;
+        public WeaponSlot.Type type;
     }
 }
