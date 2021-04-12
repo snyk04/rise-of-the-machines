@@ -14,6 +14,7 @@ namespace PlayerScripts
         [SerializeField] private GameObject robot;
         [SerializeField] private GameObject human;
         [SerializeField] private GameObject emptyRobot;
+        [SerializeField] private GameObject enemy;
 
         [Header("Cinemachine points")]
         [SerializeField] private Transform humanLookAt;
@@ -32,11 +33,13 @@ namespace PlayerScripts
         
         [Header("Settings")]
         [SerializeField] private float humanSpawnDistance;
+        [SerializeField] private Vector3 heading;
 
         #endregion
 
         private void Start()
         {
+            heading = new Vector3(0, 0, 0);
             audioSource.minDistance = 1;
             audioSource.maxDistance = 50;
             audioSource.volume = 1f;
@@ -128,7 +131,15 @@ namespace PlayerScripts
             {
                 if (Keyboard.current[Key.G].wasPressedThisFrame)
                 {
-                    StartCoroutine(EnterRobot());
+                    enemy = GameObject.FindGameObjectWithTag("Enemy");
+                    if (enemy != null)
+                    {
+                        heading = human.transform.position - enemy.transform.position;
+                    }
+                    if (heading == null || heading.magnitude >= 10 || enemy == null)
+                    {
+                        StartCoroutine(EnterRobot());
+                    }
                 }
 
                 yield return null;
@@ -140,7 +151,15 @@ namespace PlayerScripts
             {
                 if (Keyboard.current[Key.F].wasPressedThisFrame)
                 {
-                    StartCoroutine(ExitRobot());
+                    enemy = GameObject.FindGameObjectWithTag("Enemy");
+                    if (enemy != null)
+                    {
+                        heading = robot.transform.position - enemy.transform.position;
+                    }
+                    if (heading == null || heading.magnitude >= 10 || enemy == null)
+                    {
+                        StartCoroutine(ExitRobot());
+                    }
                 }
 
                 yield return null;
