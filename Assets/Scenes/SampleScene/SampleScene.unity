@@ -647,6 +647,12 @@ RectTransform:
   m_AnchoredPosition: {x: 960, y: -500}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &357093409 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8348087770303897855, guid: fbaca33496b28774c9bf4c38e2a1890c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1459103384429762946}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &384482387
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,12 +1140,6 @@ Transform:
   m_Father: {fileID: 653862983}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &555348273 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 130406108057414495, guid: fbaca33496b28774c9bf4c38e2a1890c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1459103384429762946}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &559236078
 GameObject:
   m_ObjectHideFlags: 0
@@ -1214,6 +1214,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 559236078}
   m_CullTransparentMesh: 0
+--- !u!1 &639693290 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8352755541510797518, guid: fbaca33496b28774c9bf4c38e2a1890c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1459103384429762946}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &645574933
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4318,6 +4324,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1913670996}
   m_CullTransparentMesh: 0
+--- !u!1 &1943994854 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3971754860528872086, guid: fbaca33496b28774c9bf4c38e2a1890c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1459103384429762946}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1943994856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943994854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca607893e11e3bb42b3fd3fb3bbbef20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  human: {fileID: 639693290}
+  robot: {fileID: 357093409}
+  camera: {fileID: 1943994854}
 --- !u!1 &1956849781
 GameObject:
   m_ObjectHideFlags: 0
@@ -4392,12 +4419,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956849781}
   m_CullTransparentMesh: 0
---- !u!1 &1970409234 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2458690055944614789, guid: fbaca33496b28774c9bf4c38e2a1890c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1459103384429762946}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2023494717
 GameObject:
   m_ObjectHideFlags: 0
@@ -4693,6 +4714,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: MinimapCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 442432933045983648, guid: fbaca33496b28774c9bf4c38e2a1890c,
+        type: 3}
+      propertyPath: orthographic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 442432933045983648, guid: fbaca33496b28774c9bf4c38e2a1890c,
+        type: 3}
+      propertyPath: orthographic size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 442432933045983648, guid: fbaca33496b28774c9bf4c38e2a1890c,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 5120
+      objectReference: {fileID: 0}
+    - target: {fileID: 602960290267042210, guid: fbaca33496b28774c9bf4c38e2a1890c,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 602960290267042210, guid: fbaca33496b28774c9bf4c38e2a1890c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1459103385778355152, guid: fbaca33496b28774c9bf4c38e2a1890c,
         type: 3}
       propertyPath: cover
@@ -4752,12 +4798,12 @@ PrefabInstance:
         type: 3}
       propertyPath: MinimapCamera1
       value: 
-      objectReference: {fileID: 555348273}
+      objectReference: {fileID: 0}
     - target: {fileID: 1459103385778355152, guid: fbaca33496b28774c9bf4c38e2a1890c,
         type: 3}
       propertyPath: MinimapCamera2
       value: 
-      objectReference: {fileID: 1970409234}
+      objectReference: {fileID: 0}
     - target: {fileID: 1459103385778355152, guid: fbaca33496b28774c9bf4c38e2a1890c,
         type: 3}
       propertyPath: exitRobotSound
@@ -4838,6 +4884,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: MinimapCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 2752231886695978837, guid: fbaca33496b28774c9bf4c38e2a1890c,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a79cb902364d71b40ac2120120877001,
+        type: 3}
     - target: {fileID: 3322978878823195111, guid: fbaca33496b28774c9bf4c38e2a1890c,
         type: 3}
       propertyPath: gun
