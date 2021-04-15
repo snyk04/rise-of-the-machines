@@ -7,12 +7,12 @@ namespace Classes.TryInHierarchie {
     public class Weapon : Equipment {
         public WeaponSO WeaponData { get; private set; }
 
-        public static Weapon CreateWeapon(WeaponSO weaponSO, float damage) {
-            var stats = new Dictionary<Type, Characteristic>() {{Type.Damage, new DamageCharacteristic(damage)}};
+        public static Weapon CreateWeapon(WeaponSO weaponSO) {
+            var stats = new Dictionary<Type, Characteristic>() {{Type.Damage, new DamageCharacteristic(weaponSO.damage)}};
             return new Weapon(weaponSO, stats);
         }
 
-        public Weapon(WeaponSO weaponSO, Dictionary<Type, Characteristic> stats) : base(weaponSO.name, stats) {
+        private Weapon(WeaponSO weaponSO, Dictionary<Type, Characteristic> stats) : base(weaponSO.name, stats) {
             WeaponData = weaponSO;
         }
         
