@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Damageable : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem Blood_1;
+    [SerializeField] private ParticleSystem Blood_2;
     private float maxHealth;
 
     private IDamageable damageble;
@@ -18,5 +20,7 @@ public class Damageable : MonoBehaviour
     {
         damageble = damageble ?? new Breakable(maxHealth, transform);
         damageble.Health.TakeDamage(damage);
+        Blood_1.Emit(1);
+        Blood_2.Emit(1);
     }
 }
