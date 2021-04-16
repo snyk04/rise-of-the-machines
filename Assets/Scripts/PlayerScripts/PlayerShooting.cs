@@ -10,7 +10,7 @@ namespace PlayerScripts
 
         private void Update()
         {
-            if (Mouse.current.leftButton.wasPressedThisFrame)
+            if (Mouse.current.leftButton.wasPressedThisFrame || Mouse.current.leftButton.isPressed && gun.weapon.WeaponData.isAutomatic)
             {
                 gun.Shoot();
             }

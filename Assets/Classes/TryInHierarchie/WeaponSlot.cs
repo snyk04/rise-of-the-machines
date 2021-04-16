@@ -2,7 +2,7 @@
 
 namespace Classes.TryInHierarchie {
     public class WeaponSlot : EquipmentSlot {
-        public enum Type {
+        public enum Spot {
             LeftShoulder,
             RightShoulder,
             LeftHand,
@@ -10,10 +10,10 @@ namespace Classes.TryInHierarchie {
             TwoHands,
         }
         
-        public Type SlotType { get; private set; }
+        public Spot SlotSpot { get; private set; }
 
-        public WeaponSlot(Type slotType) {
-            SlotType = slotType;
+        public WeaponSlot(Spot slotSpot) {
+            SlotSpot = slotSpot;
         }
 
         public override bool TryChangeItem(Equipment slotItem, out Equipment oldItem) {

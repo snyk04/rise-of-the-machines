@@ -19,8 +19,8 @@ namespace Classes {
             {Type.Legs, new LegsSlot()}
         };
 
-        private readonly WeaponsSlot weaponsSlot = new WeaponsSlot(new Dictionary<WeaponSlot.Type, WeaponSlot> {
-            {WeaponSlot.Type.TwoHands, new WeaponSlot(WeaponSlot.Type.TwoHands)}
+        private readonly WeaponsSlot weaponsSlot = new WeaponsSlot(new Dictionary<WeaponSlot.Spot, WeaponSlot> {
+            {WeaponSlot.Spot.TwoHands, new WeaponSlot(WeaponSlot.Spot.TwoHands)}
         });
 
         public Robot(float maxHealth, float moveSpeed, float armor, Transform transform, Animator animator,

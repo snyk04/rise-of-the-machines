@@ -968,7 +968,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 473368214}
-  m_LocalRotation: {x: 0.33402506, y: 0.000000039726107, z: -0.000000014078102, w: 0.9425642}
+  m_LocalRotation: {x: 0.33402508, y: -9.772742e-16, z: -3.9835306e-16, w: 0.9425642}
   m_LocalPosition: {x: -2.041748, y: 9.130005, z: -15.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1983,7 +1983,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.33402506, y: 0.000000039726107, z: -0.000000014078102, w: 0.9425642}
+  m_LocalRotation: {x: 0.33402508, y: -9.772742e-16, z: -3.9835306e-16, w: 0.9425642}
   m_LocalPosition: {x: -2.041748, y: 9.130005, z: -15.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -3083,19 +3083,13 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1282055719}
   m_CullTransparentMesh: 0
---- !u!1 &1293602014 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8708245592293107756, guid: fbaca33496b28774c9bf4c38e2a1890c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1459103384429762946}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1293602016 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8576996361051769252, guid: fbaca33496b28774c9bf4c38e2a1890c,
     type: 3}
   m_PrefabInstance: {fileID: 1459103384429762946}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1293602014}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31b89dc8191cae44fa97ee5c263e8f30, type: 3}
@@ -4982,22 +4976,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8576996361051769252, guid: fbaca33496b28774c9bf4c38e2a1890c,
         type: 3}
-      propertyPath: hitMarker
-      value: 
-      objectReference: {fileID: 5926700414644198519, guid: 6ea20cfc3f64e5340873171f3dae14f5,
-        type: 3}
-    - target: {fileID: 8576996361051769252, guid: fbaca33496b28774c9bf4c38e2a1890c,
-        type: 3}
-      propertyPath: shootPoint
-      value: 
-      objectReference: {fileID: 1293602014}
-    - target: {fileID: 8576996361051769252, guid: fbaca33496b28774c9bf4c38e2a1890c,
-        type: 3}
-      propertyPath: shootSound
-      value: 
-      objectReference: {fileID: 8300000, guid: f6fc2ec9dee1f9e4184d46b4226bdce8, type: 3}
-    - target: {fileID: 8576996361051769252, guid: fbaca33496b28774c9bf4c38e2a1890c,
-        type: 3}
       propertyPath: shotParticle
       value: 
       objectReference: {fileID: 0}
@@ -5066,6 +5044,11 @@ PrefabInstance:
       propertyPath: shootSound
       value: 
       objectReference: {fileID: 8300000, guid: f6fc2ec9dee1f9e4184d46b4226bdce8, type: 3}
+    - target: {fileID: 8590391776397562261, guid: fbaca33496b28774c9bf4c38e2a1890c,
+        type: 3}
+      propertyPath: hitMarkerArray
+      value: 
+      objectReference: {fileID: 1264731101}
     - target: {fileID: 8590391776397562261, guid: fbaca33496b28774c9bf4c38e2a1890c,
         type: 3}
       propertyPath: shotParticle_1

@@ -12,18 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cc762da0dc347a2a093567b9353d31c, type: 3}
   m_Name: TestWeapon
   m_EditorClassIdentifier: 
-  name: 
+  name: TestWeapon
   weaponID: 0
-  damage: 0
-  bulletsInMagazine: 0
-  numOfBullets: 0
-  reloadTime: 0
-  currentAmmo: 0
+  damage: 10
+  bulletsInMagazine: 10
+  numOfBullets: 10
+  reloadTime: 1
+  currentAmmo: 10
   isReloading: 0
   shootSound: {fileID: 0}
   noAmmoSound: {fileID: 0}
-  spread: 0
+  spread: 1
   reloadSound: {fileID: 0}
-  fireRate: 0
-  isAutomatic: 0
-  type: 0
+  fireRate: 10
+  isAutomatic: 1
+  spot: 0
+  amountOfBullets: 1
+  maxDistance: 500
