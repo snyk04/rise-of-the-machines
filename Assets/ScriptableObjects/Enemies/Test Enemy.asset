@@ -18,6 +18,6 @@ MonoBehaviour:
   fieldOfView: 180
   viewDistance: 25
   fightStartDistance: 4
-  fightStopDistance: 2
+  fightStopDistance: 6
   damagePerHit: 10
   attackInterval: 1

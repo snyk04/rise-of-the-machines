@@ -3,8 +3,10 @@
 namespace Classes.TryInHierarchie {
     public class HealthCharacteristic : Characteristic {
         public delegate void HealthZero();
+        public delegate void HpChange();
 
         private event HealthZero HealthZeroEvent;
+        public event HpChange OnHpChange;
 
         private float maxHP;
         public float MaxHP {
@@ -33,15 +35,14 @@ namespace Classes.TryInHierarchie {
 
         public bool IsDead() => HP <= 0;
 
-
         public void TakeDamage(float damage) {
             HP -= damage;
+            OnHpChange?.Invoke();
         }
-
         public void RestoreHealth(float heal) {
             HP += heal;
+            OnHpChange?.Invoke();
         }
-
         public void HealToMaxHP() => HP = MaxHP;
     }
 }
