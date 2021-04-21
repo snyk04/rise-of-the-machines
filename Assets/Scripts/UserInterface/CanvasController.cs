@@ -29,6 +29,8 @@ namespace UserInterface
 
         public IEnumerator FadeScreen()
         {
+            cover.gameObject.SetActive(true);
+
             float transparency = 0;
             while (transparency < 1)
             {
@@ -46,16 +48,20 @@ namespace UserInterface
                 cover.color = new Color(0, 0, 0, transparency);
                 yield return new WaitForEndOfFrame();
             }
+
+            cover.gameObject.SetActive(false);
         }
 
         public void StartAnimation(string[] textQuery)
         {
+            changeStateText.gameObject.SetActive(true);
             animationCoroutine = StartCoroutine(AnimateChangeStateText(textQuery));
         }
         public void StopAnimation()
         {
             StopCoroutine(animationCoroutine);
             changeStateText.text = "";
+            changeStateText.gameObject.SetActive(false);
         }
 
         private IEnumerator AnimateChangeStateText(string[] textQuery)

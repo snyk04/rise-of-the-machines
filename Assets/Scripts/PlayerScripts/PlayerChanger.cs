@@ -15,7 +15,6 @@ namespace PlayerScripts
         [SerializeField] private GameObject robot;
         [SerializeField] private GameObject human;
         [SerializeField] private GameObject emptyRobot;
-        [SerializeField] private GameObject enemy;
 
         [Header("Cinemachine points")]
         [SerializeField] private Transform humanLookAt;
@@ -34,13 +33,14 @@ namespace PlayerScripts
         
         [Header("Settings")]
         [SerializeField] private float humanSpawnDistance;
-        [SerializeField] private Vector3 heading;
+
+        private Coroutine waitForEnterCoroutine;
+        private Coroutine waitForExitCoroutine;
 
         #endregion
 
         private void Start()
         {
-            heading = new Vector3(0, 0, 0);
             audioSource.minDistance = 1;
             audioSource.maxDistance = 50;
             audioSource.volume = 1f;
@@ -73,9 +73,10 @@ namespace PlayerScripts
             yield return new WaitForSeconds(enterRobotSound.length);
             canvasController.StopAnimation();
 
+            yield return StartCoroutine(canvasController.UnfadeScreen());
+
             // TODO: разблокировать управление
             ActivateExitText();
-            yield return StartCoroutine(canvasController.UnfadeScreen());
         }
         private IEnumerator ExitRobot()
         {
@@ -100,29 +101,30 @@ namespace PlayerScripts
             yield return new WaitForSeconds(exitRobotSound.length);
             canvasController.StopAnimation();
 
-            // TODO: разблокировать управление
             yield return StartCoroutine(canvasController.UnfadeScreen());
+            
+            // TODO: разблокировать управление
         }
 
         public void ActivateEnterText()
         {
             canvasController.EnterText.SetActive(true);
-            StartCoroutine(WaitForEnter());
+            waitForEnterCoroutine = StartCoroutine(WaitForEnter());
         }
         public void ActivateExitText()
         {
             canvasController.ExitText.SetActive(true);
-            StartCoroutine(WaitForExit());
+            waitForExitCoroutine = StartCoroutine(WaitForExit());
         }
         public void DeactivateEnterText()
         {
             canvasController.EnterText.SetActive(false);
-            StopCoroutine(WaitForEnter());
+            StopCoroutine(waitForEnterCoroutine);
         }
         public void DeactivateExitText()
         {
             canvasController.ExitText.SetActive(false);
-            StopCoroutine(WaitForExit());
+            StopCoroutine(waitForExitCoroutine);
         }
 
         // TODO: Заменить это на ивентики там хз, ну без корутин чтобы было, по православному чтобы
@@ -132,15 +134,7 @@ namespace PlayerScripts
             {
                 if (Keyboard.current[Key.G].wasPressedThisFrame)
                 {
-                    enemy = GameObject.FindGameObjectWithTag("Enemy");
-                    if (enemy != null)
-                    {
-                        heading = human.transform.position - enemy.transform.position;
-                    }
-                    if (heading == null || heading.magnitude >= 10 || enemy == null)
-                    {
-                        StartCoroutine(EnterRobot());
-                    }
+                    StartCoroutine(EnterRobot());
                 }
 
                 yield return null;
@@ -152,15 +146,7 @@ namespace PlayerScripts
             {
                 if (Keyboard.current[Key.F].wasPressedThisFrame)
                 {
-                    enemy = GameObject.FindGameObjectWithTag("Enemy");
-                    if (enemy != null)
-                    {
-                        heading = robot.transform.position - enemy.transform.position;
-                    }
-                    if (heading == null || heading.magnitude >= 10 || enemy == null)
-                    {
-                        StartCoroutine(ExitRobot());
-                    }
+                    StartCoroutine(ExitRobot());
                 }
 
                 yield return null;
