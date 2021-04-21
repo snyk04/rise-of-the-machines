@@ -1,9 +1,10 @@
-﻿using System;
-using Classes;
+﻿using Classes;
 using UnityEngine;
 
-namespace PlayerScripts {
-    public class PlayerController : MonoBehaviour {
+namespace PlayerScripts
+{
+    public class PlayerController : MonoBehaviour
+    {
         [SerializeField] private Transform human;
         [SerializeField] private Transform robot;
         [SerializeField] private Animator humanAnimator;
@@ -16,10 +17,11 @@ namespace PlayerScripts {
         public static PlayerController playerController;
         private Player player;
 
-        private void Awake() {
+        private void Awake()
+        {
             playerController = this;
-            var player = new Player(new Human(100, 4, 20, human, humanAnimator, humanCharacterController, humanGunTransform),
-                                    new Robot(100, 4, 20, robot, robotAnimator, robotCharacterController, robotGunTransform)); // todo add HumanSO, RobotSO
+            player = new Player(new Human(100, 4, 20, human, humanAnimator, humanCharacterController, humanGunTransform),
+                                new Robot(100, 4, 20, robot, robotAnimator, robotCharacterController, robotGunTransform)); // todo add HumanSO, RobotSO
         }
 
         // private void Update() {

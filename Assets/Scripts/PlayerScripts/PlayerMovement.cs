@@ -12,6 +12,7 @@ namespace PlayerScripts
         [SerializeField] private PlayerChanger playerChanger;
         [SerializeField] private PlayerAnimation animationController;
         [SerializeField] private Camera mainCamera;
+
         [Header("Settings")]
         [SerializeField] private LayerMask whatIsGround;
         [SerializeField] private bool isGunRotate;

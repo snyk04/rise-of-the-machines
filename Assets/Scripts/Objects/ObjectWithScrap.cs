@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 
-public class ObjectWithScrap : MonoBehaviour
+namespace Objects
 {
-    public void Break()
+    public class ObjectWithScrap : MonoBehaviour
     {
-        Destroy(gameObject);
+        public void Break()
+        {
+            Destroy(gameObject);
+        }
     }
 }

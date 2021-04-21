@@ -5,7 +5,7 @@ namespace Objects
 {
     public class EmptyRobot : MonoBehaviour
     {
-        [SerializeField] PlayerChanger playerChanger;
+        [SerializeField] private PlayerChanger playerChanger;
 
         private void OnTriggerEnter(Collider other)
         {

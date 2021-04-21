@@ -3,6 +3,7 @@ using Cinemachine;
 using Classes;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UserInterface;
 
 namespace PlayerScripts
 {
