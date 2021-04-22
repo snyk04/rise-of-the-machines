@@ -26,7 +26,6 @@ namespace Objects
             weapon = Weapon.CreateWeapon(weaponSO);
 
             lineRenderer = lineRenderer ? lineRenderer : gameObject.AddComponent<LineRenderer>();
-            lineRenderer.positionCount = 2;
             ClearLineRenderer();
             lineRenderer.widthMultiplier = 0.1f;
         }
@@ -34,9 +33,14 @@ namespace Objects
         {
             timeAfterLastShot += Time.deltaTime;
         }
+        
+        List<Ray> rays = new List<Ray>();
+        List<Vector3> positions = new List<Vector3>();
 
         public void Shoot()
         {
+            rays.Clear();
+            positions.Clear();
             WeaponSO weaponData = weapon.WeaponData;
 
             if (timeAfterLastShot < 1 / weaponData.shotsPerSecond)
@@ -44,21 +48,27 @@ namespace Objects
                 return;
             }
             timeAfterLastShot = 0;
+            
+            var muzzleHolePos = muzzleHole.position;
 
-            var rays = new List<Ray>();
             for (int i = 0; i < weaponData.bulletsPerShot; i++)
             {
                 var localShootDir = muzzleHole.rotation * SimpsonsSpreading.Spreading(weaponData.shotSpread);
                 localShootDir.y = 0;
-                var muzzleHolePos = muzzleHole.position;
-                if (animateShoot != null)
-                {
-                    StopCoroutine(animateShoot);
-                }
-                animateShoot = StartCoroutine(VisualizeShot(muzzleHolePos, localShootDir));
-
                 rays.Add(new Ray(muzzleHolePos, localShootDir));
             }
+
+            for (int i = 0; i < weaponData.bulletsPerShot; i++)
+            {
+                positions.Add(muzzleHolePos);
+                positions.Add(rays[i].direction.normalized * weapon.WeaponData.maxShotDistance + muzzleHolePos);
+            }
+            
+            if (animateShoot != null)
+            {
+                StopCoroutine(animateShoot);
+            }
+            animateShoot = StartCoroutine(VisualizeShot(positions.ToArray()));
 
             for (int i = 0; i < weaponData.bulletsPerShot; i++)
             {
@@ -98,18 +108,18 @@ namespace Objects
             Destroy(source);
         }
 
-        private IEnumerator VisualizeShot(Vector3 muzzleHolePos, Vector3 localShootDirection)
+        private IEnumerator VisualizeShot(Vector3[] positions)
         {
-            lineRenderer.SetPositions(new []{ muzzleHolePos, localShootDirection.normalized * weapon.WeaponData.maxShotDistance + muzzleHolePos});
+            lineRenderer.positionCount = positions.Length;
+            lineRenderer.SetPositions(positions);
             yield return new WaitForSeconds(0.1f);
             ClearLineRenderer();
         }
 
         private void ClearLineRenderer()
         {
-            for (int i = 0; i < lineRenderer.positionCount; i++)
-            {
-                lineRenderer.SetPosition(i, Vector3.zero);
+            for (int i = 0; i < lineRenderer.positionCount; i++) {
+                lineRenderer.positionCount = 0;
             }
         }
     }
