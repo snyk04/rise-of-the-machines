@@ -37,10 +37,16 @@ public class MusicController : MonoBehaviour
     [SerializeField] private AudioClip ambient2;
     [SerializeField] private AudioClip combat1;
 
+    private GameState gameState;
+
     #endregion
 
     private void Start()
     {
+        gameState = GameState.Instance;
+        gameState.OnCombatStart += StartCombatSound;
+        gameState.OnCombatEnd += StartAmbientSound;
+
         ambientAudioSource.volume = ambientVolume;
         ambientAudioSource.loop = ambientLoop;
 
@@ -98,9 +104,9 @@ public class MusicController : MonoBehaviour
         audioSource.volume = 0;
     }
 
-    public IEnumerator SwitchFromAmbientToCombat(Clip nextClip)
+    public IEnumerator SwitchFromAmbientToCombat()
     {
-        SetClip(combatAudioSource, nextClip);
+        SetClip(combatAudioSource, combatMusic);
         combatAudioSource.Play();
 
         StartCoroutine(VolumeUp(combatAudioSource, ambientToCombatChangeSpeed, combatVolume));
@@ -108,9 +114,9 @@ public class MusicController : MonoBehaviour
 
         ambientAudioSource.Pause();
     }
-    public IEnumerator SwitchFromCombatToAmbient(Clip nextClip)
+    public IEnumerator SwitchFromCombatToAmbient()
     {
-        SetClip(ambientAudioSource, nextClip);
+        SetClip(ambientAudioSource, ambient);
         ambientAudioSource.UnPause();
 
         StartCoroutine(VolumeUp(ambientAudioSource, combatToAmbientChangeSpeed, ambientVolume));
@@ -119,12 +125,12 @@ public class MusicController : MonoBehaviour
         combatAudioSource.Pause();
     }
 
-    public void TEST1()
+    public void StartCombatSound()
     {
-        StartCoroutine(SwitchFromAmbientToCombat(combatMusic));
+        StartCoroutine(SwitchFromAmbientToCombat());
     }
-    public void TEST2()
+    public void StartAmbientSound()
     {
-        StartCoroutine(SwitchFromCombatToAmbient(ambient));
+        StartCoroutine(SwitchFromCombatToAmbient());
     }
 }

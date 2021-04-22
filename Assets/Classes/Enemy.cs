@@ -8,7 +8,7 @@ namespace Classes
 
         protected override void Die()
         {
-            //TODO: animation
+            GameState.Instance.RemoveTriggeredEnemies(1);
             Object.Destroy(Transform.gameObject);
         }
     }

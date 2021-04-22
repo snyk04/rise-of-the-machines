@@ -36,6 +36,9 @@ namespace Classes.TryInHierarchie {
         public bool IsDead() => HP <= 0;
 
         public void TakeDamage(float damage) {
+            if (IsDead()) {
+                return;
+            }
             HP -= damage;
             OnHpChange?.Invoke();
         }

@@ -30,6 +30,7 @@ namespace Characters
         private NavMeshAgent navMeshAgent;
         private EnemyController enemyController;
         private EnemySO enemy;
+        private GameState gameState;
 
         private State currentState;
 
@@ -43,6 +44,7 @@ namespace Characters
         }
         private void Start()
         {
+            gameState = GameState.Instance;
             ChangeState(State.Patrol, FindPlayer());
         }
 
@@ -67,6 +69,7 @@ namespace Characters
                 }
 
                 ChangeState(State.Pursuit, PursuitPlayer());
+                gameState.AddTriggeredEnemies(1);
             }
         }
         private IEnumerator PursuitPlayer()
@@ -82,6 +85,7 @@ namespace Characters
                 {
                     navMeshAgent.isStopped = true;
                     ChangeState(State.Patrol, FindPlayer());
+                    gameState.RemoveTriggeredEnemies(1);
                     break;
                 }
                 else if (distanceVectorLength <= enemy.fightStartDistance)
@@ -96,6 +100,7 @@ namespace Characters
         }
         private IEnumerator FightPlayer()
         {
+            //TODO: добавить проверку на то, жив ли игрок
             while ((Player.Instance.Transform.position - transform.position).magnitude <= enemy.fightStopDistance)
             {
                 yield return new WaitForSeconds(enemy.attackInterval);
@@ -103,6 +108,7 @@ namespace Characters
                 amountOfDamage += amountOfDamage * (2 * Random.value - 1) * damageError;
                 Player.Instance.takeDamage(amountOfDamage);
             }
+
 
             ChangeState(State.Pursuit, PursuitPlayer());
         }
