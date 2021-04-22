@@ -80,10 +80,10 @@ namespace Objects
             {
                 particle.Emit(1);
             }
-            StartCoroutine(VoiceShot());
+            StartCoroutine(PlayShotSound());
         }
 
-        private IEnumerator VoiceShot()
+        private IEnumerator PlayShotSound()
         {
             AudioSource source = gameObject.AddComponent<AudioSource>(); // todo pull objects? 
 
