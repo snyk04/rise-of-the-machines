@@ -5,7 +5,7 @@ namespace Classes.TryInHierarchie {
         public delegate void HealthZero();
         public delegate void HpChange();
 
-        private event HealthZero HealthZeroEvent;
+        private event HealthZero OnHealthZero;
         public event HpChange OnHpChange;
 
         private float maxHP;
@@ -23,14 +23,14 @@ namespace Classes.TryInHierarchie {
             private set {
                 Value = Mathf.Clamp(value, 0, MaxHP);
                 if (Value.Equals(0)) {
-                    HealthZeroEvent?.Invoke();
+                    OnHealthZero?.Invoke();
                 }
             }
         }
 
-        public HealthCharacteristic(float maxHp, HealthZero healthZeroMethod) : base(maxHp) {
+        public HealthCharacteristic(float maxHp, HealthZero onHealthZeroMethod) : base(maxHp) {
             MaxHP = maxHp;
-            HealthZeroEvent += healthZeroMethod;
+            OnHealthZero += onHealthZeroMethod;
         }
 
         public bool IsDead() => HP <= 0;
@@ -43,6 +43,6 @@ namespace Classes.TryInHierarchie {
             HP += heal;
             OnHpChange?.Invoke();
         }
-        public void HealToMaxHP() => HP = MaxHP;
+        public void HealToMaxHP() => RestoreHealth(MaxHP);
     }
 }
