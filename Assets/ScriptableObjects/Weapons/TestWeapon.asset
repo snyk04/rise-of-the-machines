@@ -15,17 +15,19 @@ MonoBehaviour:
   name: TestWeapon
   weaponID: 0
   damage: 10
-  bulletsInMagazine: 10
-  numOfBullets: 10
+  damageSpread: 0
+  maxBulletsInMagazine: 1
+  maxBulletsInBackpack: 1
+  currentBulletsInMagazine: 1
+  currentBulletsInBackpack: 1
+  bulletsPerShot: 1
   reloadTime: 1
-  currentAmmo: 10
-  isReloading: 0
+  shotSpread: 1
+  shotsPerSecond: 10
+  maxShotDistance: 100
+  isAutomatic: 1
   shootSound: {fileID: 8300000, guid: f6fc2ec9dee1f9e4184d46b4226bdce8, type: 3}
   noAmmoSound: {fileID: 0}
-  spread: 1
   reloadSound: {fileID: 0}
-  fireRate: 10
-  isAutomatic: 1
   spot: 0
-  amountOfBullets: 1
-  maxDistance: 500
+  isReloading: 0

@@ -51,14 +51,13 @@ namespace Objects
                 var localShootDir = muzzleHole.rotation * SimpsonsSpreading.Spreading(weaponData.shotSpread);
                 localShootDir.y = 0;
                 var muzzleHolePos = muzzleHole.position;
-                var shootDirection = muzzleHolePos + localShootDir;
                 if (animateShoot != null)
                 {
                     StopCoroutine(animateShoot);
                 }
-                animateShoot = StartCoroutine(VisualizeShoot(muzzleHolePos, shootDirection));
+                animateShoot = StartCoroutine(VisualizeShot(muzzleHolePos, localShootDir));
 
-                rays.Add(new Ray(muzzleHolePos, shootDirection - muzzleHolePos));
+                rays.Add(new Ray(muzzleHolePos, localShootDir));
             }
 
             for (int i = 0; i < weaponData.bulletsPerShot; i++)
@@ -81,10 +80,10 @@ namespace Objects
             {
                 particle.Emit(1);
             }
-            StartCoroutine(VoiceShoot());
+            StartCoroutine(VoiceShot());
         }
 
-        private IEnumerator VoiceShoot()
+        private IEnumerator VoiceShot()
         {
             AudioSource source = gameObject.AddComponent<AudioSource>(); // todo pull objects? 
 
@@ -99,9 +98,9 @@ namespace Objects
             Destroy(source);
         }
 
-        private IEnumerator VisualizeShoot(Vector3 muzzleHolePos, Vector3 shootDirection)
+        private IEnumerator VisualizeShot(Vector3 muzzleHolePos, Vector3 localShootDirection)
         {
-            lineRenderer.SetPositions(new[] { muzzleHolePos, (shootDirection - muzzleHolePos).normalized * weapon.WeaponData.maxShotDistance });
+            lineRenderer.SetPositions(new []{ muzzleHolePos, localShootDirection.normalized * weapon.WeaponData.maxShotDistance + muzzleHolePos});
             yield return new WaitForSeconds(0.1f);
             ClearLineRenderer();
         }
