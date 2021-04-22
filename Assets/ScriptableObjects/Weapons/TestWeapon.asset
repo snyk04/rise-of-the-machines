@@ -15,14 +15,14 @@ MonoBehaviour:
   name: TestWeapon
   weaponID: 0
   damage: 10
-  damageSpread: 0
-  maxBulletsInMagazine: 1
-  maxBulletsInBackpack: 1
-  currentBulletsInMagazine: 1
-  currentBulletsInBackpack: 1
-  bulletsPerShot: 1
+  damageSpread: 0.1
+  maxBulletsInMagazine: 30
+  maxBulletsInBackpack: 120
+  currentBulletsInMagazine: 30
+  currentBulletsInBackpack: 120
+  bulletsPerShot: 5
   reloadTime: 1
-  shotSpread: 1
+  shotSpread: 0
   shotsPerSecond: 10
   maxShotDistance: 100
   isAutomatic: 1

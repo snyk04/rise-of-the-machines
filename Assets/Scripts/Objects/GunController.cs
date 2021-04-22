@@ -66,7 +66,7 @@ namespace Objects
                 {
                     if (hitInfo.transform.TryGetComponent(out Damageable damageable))
                     {
-                        var amountOfDamage = Random.Range(weaponData.damage * (1 - weaponData.damageSpread), weaponData.damage * (1 + weaponData.damageSpread)) / weaponData.bulletsPerShot; // todo remove magic numbers, replace many same invokes to fields
+                        var amountOfDamage = Random.Range(weaponData.damage * (1 - weaponData.damageSpread), weaponData.damage * (1 + weaponData.damageSpread)) / weaponData.bulletsPerShot;
                         damageable.TakeDamage(amountOfDamage);
                     }
                     if (hitInfo.transform.TryGetComponent(out ParticlesManager particlesManager))
