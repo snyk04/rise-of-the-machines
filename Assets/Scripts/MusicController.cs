@@ -28,8 +28,8 @@ public class MusicController : MonoBehaviour
     [Range(0, 1)] [SerializeField] private float ambientVolume;
     [Range(0, 1)] [SerializeField] private float combatVolume;
     [Space]
-    [Range(0, 5)] [SerializeField] private float ambientToCombatChangeSpeed;
-    [Range(0, 5)] [SerializeField] private float combatToAmbientChangeSpeed;
+    [SerializeField] private float ambientToCombatChangeTime;
+    [SerializeField] private float combatToAmbientChangeTime;
 
     [Header("Music")]
     [SerializeField] private AudioClip mainMenu;
@@ -37,30 +37,30 @@ public class MusicController : MonoBehaviour
     [SerializeField] private AudioClip ambient2;
     [SerializeField] private AudioClip combat1;
 
-    private GameState gameState;
-
     #endregion
 
     private void Start()
     {
-        gameState = GameState.Instance;
+        var gameState = GameState.Instance;
         gameState.OnCombatStart += StartCombatSound;
         gameState.OnCombatEnd += StartAmbientSound;
 
-        ambientAudioSource.volume = ambientVolume;
+        ambientAudioSource.volume = 0;
         ambientAudioSource.loop = ambientLoop;
 
-        combatAudioSource.volume = combatVolume;
+        combatAudioSource.volume = 0;
         combatAudioSource.loop = combatLoop;
 
         if (ambient != Clip.Nothing)
         {
             SetClip(ambientAudioSource, ambient);
+            ambientAudioSource.volume = ambientVolume;
             ambientAudioSource.Play();
         }
         else if (combatMusic != Clip.Nothing)
         {
             SetClip(combatAudioSource, combatMusic);
+            combatAudioSource.volume = combatVolume;
             combatAudioSource.Play();
         }
     }
@@ -85,20 +85,20 @@ public class MusicController : MonoBehaviour
                 break;
         }
     }
-    private IEnumerator VolumeUp(AudioSource audioSource, float trackChangeSpeed, float maxVolume)
+    private IEnumerator VolumeUp(AudioSource audioSource, float trackChangeTime, float maxVolume)
     {
         while (audioSource.volume < maxVolume)
         {
-            audioSource.volume += (maxVolume / 100) * trackChangeSpeed;
+            audioSource.volume += (maxVolume / 100) * TimeToSpeed(trackChangeTime);
             yield return new WaitForFixedUpdate();
         }
         audioSource.volume = maxVolume;
     }
-    private IEnumerator VolumeDown(AudioSource audioSource, float trackChangeSpeed, float maxVolume)
+    private IEnumerator VolumeDown(AudioSource audioSource, float trackChangeTime, float maxVolume)
     {
         while (audioSource.volume > 0f)
         {
-            audioSource.volume -= (maxVolume / 100) * trackChangeSpeed;
+            audioSource.volume -= (maxVolume / 100) * TimeToSpeed(trackChangeTime);
             yield return new WaitForFixedUpdate();
         }
         audioSource.volume = 0;
@@ -109,8 +109,8 @@ public class MusicController : MonoBehaviour
         SetClip(combatAudioSource, combatMusic);
         combatAudioSource.Play();
 
-        StartCoroutine(VolumeUp(combatAudioSource, ambientToCombatChangeSpeed, combatVolume));
-        yield return StartCoroutine(VolumeDown(ambientAudioSource, ambientToCombatChangeSpeed, ambientVolume));
+        StartCoroutine(VolumeUp(combatAudioSource, ambientToCombatChangeTime, combatVolume));
+        yield return StartCoroutine(VolumeDown(ambientAudioSource, ambientToCombatChangeTime, ambientVolume));
 
         ambientAudioSource.Pause();
     }
@@ -119,8 +119,8 @@ public class MusicController : MonoBehaviour
         SetClip(ambientAudioSource, ambient);
         ambientAudioSource.UnPause();
 
-        StartCoroutine(VolumeUp(ambientAudioSource, combatToAmbientChangeSpeed, ambientVolume));
-        yield return StartCoroutine(VolumeDown(combatAudioSource, combatToAmbientChangeSpeed, combatVolume));
+        StartCoroutine(VolumeUp(ambientAudioSource, combatToAmbientChangeTime, ambientVolume));
+        yield return StartCoroutine(VolumeDown(combatAudioSource, combatToAmbientChangeTime, combatVolume));
 
         combatAudioSource.Pause();
     }
@@ -132,5 +132,10 @@ public class MusicController : MonoBehaviour
     public void StartAmbientSound()
     {
         StartCoroutine(SwitchFromCombatToAmbient());
+    }
+
+    private float TimeToSpeed(float trackChangeTime)
+    {
+        return 2 / trackChangeTime;
     }
 }
