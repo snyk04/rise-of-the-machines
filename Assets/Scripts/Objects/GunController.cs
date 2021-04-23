@@ -90,22 +90,7 @@ namespace Objects
             {
                 particle.Emit(1);
             }
-            StartCoroutine(PlayShotSound());
-        }
-
-        private IEnumerator PlayShotSound()
-        {
-            AudioSource source = gameObject.AddComponent<AudioSource>(); // todo pull objects? 
-
-            source.clip = weaponSO.shootSound;
-            source.minDistance = 1;
-            source.maxDistance = 50;
-            source.volume = 1f;
-            source.spatialBlend = 1f;
-            source.Play();
-
-            yield return new WaitForSeconds(source.clip.length);
-            Destroy(source);
+            GetComponent<GunSound>().PlayShotSound();
         }
 
         private IEnumerator VisualizeShot(Vector3[] positions)

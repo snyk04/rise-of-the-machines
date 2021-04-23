@@ -27,7 +27,7 @@ namespace Classes.ScriptableObjects
         public bool isAutomatic;
 
         [Header("Sound")]
-        public AudioClip shootSound;
+        public AudioClip shotSound;
         public AudioClip noAmmoSound;
         public AudioClip reloadSound;
 

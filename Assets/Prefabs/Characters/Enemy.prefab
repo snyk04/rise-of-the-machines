@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3826625152611042724}
   - component: {fileID: 1929879431206147486}
   m_Layer: 12
-  m_Name: New Sprite
+  m_Name: MinimapMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,8 +117,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3826625152611042724}
-  - {fileID: 8154902158983944508}
-  - {fileID: 6680873881995891934}
+  - {fileID: 4027513034375309235}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -259,24 +258,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f07430e94ce5da344a3ce1a2f164e1ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particle: {fileID: 8357941036582308364}
-  particle1: {fileID: 6802243307895719918}
+  particles:
+  - {fileID: 8357941036582308364}
+  - {fileID: 6802243307895719918}
+--- !u!1 &7871820626100121819
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4027513034375309235}
+  m_Layer: 9
+  m_Name: Particles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4027513034375309235
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7871820626100121819}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8154902158983944508}
+  - {fileID: 6680873881995891934}
+  m_Father: {fileID: 5123428254204717879}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5454270613566479453
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 5123428254204717879}
+    m_TransformParent: {fileID: 4027513034375309235}
     m_Modifications:
     - target: {fileID: 1659098585363875971, guid: ce7bd453c8e1d5b4aaa43d4a5b06a757,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1659098585363875971, guid: ce7bd453c8e1d5b4aaa43d4a5b06a757,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.03
+      value: 0.029999997
       objectReference: {fileID: 0}
     - target: {fileID: 1659098585363875971, guid: ce7bd453c8e1d5b4aaa43d4a5b06a757,
         type: 3}
@@ -286,7 +318,7 @@ PrefabInstance:
     - target: {fileID: 1659098585363875971, guid: ce7bd453c8e1d5b4aaa43d4a5b06a757,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.03
+      value: 0.029999997
       objectReference: {fileID: 0}
     - target: {fileID: 1659098585363875971, guid: ce7bd453c8e1d5b4aaa43d4a5b06a757,
         type: 3}
@@ -341,7 +373,7 @@ PrefabInstance:
     - target: {fileID: 1663221756419412815, guid: ce7bd453c8e1d5b4aaa43d4a5b06a757,
         type: 3}
       propertyPath: m_Name
-      value: Blood (1)
+      value: Blood 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce7bd453c8e1d5b4aaa43d4a5b06a757, type: 3}
@@ -362,12 +394,12 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 5123428254204717879}
+    m_TransformParent: {fileID: 4027513034375309235}
     m_Modifications:
     - target: {fileID: 1659098585363875971, guid: ce7bd453c8e1d5b4aaa43d4a5b06a757,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1659098585363875971, guid: ce7bd453c8e1d5b4aaa43d4a5b06a757,
         type: 3}
@@ -377,12 +409,12 @@ PrefabInstance:
     - target: {fileID: 1659098585363875971, guid: ce7bd453c8e1d5b4aaa43d4a5b06a757,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.03
+      value: 0.029999997
       objectReference: {fileID: 0}
     - target: {fileID: 1659098585363875971, guid: ce7bd453c8e1d5b4aaa43d4a5b06a757,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.03
+      value: 0.029999997
       objectReference: {fileID: 0}
     - target: {fileID: 1659098585363875971, guid: ce7bd453c8e1d5b4aaa43d4a5b06a757,
         type: 3}
@@ -437,7 +469,7 @@ PrefabInstance:
     - target: {fileID: 1663221756419412815, guid: ce7bd453c8e1d5b4aaa43d4a5b06a757,
         type: 3}
       propertyPath: m_Name
-      value: Blood
+      value: Blood 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce7bd453c8e1d5b4aaa43d4a5b06a757, type: 3}
