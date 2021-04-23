@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace UserInterface
 {
-    public class CharacteristicBarController : MonoBehaviour
+    public class CharacteristicBar : MonoBehaviour
     {
         public enum Type
         {
@@ -17,8 +17,6 @@ namespace UserInterface
 
         private float maxValue;
         private float currentValue;
-
-        private delegate void Change();
 
         private void Start()
         {

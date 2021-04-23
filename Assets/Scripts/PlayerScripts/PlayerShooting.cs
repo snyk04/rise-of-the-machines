@@ -12,7 +12,7 @@ namespace PlayerScripts
         {
             if (Mouse.current.leftButton.wasPressedThisFrame || Mouse.current.leftButton.isPressed && gun.weapon.WeaponData.isAutomatic)
             {
-                gun.Shoot();
+                gun.TryShoot();
             }
         }
     }
