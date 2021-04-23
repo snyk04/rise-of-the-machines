@@ -882,7 +882,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 473368214}
-  m_LocalRotation: {x: 0.33402508, y: 9.772742e-16, z: 3.9835306e-16, w: 0.9425642}
+  m_LocalRotation: {x: 0.33402508, y: -9.772742e-16, z: -3.9835306e-16, w: 0.9425642}
   m_LocalPosition: {x: -2.041748, y: 9.130005, z: -15.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1149,17 +1149,17 @@ PrefabInstance:
     - target: {fileID: 7272428175781894275, guid: 6277e024316a612499222d980373a7a9,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7272428175781894275, guid: 6277e024316a612499222d980373a7a9,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7272428175781894275, guid: 6277e024316a612499222d980373a7a9,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7272428175781894275, guid: 6277e024316a612499222d980373a7a9,
         type: 3}
@@ -1169,7 +1169,7 @@ PrefabInstance:
     - target: {fileID: 7272428175781894275, guid: 6277e024316a612499222d980373a7a9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.26535
+      value: 10.75
       objectReference: {fileID: 0}
     - target: {fileID: 7272428175781894275, guid: 6277e024316a612499222d980373a7a9,
         type: 3}
@@ -1818,7 +1818,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.33402508, y: 9.772742e-16, z: 3.9835306e-16, w: 0.9425642}
+  m_LocalRotation: {x: 0.33402508, y: -9.772742e-16, z: -3.9835306e-16, w: 0.9425642}
   m_LocalPosition: {x: -2.041748, y: 9.130005, z: -15.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -3575,7 +3575,7 @@ MonoBehaviour:
   mainMenu: {fileID: 8300000, guid: 9970c3d8373e19b44b0c36e47ce9f5f3, type: 3}
   ambient1: {fileID: 8300000, guid: c62270ac2805125458cf20ef835cad5a, type: 3}
   ambient2: {fileID: 8300000, guid: 83e98767f85c60747ab8e8db9d5daa12, type: 3}
-  combat1: {fileID: 8300000, guid: 53d084a271b5a3d498e81acffe790b09, type: 3}
+  combat1: {fileID: 8300000, guid: 07dc46c7d2f732b4fbf1b72d8c8a3da0, type: 3}
 --- !u!114 &1777141025
 MonoBehaviour:
   m_ObjectHideFlags: 0
