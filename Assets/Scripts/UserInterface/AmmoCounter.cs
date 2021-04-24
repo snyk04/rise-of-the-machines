@@ -1,5 +1,6 @@
 ﻿using Classes.ScriptableObjects;
 using Objects;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,7 @@ namespace UserInterface
 {
     public class AmmoCounter : MonoBehaviour
     {
-        [SerializeField] private Text text;
+        [SerializeField] private TextMeshProUGUI text;
         [SerializeField] private GunController gun;
 
         private WeaponSO weaponData;

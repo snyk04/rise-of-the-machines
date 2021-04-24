@@ -1,4 +1,5 @@
 ﻿using Classes;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +15,7 @@ namespace UserInterface
 
         [SerializeField] private Type type;
         [SerializeField] private Slider slider;
-        [SerializeField] private Text text;
+        [SerializeField] private TextMeshProUGUI text;
 
         private float maxValue;
         private float currentValue;
