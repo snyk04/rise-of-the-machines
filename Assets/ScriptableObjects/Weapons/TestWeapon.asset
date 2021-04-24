@@ -17,9 +17,9 @@ MonoBehaviour:
   damage: 10
   damageSpread: 0.1
   maxBulletsInMagazine: 30
-  maxBulletsInBackpack: 120
-  currentBulletsInMagazine: 0
-  currentBulletsInBackpack: 0
+  maxAllAmmo: 0
+  currentBulletsInMagazine: 30
+  allAmmo: 0
   bulletsPerShot: 1
   reloadTime: 1
   shotSpread: 0

@@ -19,16 +19,16 @@ namespace UserInterface
             weapon.OnReload += UpdateAmmoInBackpack;
 
             weaponData = weapon.WeaponData;
-            text.text = $"{weaponData.currentBulletsInMagazine} / {weaponData.currentBulletsInBackpack - weaponData.currentBulletsInMagazine}";
+            text.text = $"{weaponData.currentBulletsInMagazine} / {weaponData.allAmmo - weaponData.currentBulletsInMagazine}";
         }
 
         public void UpdateAmmoInMagazine()
         {
-            text.text = $"{weaponData.currentBulletsInMagazine} / {weaponData.currentBulletsInBackpack - weaponData.currentBulletsInMagazine}";
+            text.text = $"{weaponData.currentBulletsInMagazine} / {weaponData.allAmmo - weaponData.currentBulletsInMagazine}";
         }
         public void UpdateAmmoInBackpack()
         {
-            text.text = $"{weaponData.currentBulletsInMagazine} / {weaponData.currentBulletsInBackpack - weaponData.currentBulletsInMagazine}";
+            text.text = $"{weaponData.currentBulletsInMagazine} / {weaponData.allAmmo - weaponData.currentBulletsInMagazine}";
         }
     }
 }

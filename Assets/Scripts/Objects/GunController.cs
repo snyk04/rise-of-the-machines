@@ -1,4 +1,5 @@
-﻿using CharactersAndObjects;
+﻿using System;
+using CharactersAndObjects;
 using Classes;
 using Classes.ScriptableObjects;
 using Classes.TryInHierarchie;
@@ -19,74 +20,50 @@ namespace Objects
 
         public Weapon weapon { get; private set; }
         private GunSound gunSound;
-        private float timeAfterLastShot;
         private Coroutine animateShoot;
 
         private void Awake()
         {
-            weapon = Weapon.CreateWeapon(weaponSO);
+            weapon = Weapon.CreateWeapon(Instantiate(weaponSO));
             gunSound = GetComponent<GunSound>();
 
             lineRenderer = lineRenderer ? lineRenderer : gameObject.AddComponent<LineRenderer>();
             ClearLineRenderer();
             lineRenderer.widthMultiplier = 0.1f;
         }
-        private void Update()
-        {
-            timeAfterLastShot += Time.deltaTime;
-        }
 
         private List<Ray> rays = new List<Ray>();
-        private List<Vector3> positions = new List<Vector3>();
 
-        public void TryShoot()
-        {
-            Weapon.ShotResult shotResult = weapon.TryShoot(timeAfterLastShot);
+        public void TryShoot() {
+            Weapon.ShotResult shotResult = weapon.TryShoot(Time.time, muzzleHole.position, muzzleHole.rotation, out rays);
 
-            switch (shotResult)
-            {
+            switch (shotResult) {
                 case Weapon.ShotResult.NoAmmoInBackpack:
                     NoAmmo();
                     break;
                 case Weapon.ShotResult.NoAmmoInMagazine:
                     Reload();
                     break;
-                case Weapon.ShotResult.ShotSuccesful:
-                    Shoot();
+                case Weapon.ShotResult.ShotSuccessful:
+                    Shoot(rays);
                     break;
                 case Weapon.ShotResult.TooFast:
+                    return;
+                default:
                     return;
             }
         }
 
-        private void Shoot()
-        {
-            timeAfterLastShot = 0;
+        private List<Vector3> positions = new List<Vector3>();
 
-            rays.Clear();
+        private void Shoot(List<Ray> rays)
+        {
             positions.Clear();
             WeaponSO weaponData = weapon.WeaponData;
 
             var muzzleHolePos = muzzleHole.position;
 
-            for (int i = 0; i < weaponData.bulletsPerShot; i++)
-            {
-                var localShootDir = muzzleHole.rotation * SimpsonsSpreading.Spreading(weaponData.shotSpread);
-                localShootDir.y = 0;
-                rays.Add(new Ray(muzzleHolePos, localShootDir));
-            }
-
-            for (int i = 0; i < weaponData.bulletsPerShot; i++)
-            {
-                positions.Add(muzzleHolePos);
-                positions.Add(rays[i].direction.normalized * weapon.WeaponData.maxShotDistance + muzzleHolePos);
-            }
-
-            if (animateShoot != null)
-            {
-                StopCoroutine(animateShoot);
-            }
-            animateShoot = StartCoroutine(VisualizeShot(positions.ToArray()));
+            VisualizeShot(weaponData, muzzleHolePos);
 
             for (int i = 0; i < weaponData.bulletsPerShot; i++)
             {
@@ -113,15 +90,29 @@ namespace Objects
         private void Reload()
         {
             // TODO: заблокировать возможность стрелять
-            timeAfterLastShot = 0;
             weapon.Reload();
             gunSound.PlayReloadSound();
         }
         private void NoAmmo()
         {
-            timeAfterLastShot = 0;
             gunSound.PlayNoAmmoSound();
         }
+        
+        private void VisualizeShot(WeaponSO weaponData, Vector3 muzzleHolePos)
+        {
+            for (int i = 0; i < weaponData.bulletsPerShot; i++)
+            {
+                positions.Add(muzzleHolePos);
+                positions.Add(rays[i].direction.normalized * weaponData.maxShotDistance + muzzleHolePos);
+            }
+
+            if (animateShoot != null)
+            {
+                StopCoroutine(animateShoot);
+            }
+            animateShoot = StartCoroutine(VisualizeShot(positions.ToArray()));
+        }
+
 
         private IEnumerator VisualizeShot(Vector3[] positions)
         {

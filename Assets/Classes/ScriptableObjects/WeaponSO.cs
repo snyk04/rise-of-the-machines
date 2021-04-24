@@ -16,9 +16,9 @@ namespace Classes.ScriptableObjects
         public float damage;
         [Range(0, 1)] public float damageSpread;
         public int maxBulletsInMagazine;
-        public int maxBulletsInBackpack;
+        public int maxAllAmmo;
         public int currentBulletsInMagazine;
-        public int currentBulletsInBackpack;
+        public int allAmmo; // todo naming
         public int bulletsPerShot = 1;
         public float reloadTime;
         public float shotSpread; // range fo spread after DEFAULT_SPREAD_DISTANCE
