@@ -13,7 +13,8 @@ namespace UserInterface
         }
 
         [SerializeField] private Type type;
-        [SerializeField] private Image bar;
+        [SerializeField] private Slider slider;
+        [SerializeField] private Text text;
 
         private float maxValue;
         private float currentValue;
@@ -35,8 +36,15 @@ namespace UserInterface
 
         private void ChangeHp()
         {
+            if (slider == null)
+            {
+                return;
+            }
             currentValue = Player.Instance.Health.HP;
-            bar.fillAmount = currentValue / maxValue;
+
+            var hp = currentValue / maxValue;
+            slider.value = hp;
+            text.text = $"{Mathf.Round(hp * 100)}";
         }
         private void ChangeArmor()
         {
