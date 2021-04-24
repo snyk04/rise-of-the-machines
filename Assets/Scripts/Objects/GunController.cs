@@ -90,7 +90,7 @@ namespace Objects
         private void Reload()
         {
             // TODO: заблокировать возможность стрелять
-            weapon.Reload();
+            StartCoroutine(weapon.Reload());
             gunSound.PlayReloadSound();
         }
         private void NoAmmo()

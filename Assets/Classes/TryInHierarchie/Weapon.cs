@@ -48,10 +48,12 @@ namespace Classes.TryInHierarchie {
             }
 
             if (WeaponData.allAmmo == 0) {
+                LastShotTime = time;
                 return ShotResult.NoAmmoInBackpack;
-            } // todo wtf?
+            }
 
             if (WeaponData.currentBulletsInMagazine == 0 || WeaponData.isReloading) {
+                LastShotTime = time;
                 return ShotResult.NoAmmoInMagazine;
             }
 
@@ -69,21 +71,12 @@ namespace Classes.TryInHierarchie {
             return ShotResult.ShotSuccessful;
         }
 
-        public void Reload() {
-            while (WeaponData.currentBulletsInMagazine < WeaponData.maxBulletsInMagazine &&
-                WeaponData.currentBulletsInMagazine < WeaponData.allAmmo) {
-                WeaponData.currentBulletsInMagazine += 1;
-            }
-
-            // WeaponData.currentBulletsInMagazine = WeaponData.allAmmo >= WeaponData.maxBulletsInMagazine
-                // ? WeaponData.maxBulletsInMagazine
-                // : WeaponData.allAmmo % WeaponData.maxBulletsInMagazine;
-            // StartCoroutine(ReloadCoroutine);
-
+        public IEnumerator Reload() {
+            WeaponData.currentBulletsInMagazine = WeaponData.allAmmo >= WeaponData.maxBulletsInMagazine
+                ? WeaponData.maxBulletsInMagazine
+                : WeaponData.allAmmo % WeaponData.maxBulletsInMagazine;
             OnReload?.Invoke();
-        }
 
-        private IEnumerator ReloadCoroutine() {
             WeaponData.isReloading = true;
             yield return new WaitForSeconds(WeaponData.reloadTime);
             WeaponData.isReloading = false;

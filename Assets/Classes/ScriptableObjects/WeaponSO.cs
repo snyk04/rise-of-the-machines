@@ -18,7 +18,7 @@ namespace Classes.ScriptableObjects
         public int maxBulletsInMagazine;
         public int maxAllAmmo;
         public int currentBulletsInMagazine;
-        public int allAmmo; // todo naming
+        public int allAmmo; 
         public int bulletsPerShot = 1;
         public float reloadTime;
         public float shotSpread; // range fo spread after DEFAULT_SPREAD_DISTANCE
