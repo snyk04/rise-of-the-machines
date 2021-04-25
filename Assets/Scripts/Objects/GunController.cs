@@ -76,7 +76,7 @@ namespace Objects
                     }
                     if (hitInfo.transform.TryGetComponent(out ParticlesManager particlesManager))
                     {
-                        particlesManager.EmitAllParticles(hitInfo.point);
+                        particlesManager.EmitAllParticles(hitInfo);
                     }
                 }
             }
@@ -112,7 +112,6 @@ namespace Objects
             }
             animateShoot = StartCoroutine(VisualizeShot(positions.ToArray()));
         }
-
 
         private IEnumerator VisualizeShot(Vector3[] positions)
         {

@@ -6,24 +6,19 @@ namespace CharactersAndObjects
     {
         [SerializeField] private ParticleSystem[] particles;
 
-        public void EmitAllParticles(Vector3 point)
+        public void EmitAllParticles(RaycastHit hitInfo)
         {
-            // TODO: Пока колхоз, но мне кажется, что есть возможность сделать это так как это сделано в комментах, но оно почему-то не пашет :(
-
-            //var param = new ParticleSystem.EmitParams();
-            //param.position = point;
-            //particle.Emit(param, 1);
-            //particle1.Emit(param, 1);
-
             foreach (ParticleSystem particle in particles)
             {
-                EmitSpecifiedParticle(particle, point, 1);
+                EmitSpecifiedParticle(particle, hitInfo, 1);
             }
         }
 
-        private void EmitSpecifiedParticle(ParticleSystem particle, Vector3 position, int count)
+        private void EmitSpecifiedParticle(ParticleSystem particle, RaycastHit hitInfo, int count)
         {
-            particle.transform.position = position;
+            particle.transform.position = hitInfo.point;
+            particle.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
+            particle.transform.Rotate(Vector3.right, 90);
             particle.Emit(count);
         }
     }
