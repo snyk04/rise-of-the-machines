@@ -15,9 +15,12 @@ namespace Classes
 
         public delegate void TakeDamage(float damage);
         public delegate void RestoreHealth(float heal);
+        public delegate void StateChange();
 
         public TakeDamage takeDamage { get; private set; }
         public RestoreHealth restoreHealth { get; private set; }
+        
+        public StateChange stateChangedEvent;
         
         public HealthCharacteristic Health { get; private set; }
         public SpeedCharacteristic MoveSpeed { get; private set; }
@@ -50,6 +53,7 @@ namespace Classes
                 if (currentState == value) return;
                 currentState = value;
                 OnChangeState();
+                stateChangedEvent.Invoke();
             }
         }
 
