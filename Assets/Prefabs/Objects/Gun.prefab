@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7353626647799112078}
   - component: {fileID: 7986173493490358715}
   - component: {fileID: 3050208580369375928}
+  - component: {fileID: 5930674674187011362}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -93,20 +94,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b89dc8191cae44fa97ee5c263e8f30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  muzzleHole: {fileID: 4737516720115447617}
-  damageableLayer:
-    serializedVersion: 2
-    m_Bits: 512
-  shootSound: {fileID: 8300000, guid: f6fc2ec9dee1f9e4184d46b4226bdce8, type: 3}
-  shootPoint: {fileID: 2705254962034705200}
-  shotParticle_1: {fileID: 0}
-  shotParticle_2: {fileID: 0}
-  shotParticle_3: {fileID: 0}
-  hitMarker: {fileID: 5926700414644198519, guid: 6ea20cfc3f64e5340873171f3dae14f5,
-    type: 3}
-  hitMarkerArray: {fileID: 0}
-  lineRenderer: {fileID: 0}
   weaponSO: {fileID: 11400000, guid: bfd80e12193ece24289d006e2f3e8478, type: 2}
+  lineRenderer: {fileID: 0}
+  muzzleHole: {fileID: 4737516720115447617}
+  shotParticles: []
+--- !u!114 &5930674674187011362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2705254962034705200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbedfe30ea7c9ef48b95450d7f091a93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5014464140027501547
 GameObject:
   m_ObjectHideFlags: 0
