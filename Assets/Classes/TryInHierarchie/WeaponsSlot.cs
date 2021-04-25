@@ -10,14 +10,16 @@ namespace Classes.TryInHierarchie {
             Slots = slots;
         }
 
-        public bool TryChangeItem(Weapon weapon) {
+
+        public bool TryChangeItem(Weapon newWeapon, WeaponSlot.Spot spot, out Equipment oldWeapon) {
             var result = false;
-            switch (weapon.WeaponData.spot) {
+            oldWeapon = null;
+            switch (spot) {
                 case WeaponSlot.Spot.TwoHands:
                     if (Slots.ContainsKey(WeaponSlot.Spot.TwoHands)) {
-                        result = Slots[WeaponSlot.Spot.TwoHands].TryChangeItem(weapon, out var oldItem);
+                        result = Slots[WeaponSlot.Spot.TwoHands].TryChangeItem(newWeapon, out oldWeapon);
                         if (!result) break;
-                        Debug.Log($"{oldItem} dropped");
+                        Debug.Log($"{oldWeapon} dropped");
                         if (Slots.ContainsKey(WeaponSlot.Spot.LeftHand)) {
                             Debug.Log($"{Slots[WeaponSlot.Spot.LeftHand]} dropped");
                             Slots[WeaponSlot.Spot.LeftHand] = null;
@@ -28,13 +30,19 @@ namespace Classes.TryInHierarchie {
                             Slots[WeaponSlot.Spot.RightHand] = null;
                         }
                     }
+                    else {
+                        Debug.Log($"There is no {spot} spot");
+                    }
 
                     break;
                 default:
-                    if (Slots.ContainsKey(weapon.WeaponData.spot)) {
-                        result = Slots[WeaponSlot.Spot.TwoHands].TryChangeItem(weapon, out var oldItem);
+                    if (Slots.ContainsKey(spot)) {
+                        result = Slots[WeaponSlot.Spot.TwoHands].TryChangeItem(newWeapon, out oldWeapon);
                         if (!result) break;
-                        Debug.Log($"{oldItem} dropped");
+                        Debug.Log($"{oldWeapon} dropped");
+                    }
+                    else {
+                        Debug.Log($"There is no {spot} spot");
                     }
 
                     break;

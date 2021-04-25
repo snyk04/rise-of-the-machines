@@ -31,7 +31,7 @@ namespace Classes {
             GunTransform = gunTransform;
         }
 
-        public void ChangeEquipment(Equipment newItem) {
+        public void ChangeArmor(Equipment newItem) {
             Equipment oldItem;
             switch (newItem) {
                 case HeadArmor _:
@@ -53,12 +53,15 @@ namespace Classes {
                     }
 
                     break;
-                case Weapon item:
-                    weaponsSlot.TryChangeItem(item);
-                    break;
                 default:
                     Debug.Log("There is no such slot");
                     break;
+            }
+        }
+
+        public void ChangeWeapon(Weapon newWeapon, WeaponSlot.Spot spot) {
+            if (weaponsSlot.TryChangeItem(newWeapon, spot, out var oldWeapon)) {
+                RecalculateCharacteristics(oldWeapon, newWeapon);
             }
         }
 

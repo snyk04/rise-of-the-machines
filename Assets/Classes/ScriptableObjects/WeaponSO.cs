@@ -32,7 +32,7 @@ namespace Classes.ScriptableObjects
         public AudioClip reloadSound;
 
         [Header("Other")]
-        public WeaponSlot.Spot spot;
+        // public WeaponSlot.Spot spot;
         public bool isReloading;
     }
 }
