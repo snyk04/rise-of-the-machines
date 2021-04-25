@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cc762da0dc347a2a093567b9353d31c, type: 3}
-  m_Name: TestWeapon
+  m_Name: TestInfinityWeapon
   m_EditorClassIdentifier: 
   name: TestWeapon
   weaponID: 0
   damage: 10
   damageSpread: 0.1
-  maxBulletsInMagazine: 30
-  maxAllAmmo: 120
-  currentBulletsInMagazine: 30
-  allAmmo: 120
+  maxBulletsInMagazine: 999999
+  maxAllAmmo: 999999
+  currentBulletsInMagazine: 999999
+  allAmmo: 999999
   bulletsPerShot: 1
   reloadTime: 1
   shotSpread: 0
