@@ -73,6 +73,10 @@ namespace Classes.TryInHierarchie {
         }
 
         public IEnumerator Reload() {
+            if (WeaponData.currentBulletsInMagazine == WeaponData.maxBulletsInMagazine) {
+                Debug.Log("STOP!!!");
+                yield break;
+            }
             OnReloadStart?.Invoke();
             WeaponData.isReloading = true;
             yield return new WaitForSeconds(WeaponData.reloadTime);

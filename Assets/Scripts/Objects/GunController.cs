@@ -28,14 +28,18 @@ namespace Objects
             lineRenderer = lineRenderer ? lineRenderer : gameObject.AddComponent<LineRenderer>();
             ClearLineRenderer();
             lineRenderer.widthMultiplier = 0.1f;
+
+            weapon.OnReloadStart += gunSound.PlayReloadSound;
         }
 
         private List<Ray> rays = new List<Ray>();
 
-        public void TryShoot() {
+        public void TryShoot()
+        {
             Weapon.ShotResult shotResult = weapon.TryShoot(Time.time, muzzleHole.position, muzzleHole.rotation, out rays);
 
-            switch (shotResult) {
+            switch (shotResult)
+            {
                 case Weapon.ShotResult.NoAmmoInBackpack:
                     NoAmmo();
                     break;
@@ -87,18 +91,18 @@ namespace Objects
         }
         public void Reload()
         {
-            if(weapon.WeaponData.isReloading) {
+            if (weapon.WeaponData.isReloading)
+            {
                 return;
             }
 
             StartCoroutine(weapon.Reload());
-            gunSound.PlayReloadSound();
         }
         private void NoAmmo()
         {
             gunSound.PlayNoAmmoSound();
         }
-        
+
         private void VisualizeShot(WeaponSO weaponData, Vector3 muzzleHolePos)
         {
             for (int i = 0; i < weaponData.bulletsPerShot; i++)

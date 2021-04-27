@@ -21,7 +21,7 @@ MonoBehaviour:
   currentBulletsInMagazine: 30
   allAmmo: 120
   bulletsPerShot: 1
-  reloadTime: 3
+  reloadTime: 1
   shotSpread: 0
   shotsPerSecond: 10
   maxShotDistance: 100

@@ -7,6 +7,8 @@ namespace Objects
 {
     public class GunSound : MonoBehaviour
     {
+        [SerializeField] private GameObject audioSourcesContainer;
+
         private Queue<AudioSource> audioSourcesPool;
         
         private AudioClip shotSound;
@@ -35,7 +37,6 @@ namespace Objects
                 audioSourcesPool.Enqueue(audioSource);
             }
         }
-
 
         public void PlayShotSound()
         {
@@ -74,7 +75,7 @@ namespace Objects
 
         private AudioSource CreateNewAudioSource()
         {
-            var audioSource = gameObject.AddComponent<AudioSource>();
+            var audioSource = audioSourcesContainer.AddComponent<AudioSource>();
 
             audioSource.minDistance = 1;
             audioSource.maxDistance = 50;
