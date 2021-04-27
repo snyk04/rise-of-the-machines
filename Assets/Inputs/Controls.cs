@@ -9,37 +9,112 @@ using UnityEngine.InputSystem.Utilities;
 public class @Controls : IInputActionCollection, IDisposable
 {
     public InputActionAsset asset { get; }
-
     public @Controls()
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""Controls"",
     ""maps"": [
         {
-            ""name"": ""Player"",
-            ""id"": ""16dc0843-7e18-4e14-8a04-1d6c3aa1312e"",
+            ""name"": ""Combat"",
+            ""id"": ""2160702b-579c-4124-a41a-aabc27842725"",
             ""actions"": [
                 {
-                    ""name"": ""Shoot"",
+                    ""name"": ""Reload"",
                     ""type"": ""Button"",
-                    ""id"": ""0baae62a-4c9c-4ce0-a3fb-26c7f9231c3e"",
+                    ""id"": ""64882fc1-8049-4a59-870a-3d8f1db12f96"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
+                {
+                    ""name"": ""StartShooting"",
+                    ""type"": ""Button"",
+                    ""id"": ""79568d5a-6eb6-4064-9eac-293b878f4994"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""StopShooting"",
+                    ""type"": ""Button"",
+                    ""id"": ""69b7972d-5281-4b7c-989c-8b1da07b2c0d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""34cc1274-d46f-4c27-81a6-edf6b1857250"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""StartShooting"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7ce2545f-e045-4b6d-9e8f-c683ef025161"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""StopShooting"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9aa8669c-ce61-48c1-b4f6-4e7aec89552f"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Interaction"",
+            ""id"": ""1446016e-62cd-4371-bb7e-b5ffa4541676"",
+            ""actions"": [
+                {
+                    ""name"": ""ChangeState"",
+                    ""type"": ""Button"",
+                    ""id"": ""996b8b89-1ac8-4a3b-9545-d1cbf17823da"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ae75f05f-4219-4853-93d1-35ce9df9ae73"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""ChangeState"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Movement"",
+            ""id"": ""16dc0843-7e18-4e14-8a04-1d6c3aa1312e"",
+            ""actions"": [
                 {
                     ""name"": ""Movement"",
                     ""type"": ""Value"",
                     ""id"": ""b55085b7-784a-4cf4-acba-546aa05fd51a"",
                     ""expectedControlType"": ""Analog"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Pick Smth"",
-                    ""type"": ""Button"",
-                    ""id"": ""243c6dde-d966-49eb-8c01-7ee0e8001e5a"",
-                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -53,28 +128,6 @@ public class @Controls : IInputActionCollection, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""bcd9d36b-02c6-434e-a37c-5fb444deeab4"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard + Mouse"",
-                    ""action"": ""Shoot"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""621d9134-60e5-4ef0-b1ed-ce0d1fffb5ec"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Shoot"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""90242f95-738a-4d7b-8f3a-5af5efbf4013"",
@@ -143,28 +196,6 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""cae213cd-8461-4a31-8875-97b2140053e8"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Pick Smth"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7bbbc604-7a9f-4ca3-961a-facdc41e2284"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pick Smth"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""a4177dd8-375d-468f-ac1b-153b59cdad1c"",
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
@@ -207,12 +238,18 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     ]
 }");
-        // Player
-        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
-        m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
-        m_Player_PickSmth = m_Player.FindAction("Pick Smth", throwIfNotFound: true);
-        m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
+        // Combat
+        m_Combat = asset.FindActionMap("Combat", throwIfNotFound: true);
+        m_Combat_Reload = m_Combat.FindAction("Reload", throwIfNotFound: true);
+        m_Combat_StartShooting = m_Combat.FindAction("StartShooting", throwIfNotFound: true);
+        m_Combat_StopShooting = m_Combat.FindAction("StopShooting", throwIfNotFound: true);
+        // Interaction
+        m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
+        m_Interaction_ChangeState = m_Interaction.FindAction("ChangeState", throwIfNotFound: true);
+        // Movement
+        m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
+        m_Movement_Movement = m_Movement.FindAction("Movement", throwIfNotFound: true);
+        m_Movement_Rotate = m_Movement.FindAction("Rotate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -259,102 +296,138 @@ public class @Controls : IInputActionCollection, IDisposable
         asset.Disable();
     }
 
-    // Player
-    private readonly InputActionMap m_Player;
-    private IPlayerActions m_PlayerActionsCallbackInterface;
-    private readonly InputAction m_Player_Shoot;
-    private readonly InputAction m_Player_Movement;
-    private readonly InputAction m_Player_PickSmth;
-    private readonly InputAction m_Player_Rotate;
-
-    public struct PlayerActions
+    // Combat
+    private readonly InputActionMap m_Combat;
+    private ICombatActions m_CombatActionsCallbackInterface;
+    private readonly InputAction m_Combat_Reload;
+    private readonly InputAction m_Combat_StartShooting;
+    private readonly InputAction m_Combat_StopShooting;
+    public struct CombatActions
     {
         private @Controls m_Wrapper;
-
-        public PlayerActions(@Controls wrapper)
-        {
-            m_Wrapper = wrapper;
-        }
-
-        public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
-        public InputAction @Movement => m_Wrapper.m_Player_Movement;
-        public InputAction @PickSmth => m_Wrapper.m_Player_PickSmth;
-        public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
-
-        public InputActionMap Get()
-        {
-            return m_Wrapper.m_Player;
-        }
-
-        public void Enable()
-        {
-            Get().Enable();
-        }
-
-        public void Disable()
-        {
-            Get().Disable();
-        }
-
+        public CombatActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Reload => m_Wrapper.m_Combat_Reload;
+        public InputAction @StartShooting => m_Wrapper.m_Combat_StartShooting;
+        public InputAction @StopShooting => m_Wrapper.m_Combat_StopShooting;
+        public InputActionMap Get() { return m_Wrapper.m_Combat; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-
-        public static implicit operator InputActionMap(PlayerActions set)
+        public static implicit operator InputActionMap(CombatActions set) { return set.Get(); }
+        public void SetCallbacks(ICombatActions instance)
         {
-            return set.Get();
-        }
-
-        public void SetCallbacks(IPlayerActions instance)
-        {
-            if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
+            if (m_Wrapper.m_CombatActionsCallbackInterface != null)
             {
-                @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
-                @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
-                @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
-                @Movement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
-                @Movement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
-                @Movement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
-                @PickSmth.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPickSmth;
-                @PickSmth.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPickSmth;
-                @PickSmth.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPickSmth;
-                @Rotate.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotate;
-                @Rotate.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotate;
-                @Rotate.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotate;
+                @Reload.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnReload;
+                @StartShooting.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShooting;
+                @StartShooting.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShooting;
+                @StartShooting.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShooting;
+                @StopShooting.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShooting;
+                @StopShooting.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShooting;
+                @StopShooting.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShooting;
             }
-
-            m_Wrapper.m_PlayerActionsCallbackInterface = instance;
+            m_Wrapper.m_CombatActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Shoot.started += instance.OnShoot;
-                @Shoot.performed += instance.OnShoot;
-                @Shoot.canceled += instance.OnShoot;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
+                @StartShooting.started += instance.OnStartShooting;
+                @StartShooting.performed += instance.OnStartShooting;
+                @StartShooting.canceled += instance.OnStartShooting;
+                @StopShooting.started += instance.OnStopShooting;
+                @StopShooting.performed += instance.OnStopShooting;
+                @StopShooting.canceled += instance.OnStopShooting;
+            }
+        }
+    }
+    public CombatActions @Combat => new CombatActions(this);
+
+    // Interaction
+    private readonly InputActionMap m_Interaction;
+    private IInteractionActions m_InteractionActionsCallbackInterface;
+    private readonly InputAction m_Interaction_ChangeState;
+    public struct InteractionActions
+    {
+        private @Controls m_Wrapper;
+        public InteractionActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ChangeState => m_Wrapper.m_Interaction_ChangeState;
+        public InputActionMap Get() { return m_Wrapper.m_Interaction; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InteractionActions set) { return set.Get(); }
+        public void SetCallbacks(IInteractionActions instance)
+        {
+            if (m_Wrapper.m_InteractionActionsCallbackInterface != null)
+            {
+                @ChangeState.started -= m_Wrapper.m_InteractionActionsCallbackInterface.OnChangeState;
+                @ChangeState.performed -= m_Wrapper.m_InteractionActionsCallbackInterface.OnChangeState;
+                @ChangeState.canceled -= m_Wrapper.m_InteractionActionsCallbackInterface.OnChangeState;
+            }
+            m_Wrapper.m_InteractionActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @ChangeState.started += instance.OnChangeState;
+                @ChangeState.performed += instance.OnChangeState;
+                @ChangeState.canceled += instance.OnChangeState;
+            }
+        }
+    }
+    public InteractionActions @Interaction => new InteractionActions(this);
+
+    // Movement
+    private readonly InputActionMap m_Movement;
+    private IMovementActions m_MovementActionsCallbackInterface;
+    private readonly InputAction m_Movement_Movement;
+    private readonly InputAction m_Movement_Rotate;
+    public struct MovementActions
+    {
+        private @Controls m_Wrapper;
+        public MovementActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_Movement_Movement;
+        public InputAction @Rotate => m_Wrapper.m_Movement_Rotate;
+        public InputActionMap Get() { return m_Wrapper.m_Movement; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MovementActions set) { return set.Get(); }
+        public void SetCallbacks(IMovementActions instance)
+        {
+            if (m_Wrapper.m_MovementActionsCallbackInterface != null)
+            {
+                @Movement.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnMovement;
+                @Movement.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnMovement;
+                @Movement.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnMovement;
+                @Rotate.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
+                @Rotate.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
+                @Rotate.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
+            }
+            m_Wrapper.m_MovementActionsCallbackInterface = instance;
+            if (instance != null)
+            {
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
-                @PickSmth.started += instance.OnPickSmth;
-                @PickSmth.performed += instance.OnPickSmth;
-                @PickSmth.canceled += instance.OnPickSmth;
                 @Rotate.started += instance.OnRotate;
                 @Rotate.performed += instance.OnRotate;
                 @Rotate.canceled += instance.OnRotate;
             }
         }
     }
-
-    public PlayerActions @Player => new PlayerActions(this);
+    public MovementActions @Movement => new MovementActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
-
     public InputControlScheme KeyboardMouseScheme
     {
         get
         {
-            if (m_KeyboardMouseSchemeIndex == -1)
-                m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard + Mouse");
+            if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard + Mouse");
             return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
         }
     }
-
     private int m_GamepadSchemeIndex = -1;
-
     public InputControlScheme GamepadScheme
     {
         get
@@ -363,12 +436,19 @@ public class @Controls : IInputActionCollection, IDisposable
             return asset.controlSchemes[m_GamepadSchemeIndex];
         }
     }
-
-    public interface IPlayerActions
+    public interface ICombatActions
     {
-        void OnShoot(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
+        void OnStartShooting(InputAction.CallbackContext context);
+        void OnStopShooting(InputAction.CallbackContext context);
+    }
+    public interface IInteractionActions
+    {
+        void OnChangeState(InputAction.CallbackContext context);
+    }
+    public interface IMovementActions
+    {
         void OnMovement(InputAction.CallbackContext context);
-        void OnPickSmth(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
     }
 }

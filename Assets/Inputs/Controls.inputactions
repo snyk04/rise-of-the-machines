@@ -2,30 +2,106 @@
     "name": "Controls",
     "maps": [
         {
-            "name": "Player",
-            "id": "16dc0843-7e18-4e14-8a04-1d6c3aa1312e",
+            "name": "Combat",
+            "id": "2160702b-579c-4124-a41a-aabc27842725",
             "actions": [
                 {
-                    "name": "Shoot",
+                    "name": "Reload",
                     "type": "Button",
-                    "id": "0baae62a-4c9c-4ce0-a3fb-26c7f9231c3e",
+                    "id": "64882fc1-8049-4a59-870a-3d8f1db12f96",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
+                {
+                    "name": "StartShooting",
+                    "type": "Button",
+                    "id": "79568d5a-6eb6-4064-9eac-293b878f4994",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "StopShooting",
+                    "type": "Button",
+                    "id": "69b7972d-5281-4b7c-989c-8b1da07b2c0d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "34cc1274-d46f-4c27-81a6-edf6b1857250",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "StartShooting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7ce2545f-e045-4b6d-9e8f-c683ef025161",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "StopShooting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9aa8669c-ce61-48c1-b4f6-4e7aec89552f",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Interaction",
+            "id": "1446016e-62cd-4371-bb7e-b5ffa4541676",
+            "actions": [
+                {
+                    "name": "ChangeState",
+                    "type": "Button",
+                    "id": "996b8b89-1ac8-4a3b-9545-d1cbf17823da",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ae75f05f-4219-4853-93d1-35ce9df9ae73",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "ChangeState",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Movement",
+            "id": "16dc0843-7e18-4e14-8a04-1d6c3aa1312e",
+            "actions": [
                 {
                     "name": "Movement",
                     "type": "Value",
                     "id": "b55085b7-784a-4cf4-acba-546aa05fd51a",
                     "expectedControlType": "Analog",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Pick Smth",
-                    "type": "Button",
-                    "id": "243c6dde-d966-49eb-8c01-7ee0e8001e5a",
-                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
@@ -39,28 +115,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "bcd9d36b-02c6-434e-a37c-5fb444deeab4",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard + Mouse",
-                    "action": "Shoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "621d9134-60e5-4ef0-b1ed-ce0d1fffb5ec",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Shoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "90242f95-738a-4d7b-8f3a-5af5efbf4013",
@@ -126,28 +180,6 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "cae213cd-8461-4a31-8875-97b2140053e8",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Pick Smth",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7bbbc604-7a9f-4ca3-961a-facdc41e2284",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pick Smth",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",

@@ -1,6 +1,4 @@
-﻿using System;
-using CharactersAndObjects;
-using Classes;
+﻿using CharactersAndObjects;
 using Classes.ScriptableObjects;
 using Classes.TryInHierarchie;
 using UnityEngine;
@@ -87,7 +85,7 @@ namespace Objects
             }
             gunSound.PlayShotSound();
         }
-        private void Reload()
+        public void Reload()
         {
             if(weapon.WeaponData.isReloading) {
                 return;

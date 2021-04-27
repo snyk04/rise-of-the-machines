@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Cinemachine;
 using Classes;
+using InputHandling;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UserInterface;
@@ -34,13 +36,21 @@ namespace PlayerScripts
         [Header("Settings")]
         [SerializeField] private float humanSpawnDistance;
 
-        private Coroutine waitForEnterCoroutine;
-        private Coroutine waitForExitCoroutine;
+        private InputCombat combatInput;
+        private InputInteraction interactionInput;
+        private InputMovement movementInput;
+
+        private Action<InputAction.CallbackContext> enterRobotAction;
+        private Action<InputAction.CallbackContext> exitRobotAction;
 
         #endregion
 
         private void Start()
         {
+            combatInput = InputCombat.Instance;
+            interactionInput = InputInteraction.Instance;
+            movementInput = InputMovement.Instance;
+
             audioSource.minDistance = 1;
             audioSource.maxDistance = 50;
             audioSource.volume = 1f;
@@ -53,10 +63,11 @@ namespace PlayerScripts
             virtualCamera.Follow = follow;
         }
 
-        private IEnumerator EnterRobot()
+        private IEnumerator EnterRobotCoroutine()
         {
-            // TODO: блокировать управление
+            DisableControls();
             DeactivateEnterText();
+
             yield return StartCoroutine(canvasController.FadeScreen());
 
             PlaySound(enterRobotSound);
@@ -75,13 +86,14 @@ namespace PlayerScripts
 
             yield return StartCoroutine(canvasController.UnfadeScreen());
 
-            // TODO: разблокировать управление
+            EnableControls();
             ActivateExitText();
         }
-        private IEnumerator ExitRobot()
+        private IEnumerator ExitRobotCoroutine()
         {
-            // TODO: блокировать управление
+            DisableControls();
             DeactivateExitText();
+
             yield return StartCoroutine(canvasController.FadeScreen());
 
             PlaySound(exitRobotSound);
@@ -102,55 +114,40 @@ namespace PlayerScripts
             canvasController.StopAnimation();
 
             yield return StartCoroutine(canvasController.UnfadeScreen());
-            
-            // TODO: разблокировать управление
+
+            EnableControls();
+        }
+
+        private void EnterRobot()
+        {
+            StartCoroutine(EnterRobotCoroutine());
+        }
+        private void ExitRobot()
+        {
+            StartCoroutine(ExitRobotCoroutine());
         }
 
         public void ActivateEnterText()
         {
             canvasController.EnterText.SetActive(true);
-            waitForEnterCoroutine = StartCoroutine(WaitForEnter());
+            enterRobotAction = (InputAction.CallbackContext ctx) => EnterRobot();
+            interactionInput.interactionActions.ChangeState.performed += enterRobotAction;
         }
         public void ActivateExitText()
         {
             canvasController.ExitText.SetActive(true);
-            waitForExitCoroutine = StartCoroutine(WaitForExit());
+            exitRobotAction = (InputAction.CallbackContext ctx) => ExitRobot();
+            interactionInput.interactionActions.ChangeState.performed += exitRobotAction;
         }
         public void DeactivateEnterText()
         {
             canvasController.EnterText.SetActive(false);
-            StopCoroutine(waitForEnterCoroutine);
+            interactionInput.interactionActions.ChangeState.performed -= enterRobotAction;
         }
         public void DeactivateExitText()
         {
             canvasController.ExitText.SetActive(false);
-            StopCoroutine(waitForExitCoroutine);
-        }
-
-        // TODO: Заменить это на ивентики там хз, ну без корутин чтобы было, по православному чтобы
-        private IEnumerator WaitForEnter()
-        {
-            while (Player.Instance.CurrentState == Player.State.Human)
-            {
-                if (Keyboard.current[Key.G].wasPressedThisFrame)
-                {
-                    StartCoroutine(EnterRobot());
-                }
-
-                yield return null;
-            }
-        }
-        private IEnumerator WaitForExit()
-        {
-            while (Player.Instance.CurrentState == Player.State.Robot)
-            {
-                if (Keyboard.current[Key.F].wasPressedThisFrame)
-                {
-                    StartCoroutine(ExitRobot());
-                }
-
-                yield return null;
-            }
+            interactionInput.interactionActions.ChangeState.performed -= exitRobotAction;
         }
 
         private void PlaySound(AudioClip clip)
@@ -162,6 +159,18 @@ namespace PlayerScripts
         private void ChangePlayerState(Player.State state)
         {
             Player.Instance.CurrentState = state;
+        }
+        private void EnableControls()
+        {
+            combatInput.EnableControls();
+            interactionInput.EnableControls();
+            movementInput.EnableControls();
+        }
+        private void DisableControls()
+        {
+            combatInput.DisableControls();
+            interactionInput.DisableControls();
+            movementInput.DisableControls();
         }
     }
 }

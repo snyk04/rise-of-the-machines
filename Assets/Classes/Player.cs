@@ -53,7 +53,7 @@ namespace Classes
                 if (currentState == value) return;
                 currentState = value;
                 OnChangeState();
-                stateChangedEvent.Invoke();
+                stateChangedEvent?.Invoke();
             }
         }
 

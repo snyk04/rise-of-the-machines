@@ -1322,7 +1322,6 @@ GameObject:
   - component: {fileID: 7486560743063582832}
   - component: {fileID: 7486560743054546892}
   - component: {fileID: 6690596577402663532}
-  - component: {fileID: 4184686360142757241}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1388,19 +1387,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &4184686360142757241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7486560743064069200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2b5450f642984840b86ada6c247db70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gun: {fileID: 7136223002006771002}
 --- !u!1 &7486560743064069204
 GameObject:
   m_ObjectHideFlags: 0
@@ -2392,15 +2378,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5286224899530438530}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7136223002006771002 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3050208580369375928, guid: dffb23cbee883a54c970e72ab3d5dc34,
-    type: 3}
-  m_PrefabInstance: {fileID: 5286224899530438530}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31b89dc8191cae44fa97ee5c263e8f30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

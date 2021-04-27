@@ -29,5 +29,4 @@ MonoBehaviour:
   shotSound: {fileID: 8300000, guid: f6fc2ec9dee1f9e4184d46b4226bdce8, type: 3}
   noAmmoSound: {fileID: 8300000, guid: cb7706f68733b2c4f8df5bae835f6a5e, type: 3}
   reloadSound: {fileID: 8300000, guid: 3961aeabf21804046aff5e83ccf68f99, type: 3}
-  spot: 0
   isReloading: 0
