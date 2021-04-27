@@ -17,17 +17,17 @@ namespace UserInterface
         {
             var weapon = gun.weapon;
             weapon.OnShot += UpdateAmmoInMagazine;
-            weapon.OnReload += UpdateAmmoInBackpack;
+            weapon.OnReloadEnd += UpdateAmmoInBackpack;
 
             weaponData = weapon.WeaponData;
             text.text = $"{weaponData.currentBulletsInMagazine} / {weaponData.allAmmo - weaponData.currentBulletsInMagazine}";
         }
 
-        public void UpdateAmmoInMagazine()
+        private void UpdateAmmoInMagazine()
         {
             text.text = $"{weaponData.currentBulletsInMagazine} / {weaponData.allAmmo - weaponData.currentBulletsInMagazine}";
         }
-        public void UpdateAmmoInBackpack()
+        private void UpdateAmmoInBackpack()
         {
             text.text = $"{weaponData.currentBulletsInMagazine} / {weaponData.allAmmo - weaponData.currentBulletsInMagazine}";
         }

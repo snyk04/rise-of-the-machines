@@ -89,7 +89,10 @@ namespace Objects
         }
         private void Reload()
         {
-            // TODO: заблокировать возможность стрелять
+            if(weapon.WeaponData.isReloading) {
+                return;
+            }
+
             StartCoroutine(weapon.Reload());
             gunSound.PlayReloadSound();
         }

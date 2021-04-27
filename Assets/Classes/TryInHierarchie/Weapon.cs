@@ -17,7 +17,8 @@ namespace Classes.TryInHierarchie {
         public delegate void AmmoChange();
 
         public AmmoChange OnShot;
-        public AmmoChange OnReload;
+        public AmmoChange OnReloadStart;
+        public AmmoChange OnReloadEnd;
         public float LastShotTime { get; private set; }
 
         public WeaponSO WeaponData { get; private set; }
@@ -72,13 +73,13 @@ namespace Classes.TryInHierarchie {
         }
 
         public IEnumerator Reload() {
+            OnReloadStart?.Invoke();
+            WeaponData.isReloading = true;
+            yield return new WaitForSeconds(WeaponData.reloadTime);
             WeaponData.currentBulletsInMagazine = WeaponData.allAmmo >= WeaponData.maxBulletsInMagazine
                 ? WeaponData.maxBulletsInMagazine
                 : WeaponData.allAmmo % WeaponData.maxBulletsInMagazine;
-            OnReload?.Invoke();
-
-            WeaponData.isReloading = true;
-            yield return new WaitForSeconds(WeaponData.reloadTime);
+            OnReloadEnd?.Invoke();
             WeaponData.isReloading = false;
         }
     }
