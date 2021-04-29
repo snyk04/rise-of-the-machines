@@ -14,7 +14,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "StartShooting",
+                    "name": "StartShootingLeft",
                     "type": "Button",
                     "id": "79568d5a-6eb6-4064-9eac-293b878f4994",
                     "expectedControlType": "Button",
@@ -22,9 +22,25 @@
                     "interactions": ""
                 },
                 {
-                    "name": "StopShooting",
+                    "name": "StopShootingLeft",
                     "type": "Button",
                     "id": "69b7972d-5281-4b7c-989c-8b1da07b2c0d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "StartShootingRight",
+                    "type": "Button",
+                    "id": "2823049e-9951-4d30-a62b-6e5e0a3f2b0c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "StopShootingRight",
+                    "type": "Button",
+                    "id": "301676e7-606c-4cb8-a719-531166518ce4",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -38,7 +54,7 @@
                     "interactions": "Press",
                     "processors": "",
                     "groups": "Keyboard + Mouse",
-                    "action": "StartShooting",
+                    "action": "StartShootingLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -49,7 +65,7 @@
                     "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "Keyboard + Mouse",
-                    "action": "StopShooting",
+                    "action": "StopShootingLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -61,6 +77,28 @@
                     "processors": "",
                     "groups": "Keyboard + Mouse",
                     "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "68a794b6-43cb-4d6f-923e-265e24cb7b93",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "StopShootingRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fc1090ab-d3a0-4f80-bcc0-c2e42430940b",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "StartShootingRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

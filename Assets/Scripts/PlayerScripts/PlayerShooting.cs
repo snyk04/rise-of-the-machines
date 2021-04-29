@@ -6,42 +6,68 @@ namespace PlayerScripts
 {
     public class PlayerShooting : MonoBehaviour
     {
-        [SerializeField] private GunController gun;
+        [SerializeField] private GunController leftGun;
+        [SerializeField] private GunController rightGun;
+
+        public GunController LeftGun { get => leftGun; }
+        public GunController RightGun { get => rightGun; }
 
         private InputCombat input;
-        private bool IsShooting { get; set; }
+        private bool IsLeftGunShooting { get; set; }
+        private bool IsRightGunShooting { get; set; }
 
         private void Start()
         {
             input = InputCombat.Instance;
 
             input.combatActions.Reload.performed += context => Reload();
-            input.combatActions.StartShooting.performed += context => StartShooting();
-            input.combatActions.StopShooting.performed += context => StopShooting();
+            input.combatActions.StartShootingLeft.performed += context => StartShootingLeft();
+            input.combatActions.StopShootingLeft.performed += context => StopShootingLeft();
+            input.combatActions.StartShootingRight.performed += context => StartShootingRight();
+            input.combatActions.StopShootingRight.performed += context => StopShootingRight();
         }
         private void Update()
         {
-            if (IsShooting)
+            if (IsLeftGunShooting)
             {
-                gun.TryShoot();
-                if (!gun.weapon.WeaponData.isAutomatic)
+                leftGun.TryShoot();
+                if (!leftGun.weapon.WeaponData.isAutomatic)
                 {
-                    IsShooting = false;
+                    StopShootingLeft();
                 }
             }
+            if (IsRightGunShooting)
+            {
+                rightGun.TryShoot();
+                if (!rightGun.weapon.WeaponData.isAutomatic)
+                {
+                    StopShootingRight();
+                }
+            }
+
         }
 
         private void Reload()
         {
-            gun.Reload();
+            leftGun.Reload();
+            rightGun.Reload();
         }
-        private void StartShooting()
+
+        private void StartShootingLeft()
         {
-            IsShooting = true;
+            IsLeftGunShooting = true;
         }
-        private void StopShooting()
+        private void StopShootingLeft()
         {
-            IsShooting = false;
+            IsLeftGunShooting = false;
+        }
+        private void StartShootingRight()
+        {
+            IsRightGunShooting = true;
+        }
+        private void StopShootingRight()
+        {
+            IsRightGunShooting = false;
         }
     }
 }

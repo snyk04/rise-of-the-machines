@@ -27,7 +27,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""StartShooting"",
+                    ""name"": ""StartShootingLeft"",
                     ""type"": ""Button"",
                     ""id"": ""79568d5a-6eb6-4064-9eac-293b878f4994"",
                     ""expectedControlType"": ""Button"",
@@ -35,9 +35,25 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""StopShooting"",
+                    ""name"": ""StopShootingLeft"",
                     ""type"": ""Button"",
                     ""id"": ""69b7972d-5281-4b7c-989c-8b1da07b2c0d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""StartShootingRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""2823049e-9951-4d30-a62b-6e5e0a3f2b0c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""StopShootingRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""301676e7-606c-4cb8-a719-531166518ce4"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -51,7 +67,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
-                    ""action"": ""StartShooting"",
+                    ""action"": ""StartShootingLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -62,7 +78,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
-                    ""action"": ""StopShooting"",
+                    ""action"": ""StopShootingLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -74,6 +90,28 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
                     ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""68a794b6-43cb-4d6f-923e-265e24cb7b93"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""StopShootingRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc1090ab-d3a0-4f80-bcc0-c2e42430940b"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""StartShootingRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -241,8 +279,10 @@ public class @Controls : IInputActionCollection, IDisposable
         // Combat
         m_Combat = asset.FindActionMap("Combat", throwIfNotFound: true);
         m_Combat_Reload = m_Combat.FindAction("Reload", throwIfNotFound: true);
-        m_Combat_StartShooting = m_Combat.FindAction("StartShooting", throwIfNotFound: true);
-        m_Combat_StopShooting = m_Combat.FindAction("StopShooting", throwIfNotFound: true);
+        m_Combat_StartShootingLeft = m_Combat.FindAction("StartShootingLeft", throwIfNotFound: true);
+        m_Combat_StopShootingLeft = m_Combat.FindAction("StopShootingLeft", throwIfNotFound: true);
+        m_Combat_StartShootingRight = m_Combat.FindAction("StartShootingRight", throwIfNotFound: true);
+        m_Combat_StopShootingRight = m_Combat.FindAction("StopShootingRight", throwIfNotFound: true);
         // Interaction
         m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
         m_Interaction_ChangeState = m_Interaction.FindAction("ChangeState", throwIfNotFound: true);
@@ -300,15 +340,19 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Combat;
     private ICombatActions m_CombatActionsCallbackInterface;
     private readonly InputAction m_Combat_Reload;
-    private readonly InputAction m_Combat_StartShooting;
-    private readonly InputAction m_Combat_StopShooting;
+    private readonly InputAction m_Combat_StartShootingLeft;
+    private readonly InputAction m_Combat_StopShootingLeft;
+    private readonly InputAction m_Combat_StartShootingRight;
+    private readonly InputAction m_Combat_StopShootingRight;
     public struct CombatActions
     {
         private @Controls m_Wrapper;
         public CombatActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Reload => m_Wrapper.m_Combat_Reload;
-        public InputAction @StartShooting => m_Wrapper.m_Combat_StartShooting;
-        public InputAction @StopShooting => m_Wrapper.m_Combat_StopShooting;
+        public InputAction @StartShootingLeft => m_Wrapper.m_Combat_StartShootingLeft;
+        public InputAction @StopShootingLeft => m_Wrapper.m_Combat_StopShootingLeft;
+        public InputAction @StartShootingRight => m_Wrapper.m_Combat_StartShootingRight;
+        public InputAction @StopShootingRight => m_Wrapper.m_Combat_StopShootingRight;
         public InputActionMap Get() { return m_Wrapper.m_Combat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -321,12 +365,18 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Reload.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnReload;
                 @Reload.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnReload;
                 @Reload.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnReload;
-                @StartShooting.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShooting;
-                @StartShooting.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShooting;
-                @StartShooting.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShooting;
-                @StopShooting.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShooting;
-                @StopShooting.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShooting;
-                @StopShooting.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShooting;
+                @StartShootingLeft.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShootingLeft;
+                @StartShootingLeft.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShootingLeft;
+                @StartShootingLeft.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShootingLeft;
+                @StopShootingLeft.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShootingLeft;
+                @StopShootingLeft.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShootingLeft;
+                @StopShootingLeft.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShootingLeft;
+                @StartShootingRight.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShootingRight;
+                @StartShootingRight.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShootingRight;
+                @StartShootingRight.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShootingRight;
+                @StopShootingRight.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShootingRight;
+                @StopShootingRight.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShootingRight;
+                @StopShootingRight.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShootingRight;
             }
             m_Wrapper.m_CombatActionsCallbackInterface = instance;
             if (instance != null)
@@ -334,12 +384,18 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Reload.started += instance.OnReload;
                 @Reload.performed += instance.OnReload;
                 @Reload.canceled += instance.OnReload;
-                @StartShooting.started += instance.OnStartShooting;
-                @StartShooting.performed += instance.OnStartShooting;
-                @StartShooting.canceled += instance.OnStartShooting;
-                @StopShooting.started += instance.OnStopShooting;
-                @StopShooting.performed += instance.OnStopShooting;
-                @StopShooting.canceled += instance.OnStopShooting;
+                @StartShootingLeft.started += instance.OnStartShootingLeft;
+                @StartShootingLeft.performed += instance.OnStartShootingLeft;
+                @StartShootingLeft.canceled += instance.OnStartShootingLeft;
+                @StopShootingLeft.started += instance.OnStopShootingLeft;
+                @StopShootingLeft.performed += instance.OnStopShootingLeft;
+                @StopShootingLeft.canceled += instance.OnStopShootingLeft;
+                @StartShootingRight.started += instance.OnStartShootingRight;
+                @StartShootingRight.performed += instance.OnStartShootingRight;
+                @StartShootingRight.canceled += instance.OnStartShootingRight;
+                @StopShootingRight.started += instance.OnStopShootingRight;
+                @StopShootingRight.performed += instance.OnStopShootingRight;
+                @StopShootingRight.canceled += instance.OnStopShootingRight;
             }
         }
     }
@@ -439,8 +495,10 @@ public class @Controls : IInputActionCollection, IDisposable
     public interface ICombatActions
     {
         void OnReload(InputAction.CallbackContext context);
-        void OnStartShooting(InputAction.CallbackContext context);
-        void OnStopShooting(InputAction.CallbackContext context);
+        void OnStartShootingLeft(InputAction.CallbackContext context);
+        void OnStopShootingLeft(InputAction.CallbackContext context);
+        void OnStartShootingRight(InputAction.CallbackContext context);
+        void OnStopShootingRight(InputAction.CallbackContext context);
     }
     public interface IInteractionActions
     {
