@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class NewMenu : MonoBehaviour
 {
@@ -10,23 +11,23 @@ public class NewMenu : MonoBehaviour
     [SerializeField] private GameObject loadingText;
     [SerializeField] private GameObject clickToLoadText;
     [SerializeField] private GameObject cover;
-    
+
     private AsyncOperation asyncLoad;
 
     public void PlayButton()
     {
-        StartCoroutine(LoadScene());
+        StartCoroutine(LoadScene(1));
     }
     public void ExitButton()
     {
         Application.Quit();
     }
 
-    private IEnumerator LoadScene()
+    private IEnumerator LoadScene(int sceneID)
     {
         cover.SetActive(true);
         loadingText.SetActive(true);
-        asyncLoad = SceneManager.LoadSceneAsync(1);
+        asyncLoad = SceneManager.LoadSceneAsync(sceneID);
         asyncLoad.allowSceneActivation = false;
 
         while (!asyncLoad.isDone)
