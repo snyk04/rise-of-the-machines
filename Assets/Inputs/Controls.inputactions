@@ -231,6 +231,66 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "MainMenu",
+            "id": "8ee613a5-1769-4cc4-8571-ea6b28b27813",
+            "actions": [
+                {
+                    "name": "Clicked",
+                    "type": "Button",
+                    "id": "546f9b15-555a-43b3-a565-1f8e75115a06",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "51e7bc5b-0cdf-4341-888e-b5076133f138",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "Clicked",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7e6f426e-4721-4613-94f9-11ec9fe4b51a",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "Clicked",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c48c080d-0107-49fb-8bba-1b569f06360d",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "Clicked",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "48ac495b-d801-4c71-a301-a75a5466b09f",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "Clicked",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

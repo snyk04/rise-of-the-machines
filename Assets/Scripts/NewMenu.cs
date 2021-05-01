@@ -1,34 +1,49 @@
-﻿using System.Collections;
+﻿using InputHandling;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class NewMenu : MonoBehaviour
 {
+    [SerializeField] private GameObject title;
+    [SerializeField] private GameObject buttonContainer;
+    [SerializeField] private GameObject loadingText;
+    [SerializeField] private GameObject clickToLoadText;
+    [SerializeField] private GameObject cover;
+    
+    private AsyncOperation asyncLoad;
+
     public void PlayButton()
     {
-        // SceneManager.LoadScene(1);
-        StartCoroutine(ShowAndCloseLogo());
+        StartCoroutine(LoadScene());
     }
     public void ExitButton()
     {
         Application.Quit();
     }
 
-    public IEnumerator ShowAndCloseLogo()
+    private IEnumerator LoadScene()
     {
-        yield return new WaitForSeconds(0.5f);
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(1);
-        asyncOperation.allowSceneActivation = false;
+        cover.SetActive(true);
+        loadingText.SetActive(true);
+        asyncLoad = SceneManager.LoadSceneAsync(1);
+        asyncLoad.allowSceneActivation = false;
 
-        while (!asyncOperation.isDone)
+        while (!asyncLoad.isDone)
         {
-            Debug.Log(asyncOperation.progress);
-            if (asyncOperation.progress >= 0.9f)
+            if (asyncLoad.progress >= 0.9f)
             {
-                yield return new WaitForSeconds(0.25f);
-                // asyncOperation.allowSceneActivation = true;
+                loadingText.SetActive(false);
+                clickToLoadText.SetActive(true);
+                InputMainMenu.Instance.mainMenuActions.Clicked.performed += context => AllowLoad();
+                yield break;
             }
             yield return null;
         }
+    }
+
+    private void AllowLoad()
+    {
+        asyncLoad.allowSceneActivation = true;
     }
 }

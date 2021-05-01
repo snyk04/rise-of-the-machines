@@ -244,6 +244,66 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""MainMenu"",
+            ""id"": ""8ee613a5-1769-4cc4-8571-ea6b28b27813"",
+            ""actions"": [
+                {
+                    ""name"": ""Clicked"",
+                    ""type"": ""Button"",
+                    ""id"": ""546f9b15-555a-43b3-a565-1f8e75115a06"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""51e7bc5b-0cdf-4341-888e-b5076133f138"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Clicked"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e6f426e-4721-4613-94f9-11ec9fe4b51a"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Clicked"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c48c080d-0107-49fb-8bba-1b569f06360d"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Clicked"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""48ac495b-d801-4c71-a301-a75a5466b09f"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Clicked"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -290,6 +350,9 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
         m_Movement_Movement = m_Movement.FindAction("Movement", throwIfNotFound: true);
         m_Movement_Rotate = m_Movement.FindAction("Rotate", throwIfNotFound: true);
+        // MainMenu
+        m_MainMenu = asset.FindActionMap("MainMenu", throwIfNotFound: true);
+        m_MainMenu_Clicked = m_MainMenu.FindAction("Clicked", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -474,6 +537,39 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public MovementActions @Movement => new MovementActions(this);
+
+    // MainMenu
+    private readonly InputActionMap m_MainMenu;
+    private IMainMenuActions m_MainMenuActionsCallbackInterface;
+    private readonly InputAction m_MainMenu_Clicked;
+    public struct MainMenuActions
+    {
+        private @Controls m_Wrapper;
+        public MainMenuActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Clicked => m_Wrapper.m_MainMenu_Clicked;
+        public InputActionMap Get() { return m_Wrapper.m_MainMenu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MainMenuActions set) { return set.Get(); }
+        public void SetCallbacks(IMainMenuActions instance)
+        {
+            if (m_Wrapper.m_MainMenuActionsCallbackInterface != null)
+            {
+                @Clicked.started -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnClicked;
+                @Clicked.performed -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnClicked;
+                @Clicked.canceled -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnClicked;
+            }
+            m_Wrapper.m_MainMenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Clicked.started += instance.OnClicked;
+                @Clicked.performed += instance.OnClicked;
+                @Clicked.canceled += instance.OnClicked;
+            }
+        }
+    }
+    public MainMenuActions @MainMenu => new MainMenuActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -508,5 +604,9 @@ public class @Controls : IInputActionCollection, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
+    }
+    public interface IMainMenuActions
+    {
+        void OnClicked(InputAction.CallbackContext context);
     }
 }
