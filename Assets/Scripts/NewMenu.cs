@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class NewMenu : MonoBehaviour
 {
@@ -27,8 +26,10 @@ public class NewMenu : MonoBehaviour
     {
         cover.SetActive(true);
         loadingText.SetActive(true);
+        buttonContainer.SetActive(false);
+
         asyncLoad = SceneManager.LoadSceneAsync(sceneID);
-        asyncLoad.allowSceneActivation = false;
+        SetLoadAllowance(false);
 
         while (!asyncLoad.isDone)
         {
@@ -36,15 +37,15 @@ public class NewMenu : MonoBehaviour
             {
                 loadingText.SetActive(false);
                 clickToLoadText.SetActive(true);
-                InputMainMenu.Instance.mainMenuActions.Clicked.performed += context => AllowLoad();
+                InputMainMenu.Instance.mainMenuActions.Clicked.performed += context => SetLoadAllowance(true);
                 yield break;
             }
             yield return null;
         }
     }
 
-    private void AllowLoad()
+    private void SetLoadAllowance(bool isAllowed)
     {
-        asyncLoad.allowSceneActivation = true;
+        asyncLoad.allowSceneActivation = isAllowed;
     }
 }
