@@ -102,5 +102,10 @@ namespace Classes.TryInHierarchie
             OnReloadEnd?.Invoke();
             WeaponData.isReloading = false;
         }
+        
+        public override bool TryPick() {
+            return Player.Instance.Inventory.TryAdd(this);
+        }
     }
+    
 }

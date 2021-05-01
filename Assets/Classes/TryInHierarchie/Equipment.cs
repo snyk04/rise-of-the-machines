@@ -3,7 +3,7 @@ using UnityEngine;
 using Type = Classes.TryInHierarchie.Characteristic.Type;
 
 namespace Classes.TryInHierarchie {
-    public abstract class Equipment : IUpgradable, IHasCharacteristics {
+    public abstract class Equipment : IUpgradable, IHasCharacteristics, ICanBePickedUp {
         
         public Dictionary<Type, Characteristic> Stats { get; private set; }
 
@@ -23,5 +23,6 @@ namespace Classes.TryInHierarchie {
             Debug.Log($"Upgrade {Name}");
         }
 
+        public abstract bool TryPick();
     }
 }

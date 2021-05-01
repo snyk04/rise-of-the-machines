@@ -1,4 +1,5 @@
-﻿using Classes.TryInHierarchie;
+﻿using System.Collections.Generic;
+using Classes.TryInHierarchie;
 using UnityEngine;
 
 namespace Classes
@@ -29,6 +30,8 @@ namespace Classes
         public Animator Animator { get; private set; }
         public CharacterController CharacterController { get; private set; }
         public Transform GunTransform { get; private set; }
+
+        public Inventory Inventory { get; } = new Inventory();
 
         private State currentState;
         private Human human;
