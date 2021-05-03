@@ -40,7 +40,7 @@ namespace Characters
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
             enemyController = GetComponent<EnemyController>();
-            enemy = enemyController.GetEnemySO();
+            enemy = enemyController.GetEnemySo();
         }
         private void Start()
         {
@@ -67,8 +67,19 @@ namespace Characters
                 {
                     continue;
                 }
+                if (vectorBetweenEnemyAndPlayer.magnitude <= enemy.fightStartDistance)
+                {
+                    enemyController.Animator.SetBool("IsFighting", true);
+                    enemyController.Animator.SetBool("IsIdle", false);
+                    ChangeState(State.Battle, FightPlayer());
+                }
+                else
+                {
+                    enemyController.Animator.SetBool("IsIdle", false);
+                    enemyController.Animator.SetBool("IsMoving", true);
+                    ChangeState(State.Pursuit, PursuitPlayer());
+                }
 
-                ChangeState(State.Pursuit, PursuitPlayer());
                 gameState.AddTriggeredEnemies(1);
             }
         }
@@ -85,6 +96,8 @@ namespace Characters
                 {
                     navMeshAgent.isStopped = true;
                     ChangeState(State.Patrol, FindPlayer());
+                    enemyController.Animator.SetBool("IsIdle", true);
+                    enemyController.Animator.SetBool("IsMoving", false);
                     gameState.RemoveTriggeredEnemies(1);
                     break;
                 }
@@ -92,6 +105,8 @@ namespace Characters
                 {
                     navMeshAgent.isStopped = true;
                     ChangeState(State.Battle, FightPlayer());
+                    enemyController.Animator.SetBool("IsFighting", true);
+                    enemyController.Animator.SetBool("IsMoving", false);
                     break;
                 }
 
@@ -100,17 +115,24 @@ namespace Characters
         }
         private IEnumerator FightPlayer()
         {
-            //TODO: добавить проверку на то, жив ли игрок
-            while ((Player.Instance.Transform.position - transform.position).magnitude <= enemy.fightStopDistance)
+            // TODO: добавить проверку на то, жив ли игрок
+            while (currentState == State.Battle)
             {
-                yield return new WaitForSeconds(enemy.attackInterval);
-                float amountOfDamage = enemy.damagePerHit;
-                amountOfDamage += amountOfDamage * (2 * Random.value - 1) * damageError;
-                Player.Instance.takeDamage(amountOfDamage);
+                if ((Player.Instance.Transform.position - transform.position).magnitude <= enemy.fightStopDistance)
+                {
+                    float amountOfDamage = enemy.damagePerHit;
+                    amountOfDamage += amountOfDamage * (2 * Random.value - 1) * damageError;
+                    Player.Instance.takeDamage(amountOfDamage);
+                    yield return new WaitForSeconds(enemy.attackInterval);
+                }
+                else
+                {
+                    ChangeState(State.Pursuit, PursuitPlayer());
+                    enemyController.Animator.SetBool("IsFighting", false);
+                    enemyController.Animator.SetBool("IsIdle", false);
+                    enemyController.Animator.SetBool("IsMoving", true);
+                }
             }
-
-
-            ChangeState(State.Pursuit, PursuitPlayer());
         }
 
         private void ChangeState(State state, IEnumerator coroutine)

@@ -9,3 +9,5 @@
 # Datasource local storage ignored files
 /../../../../../../:\Unity\Rise-of-the-machines\.idea\.idea.Rise-of-the-machines\.idea/dataSources/
 /dataSources.local.xml
+/indexLayout.xml
+/riderModule.iml
