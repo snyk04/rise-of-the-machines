@@ -26,7 +26,8 @@ namespace Characters
 
         [Header("Fight settings")]
         [Range(0, 1)] [SerializeField] private float damageError; 
-
+        [SerializeField] private int checksPerSecondsForLookAtPlayer;
+        
         private NavMeshAgent navMeshAgent;
         private EnemyController enemyController;
         private EnemySO enemy;
@@ -112,6 +113,9 @@ namespace Characters
         private IEnumerator FightPlayer()
         {
             // TODO: добавить проверку на то, жив ли игрок
+            
+            var lookAtPlayerCoroutine = StartCoroutine(LookAtPlayer());
+            
             while (currentState == State.Battle)
             {
                 if ((Player.Instance.Transform.position - transform.position).magnitude <= enemy.fightStopDistance)
@@ -123,9 +127,19 @@ namespace Characters
                 }
                 else
                 {
+                    StopCoroutine(lookAtPlayerCoroutine);
                     ChangeState(State.Pursuit, PursuitPlayer());
                     enemyController.EnemyAnimation.SetAnimation(EnemyAnimation.State.Moving);
                 }
+            }
+        }
+
+        private IEnumerator LookAtPlayer()
+        {
+            while (true)
+            {
+                transform.LookAt(Player.Instance.Transform);
+                yield return new WaitForSeconds(1f / checksPerSecondsForLookAtPlayer);
             }
         }
 
