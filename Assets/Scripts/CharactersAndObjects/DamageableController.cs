@@ -3,21 +3,22 @@ using UnityEngine;
 
 namespace CharactersAndObjects
 {
-    public class Damageable : MonoBehaviour
+    public class DamageableController : MonoBehaviour
     {
         private float maxHealth;
-        private IDamageable damageble;
+
+        public IDamageable DamageableClass { get; private set; }
 
         public void Initialize(float maxHealth, float moveSpeed, float armor, Transform transform, Animator animator = null)
         {
             this.maxHealth = maxHealth;
-            damageble = new Enemy(maxHealth, armor, moveSpeed, transform, animator);
+            DamageableClass = new Enemy(maxHealth, armor, moveSpeed, transform, animator);
         }
 
         public void TakeDamage(float damage)
         {
-            damageble = damageble ?? new Breakable(maxHealth, transform);
-            damageble.Health.TakeDamage(damage);
+            DamageableClass = DamageableClass ?? new Breakable(maxHealth, transform);
+            DamageableClass.Health.TakeDamage(damage);
         }
     }
 }

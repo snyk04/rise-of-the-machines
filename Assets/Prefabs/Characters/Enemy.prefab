@@ -968,6 +968,7 @@ GameObject:
   - component: {fileID: 5123428254204717872}
   - component: {fileID: 2257089912114560652}
   - component: {fileID: 5010959427026520669}
+  - component: {fileID: 2356705193850752014}
   - component: {fileID: 5123428254204717875}
   - component: {fileID: 2532626879060587825}
   - component: {fileID: 8181830020826422455}
@@ -1062,6 +1063,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a6f2e65f79ea374aa60e1f2e79f5ed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2356705193850752014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5123428254204717874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4596ede148ca5364b85be8b6c82066c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5123428254204717875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1074,7 +1087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 674bd1c983ac3a54a9456773e5f673d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 11400000, guid: 0192418eccb43f744a669df61f6f4144, type: 2}
+  enemySo: {fileID: 11400000, guid: 0192418eccb43f744a669df61f6f4144, type: 2}
 --- !u!114 &2532626879060587825
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using CharactersAndObjects;
+using Classes;
 using Classes.ScriptableObjects;
 using UnityEngine;
 
@@ -6,19 +7,19 @@ namespace Characters
 {
     public class EnemyController : MonoBehaviour
     {
-        [SerializeField] private EnemySO enemy;
-        [SerializeField] private Animator animator;
+        [SerializeField] private EnemySO enemySo;
 
-        public Animator Animator => animator;
-
-        private Damageable damageable;
+        public EnemySO EnemySo => enemySo;
+        public Enemy Enemy { get; private set; }
+        public EnemyAnimation EnemyAnimation { get; private set; }
 
         private void Awake()
         {
-            damageable = GetComponent<Damageable>();
-            damageable.Initialize(enemy.health, enemy.moveSpeed, enemy.armor, transform, animator);
+            var damageable = GetComponent<DamageableController>();
+            var animator = GetComponent<Animator>();
+            damageable.Initialize(enemySo.health, enemySo.moveSpeed, enemySo.armor, transform, animator);
+            Enemy = (Enemy) damageable.DamageableClass;
+            EnemyAnimation = GetComponent<EnemyAnimation>();
         }
-
-        public EnemySO GetEnemySo() => enemy;
     }
 }

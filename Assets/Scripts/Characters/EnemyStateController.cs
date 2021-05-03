@@ -40,7 +40,7 @@ namespace Characters
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
             enemyController = GetComponent<EnemyController>();
-            enemy = enemyController.GetEnemySo();
+            enemy = enemyController.EnemySo;
         }
         private void Start()
         {
@@ -69,14 +69,12 @@ namespace Characters
                 }
                 if (vectorBetweenEnemyAndPlayer.magnitude <= enemy.fightStartDistance)
                 {
-                    enemyController.Animator.SetBool("IsFighting", true);
-                    enemyController.Animator.SetBool("IsIdle", false);
+                    enemyController.EnemyAnimation.SetAnimation(EnemyAnimation.State.Fighting);
                     ChangeState(State.Battle, FightPlayer());
                 }
                 else
                 {
-                    enemyController.Animator.SetBool("IsIdle", false);
-                    enemyController.Animator.SetBool("IsMoving", true);
+                    enemyController.EnemyAnimation.SetAnimation(EnemyAnimation.State.Moving);
                     ChangeState(State.Pursuit, PursuitPlayer());
                 }
 
@@ -96,8 +94,7 @@ namespace Characters
                 {
                     navMeshAgent.isStopped = true;
                     ChangeState(State.Patrol, FindPlayer());
-                    enemyController.Animator.SetBool("IsIdle", true);
-                    enemyController.Animator.SetBool("IsMoving", false);
+                    enemyController.EnemyAnimation.SetAnimation(EnemyAnimation.State.Idle);
                     gameState.RemoveTriggeredEnemies(1);
                     break;
                 }
@@ -105,8 +102,7 @@ namespace Characters
                 {
                     navMeshAgent.isStopped = true;
                     ChangeState(State.Battle, FightPlayer());
-                    enemyController.Animator.SetBool("IsFighting", true);
-                    enemyController.Animator.SetBool("IsMoving", false);
+                    enemyController.EnemyAnimation.SetAnimation(EnemyAnimation.State.Fighting);
                     break;
                 }
 
@@ -128,9 +124,7 @@ namespace Characters
                 else
                 {
                     ChangeState(State.Pursuit, PursuitPlayer());
-                    enemyController.Animator.SetBool("IsFighting", false);
-                    enemyController.Animator.SetBool("IsIdle", false);
-                    enemyController.Animator.SetBool("IsMoving", true);
+                    enemyController.EnemyAnimation.SetAnimation(EnemyAnimation.State.Moving);
                 }
             }
         }

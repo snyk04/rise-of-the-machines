@@ -71,7 +71,7 @@ namespace Objects
             {
                 if (Physics.Raycast(rays[i], out RaycastHit hitInfo, weaponData.maxShotDistance))
                 {
-                    if (hitInfo.transform.TryGetComponent(out Damageable damageable))
+                    if (hitInfo.transform.TryGetComponent(out DamageableController damageable))
                     {
                         var amountOfDamage = Random.Range(weaponData.damage * (1 - weaponData.damageSpread), weaponData.damage * (1 + weaponData.damageSpread)) / weaponData.bulletsPerShot;
                         damageable.TakeDamage(amountOfDamage);
