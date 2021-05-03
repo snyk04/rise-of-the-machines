@@ -5020,6 +5020,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 6fcd4bb462b446b42a77f3ce7c506007, type: 2}
+    - target: {fileID: 2532626879060587825, guid: bdc3a5abdc6a43b4c9d8f4ae3caba54a,
+        type: 3}
+      propertyPath: checksPerSecondsForLookAtPlayer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5123428254204717874, guid: bdc3a5abdc6a43b4c9d8f4ae3caba54a,
         type: 3}
       propertyPath: m_Name
