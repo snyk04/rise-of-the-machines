@@ -9,19 +9,19 @@ namespace Classes {
         public Dictionary<Type, Characteristic> Stats { get; private set; } = new Dictionary<Type, Characteristic>();
         public HealthCharacteristic Health { get; }
         public SpeedCharacteristic MoveSpeed { get; protected set; }
-        public ArmorCharacteristic Armor { get; protected set; }
+        public ArmorCharacteristic PersonArmor { get; protected set; }
         public Transform Transform { get; }
         public Animator Animator { get; }
 
         protected Person(float maxHealth, float moveSpeed, float armor, Transform transform, Animator animator) {
             Health = new HealthCharacteristic(maxHealth, Die);
             MoveSpeed = new SpeedCharacteristic(moveSpeed);
-            Armor = new ArmorCharacteristic(armor);
+            PersonArmor = new ArmorCharacteristic(armor);
             Transform = transform;
             Animator = animator;
             Stats.Add(Type.Health, Health);
             Stats.Add(Type.Speed, MoveSpeed);
-            Stats.Add(Type.Armor, Armor);
+            Stats.Add(Type.Armor, PersonArmor);
         }
 
         protected virtual void Die() { }
@@ -29,7 +29,8 @@ namespace Classes {
         protected virtual void Attack() { }
 
         public void TakeDamage(float damage) {
-            Health.TakeDamage(damage);
+            var damageAccountingArmor = damage * (1 - ((ArmorCharacteristic) Stats[Type.Armor]).GetResistance());
+            Health.TakeDamage(damageAccountingArmor);
         }
 
         public void RestoreHealth(float heal) {

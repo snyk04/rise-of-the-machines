@@ -82,11 +82,11 @@ namespace Classes
 
         private void TransformIntoHuman()
         {
-            TransformIntoObject(Human.TakeDamage, Human.RestoreHealth, Human.Health, Human.MoveSpeed, Human.Armor, Human.Transform, Human.Animator, Human.CharacterController, human.GunTransform);
+            TransformIntoObject(Human.TakeDamage, Human.RestoreHealth, Human.Health, Human.MoveSpeed, Human.PersonArmor, Human.Transform, Human.Animator, Human.CharacterController, human.GunTransform);
         }
         private void TransformIntoRobot()
         {
-            TransformIntoObject(Robot.TakeDamage, Robot.RestoreHealth, Robot.Health, Robot.MoveSpeed, Robot.Armor, Robot.Transform, Robot.Animator, Robot.CharacterController, Robot.GunTransform);
+            TransformIntoObject(Robot.TakeDamage, Robot.RestoreHealth, Robot.Health, Robot.MoveSpeed, Robot.PersonArmor, Robot.Transform, Robot.Animator, Robot.CharacterController, Robot.GunTransform);
         }
         private void TransformIntoObject(TakeDamage objTakeDamage, RestoreHealth objRestoreHealth, HealthCharacteristic objHealth, SpeedCharacteristic objMoveSpeed, ArmorCharacteristic objArmor, Transform objTransform, Animator objAnimator, CharacterController objCharacterController, Transform objGunTransform)
         {
