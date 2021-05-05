@@ -1,5 +1,4 @@
-﻿using System;
-using InputHandling;
+﻿using InputHandling;
 using Objects;
 using UnityEngine;
 

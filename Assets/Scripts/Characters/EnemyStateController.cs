@@ -29,7 +29,8 @@ namespace Characters
 
         [Header("Fight settings")]
         [Range(0, 1)] [SerializeField] private float damageError; 
-        [SerializeField] private int checksPerSecondsForLookAtPlayer;
+        [SerializeField] private float smoothTime;
+        [SerializeField] private float maxSpeed;
         
         private NavMeshAgent navMeshAgent;
         private EnemyController enemyController;
@@ -230,10 +231,12 @@ namespace Characters
 
         private IEnumerator LookAtPlayer()
         {
+            var velocity = Vector3.zero;
             while (true)
             {
-                transform.LookAt(Player.Instance.Transform);
-                yield return new WaitForSeconds(1f / checksPerSecondsForLookAtPlayer);
+                var enemyPlayerVector = Player.Instance.Transform.position - transform.position;
+                transform.forward = Vector3.SmoothDamp(transform.forward, enemyPlayerVector.normalized, ref velocity, smoothTime, maxSpeed);
+                yield return new WaitForEndOfFrame();
             }
         }
 
