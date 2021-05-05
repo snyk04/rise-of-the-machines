@@ -21,8 +21,8 @@ namespace UserInterface
         }
         private void Start()
         {
-            var leftWeapon = leftGun.weapon;
-            var rightWeapon = rightGun.weapon;
+            var leftWeapon = leftGun.Weapon;
+            var rightWeapon = rightGun.Weapon;
             var leftWeaponData = leftWeapon.WeaponData;
             var rightWeaponData = rightWeapon.WeaponData;
 
@@ -37,11 +37,11 @@ namespace UserInterface
 
         private void UpdateAmmoLeft()
         {
-            leftGunText.text = $"{leftGun.weapon.WeaponData.currentBulletsInMagazine} / {leftGun.weapon.WeaponData.allAmmo - leftGun.weapon.WeaponData.currentBulletsInMagazine}";
+            leftGunText.text = $"{leftGun.Weapon.WeaponData.currentBulletsInMagazine} / {leftGun.Weapon.WeaponData.allAmmo - leftGun.Weapon.WeaponData.currentBulletsInMagazine}";
         }
         private void UpdateAmmoRight()
         {
-            rightGunText.text = $"{rightGun.weapon.WeaponData.currentBulletsInMagazine} / {rightGun.weapon.WeaponData.allAmmo - rightGun.weapon.WeaponData.currentBulletsInMagazine}";
+            rightGunText.text = $"{rightGun.Weapon.WeaponData.currentBulletsInMagazine} / {rightGun.Weapon.WeaponData.allAmmo - rightGun.Weapon.WeaponData.currentBulletsInMagazine}";
         }
     }
 }

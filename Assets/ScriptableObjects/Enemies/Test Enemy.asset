@@ -15,9 +15,9 @@ MonoBehaviour:
   health: 100
   armor: 20
   moveSpeed: 2
-  fieldOfView: 180
-  viewDistance: 25
-  fightStartDistance: 4
-  fightStopDistance: 4
+  fieldOfView: 190
+  viewDistance: 5
+  fightStartDistance: 2
+  fightStopDistance: 2
   damagePerHit: 10
   attackInterval: 1

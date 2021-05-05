@@ -23,7 +23,7 @@ namespace Objects
         }
         private void Start()
         {
-            WeaponSO weaponData = GetComponent<GunController>().weapon.WeaponData;
+            WeaponSO weaponData = GetComponent<GunController>().Weapon.WeaponData;
 
             shotSound = weaponData.shotSound;
             noAmmoSound = weaponData.noAmmoSound;

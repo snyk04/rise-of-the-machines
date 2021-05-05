@@ -16,27 +16,27 @@ namespace Objects
         [SerializeField] private Transform muzzleHole;
         [SerializeField] private ParticleSystem[] shotParticles;
 
-        public Weapon weapon { get; private set; }
+        public Weapon Weapon { get; private set; }
         private GunSound gunSound;
         private Coroutine animateShoot;
 
         private void Awake()
         {
-            weapon = Weapon.CreateWeapon(Instantiate(weaponSO));
+            Weapon = Weapon.CreateWeapon(Instantiate(weaponSO));
             gunSound = GetComponent<GunSound>();
 
             lineRenderer = lineRenderer ? lineRenderer : gameObject.AddComponent<LineRenderer>();
             ClearLineRenderer();
             lineRenderer.widthMultiplier = 0.1f;
 
-            weapon.OnReloadStart += gunSound.PlayReloadSound;
+            Weapon.OnReloadStart += gunSound.PlayReloadSound;
         }
 
         private List<Ray> rays = new List<Ray>();
 
         public void TryShoot()
         {
-            Weapon.ShotResult shotResult = weapon.TryShoot(Time.time, muzzleHole.position, muzzleHole.rotation, out rays);
+            Weapon.ShotResult shotResult = Weapon.TryShoot(Time.time, muzzleHole.position, muzzleHole.rotation, out rays);
 
             switch (shotResult)
             {
@@ -61,7 +61,7 @@ namespace Objects
         private void Shoot(List<Ray> rays)
         {
             positions.Clear();
-            WeaponSO weaponData = weapon.WeaponData;
+            WeaponSO weaponData = Weapon.WeaponData;
 
             var muzzleHolePos = muzzleHole.position;
 
@@ -91,12 +91,12 @@ namespace Objects
         }
         public void Reload()
         {
-            if (weapon.WeaponData.isReloading)
+            if (Weapon.WeaponData.isReloading)
             {
                 return;
             }
 
-            StartCoroutine(weapon.Reload());
+            StartCoroutine(Weapon.Reload());
         }
         private void NoAmmo()
         {

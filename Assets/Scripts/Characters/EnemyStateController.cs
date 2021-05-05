@@ -1,8 +1,11 @@
 ﻿using Classes;
 using Classes.ScriptableObjects;
 using System.Collections;
+using System.Collections.Generic;
+using PlayerScripts;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 namespace Characters
 {
@@ -12,7 +15,7 @@ namespace Characters
         {
             Patrol,
             Pursuit,
-            Battle
+            Fight
         }
 
         #region Properties
@@ -30,26 +33,126 @@ namespace Characters
         
         private NavMeshAgent navMeshAgent;
         private EnemyController enemyController;
+        private EnemyAnimation enemyAnimation;
         private EnemySO enemy;
         private GameState gameState;
+        private PlayerShooting playerShooting;
 
         private State currentState;
+        private bool isTriggered;
+
+        private Dictionary<State, (EnemyAnimation.State, string)> stateDictionary;
 
         #endregion
+
+        #region Behaviour methods
 
         private void Awake()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
             enemyController = GetComponent<EnemyController>();
+            enemyAnimation = GetComponent<EnemyAnimation>();
             enemy = enemyController.EnemySo;
+
+            isTriggered = false;
+            
+            // если не использовать текст, а передавать прямую ссылку на корутину, то
+            // она не вызовется во второй раз (видимо даже после завершения корутины ссылка на неё остаётся)
+            stateDictionary = new Dictionary<State, (EnemyAnimation.State, string)>
+            {
+                {State.Patrol, (EnemyAnimation.State.Idle, "Patrolling")},
+                {State.Pursuit, (EnemyAnimation.State.Moving, "Pursuing")},
+                {State.Fight, (EnemyAnimation.State.Fighting, "Fighting")}
+            };
         }
         private void Start()
         {
             gameState = GameState.Instance;
-            ChangeState(State.Patrol, FindPlayer());
+            playerShooting = PlayerShooting.Instance;
+            
+            StartPatrolling();
+        }
+        private void OnDisable()
+        {
+            DisableHearing();
         }
 
-        private IEnumerator FindPlayer()
+        #endregion
+
+        #region Methods
+
+        private void ChangeState(State state)
+        {
+            currentState = state;
+            enemyAnimation.SetAnimation(stateDictionary[state].Item1);
+            StartCoroutine(stateDictionary[state].Item2);
+        }
+        
+        private void EnableHearing()
+        {
+            playerShooting.OnShot += ListenForShot;
+        }
+        private void DisableHearing()
+        {
+            playerShooting.OnShot -= ListenForShot;
+        }
+
+        private void StartPatrolling()
+        {
+            ChangeState(State.Patrol);
+            EnableHearing();
+            TryToUnTrigger();
+        }
+        private void StartPursuing()
+        {
+            ChangeState(State.Pursuit);
+            DisableHearing();
+            TryToTrigger();
+        }
+        private void StartFighting()
+        {
+            ChangeState(State.Fight);
+            DisableHearing();
+            TryToTrigger();
+        }
+
+        private void TryToTrigger()
+        {
+            if (isTriggered)
+            {
+                return;
+            }
+
+            isTriggered = true;
+            gameState.AddTriggeredEnemies(1);
+        }
+        private void TryToUnTrigger()
+        {
+            if (!isTriggered)
+            {
+                return;
+            }
+            
+            isTriggered = false;
+            gameState.RemoveTriggeredEnemies(1);
+        }
+
+        private void ListenForShot()
+        {
+            var playerEnemyDistance = (Player.Instance.Transform.position - transform.position).magnitude;
+            if (playerEnemyDistance > enemy.viewDistance)
+            {
+                return;
+            }
+            
+            StartPursuing();
+        }
+
+        #endregion
+
+        #region Coroutines
+
+        private IEnumerator Patrolling()
         {
             while (currentState == State.Patrol)
             {
@@ -70,53 +173,45 @@ namespace Characters
                 }
                 if (vectorBetweenEnemyAndPlayer.magnitude <= enemy.fightStartDistance)
                 {
-                    enemyController.EnemyAnimation.SetAnimation(EnemyAnimation.State.Fighting);
-                    ChangeState(State.Battle, FightPlayer());
+                    StartFighting();
                 }
                 else
                 {
-                    enemyController.EnemyAnimation.SetAnimation(EnemyAnimation.State.Moving);
-                    ChangeState(State.Pursuit, PursuitPlayer());
+                    StartPursuing();
                 }
-
-                gameState.AddTriggeredEnemies(1);
             }
         }
-        private IEnumerator PursuitPlayer()
+        private IEnumerator Pursuing()
         {
             navMeshAgent.Warp(transform.position);
+            navMeshAgent.isStopped = false;
 
             while (currentState == State.Pursuit)
             {
                 yield return new WaitForSeconds(1f / checksPerSecondForPursuitPlayer);
 
                 float distanceVectorLength = (Player.Instance.Transform.position - transform.position).magnitude;
-                if (distanceVectorLength > enemy.viewDistance * 1.5f)
+                if (distanceVectorLength > enemy.viewDistance)
                 {
                     navMeshAgent.isStopped = true;
-                    ChangeState(State.Patrol, FindPlayer());
-                    enemyController.EnemyAnimation.SetAnimation(EnemyAnimation.State.Idle);
-                    gameState.RemoveTriggeredEnemies(1);
-                    break;
+                    StartPatrolling();
                 }
                 else if (distanceVectorLength <= enemy.fightStartDistance)
                 {
                     navMeshAgent.isStopped = true;
-                    ChangeState(State.Battle, FightPlayer());
-                    enemyController.EnemyAnimation.SetAnimation(EnemyAnimation.State.Fighting);
-                    break;
+                    StartFighting();
                 }
 
                 navMeshAgent.destination = Player.Instance.Transform.position;
             }
         }
-        private IEnumerator FightPlayer()
+        private IEnumerator Fighting()
         {
             // TODO: добавить проверку на то, жив ли игрок
             
             var lookAtPlayerCoroutine = StartCoroutine(LookAtPlayer());
             
-            while (currentState == State.Battle)
+            while (currentState == State.Fight)
             {
                 if ((Player.Instance.Transform.position - transform.position).magnitude <= enemy.fightStopDistance)
                 {
@@ -128,8 +223,7 @@ namespace Characters
                 else
                 {
                     StopCoroutine(lookAtPlayerCoroutine);
-                    ChangeState(State.Pursuit, PursuitPlayer());
-                    enemyController.EnemyAnimation.SetAnimation(EnemyAnimation.State.Moving);
+                    StartPursuing();
                 }
             }
         }
@@ -143,10 +237,6 @@ namespace Characters
             }
         }
 
-        private void ChangeState(State state, IEnumerator coroutine)
-        {
-            currentState = state;
-            StartCoroutine(coroutine);
-        }
+        #endregion
     }
 }

@@ -11,7 +11,6 @@ namespace Characters
 
         public EnemySO EnemySo => enemySo;
         public Enemy Enemy { get; private set; }
-        public EnemyAnimation EnemyAnimation { get; private set; }
 
         private void Awake()
         {
@@ -19,7 +18,6 @@ namespace Characters
             var animator = GetComponent<Animator>();
             damageable.Initialize(enemySo.health, enemySo.moveSpeed, enemySo.armor, transform, animator);
             Enemy = (Enemy) damageable.DamageableClass;
-            EnemyAnimation = GetComponent<EnemyAnimation>();
         }
     }
 }
