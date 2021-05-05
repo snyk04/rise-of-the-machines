@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Shotgun
   weaponID: 1
-  damage: 50
+  damage: 8
   damageSpread: 0.25
   maxBulletsInMagazine: 8
   maxAllAmmo: 48

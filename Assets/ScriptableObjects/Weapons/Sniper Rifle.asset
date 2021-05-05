@@ -25,7 +25,7 @@ MonoBehaviour:
   shotSpread: 10
   shotsPerSecond: 0.68333334
   maxShotDistance: 40
-  isAutomatic: 0
+  isAutomatic: 1
   shotSound: {fileID: 8300000, guid: 01eebc20210f82c4f8c0d42e2cc80fb8, type: 3}
   noAmmoSound: {fileID: 8300000, guid: cb7706f68733b2c4f8df5bae835f6a5e, type: 3}
   reloadSound: {fileID: 8300000, guid: 895324ab362dd494c8ad442c310c892f, type: 3}

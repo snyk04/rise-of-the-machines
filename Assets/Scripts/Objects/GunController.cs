@@ -11,7 +11,7 @@ namespace Objects
     public class GunController : MonoBehaviour
     {
         [Header("Gun prefab settings")]
-        [SerializeField] private WeaponSO weaponSO;
+        [SerializeField] private WeaponSO weaponSo;
         [SerializeField] private LineRenderer lineRenderer;
         [SerializeField] private Transform muzzleHole;
         [SerializeField] private ParticleSystem[] shotParticles;
@@ -22,7 +22,7 @@ namespace Objects
 
         private void Awake()
         {
-            Weapon = Weapon.CreateWeapon(Instantiate(weaponSO));
+            Weapon = Weapon.CreateWeapon(Instantiate(weaponSo));
             gunSound = GetComponent<GunSound>();
 
             lineRenderer = lineRenderer ? lineRenderer : gameObject.AddComponent<LineRenderer>();
@@ -73,7 +73,7 @@ namespace Objects
                 {
                     if (hitInfo.transform.TryGetComponent(out DamageableController damageable))
                     {
-                        var amountOfDamage = Random.Range(weaponData.damage * (1 - weaponData.damageSpread), weaponData.damage * (1 + weaponData.damageSpread)) / weaponData.bulletsPerShot;
+                        var amountOfDamage = Random.Range(weaponData.damage * (1 - weaponData.damageSpread), weaponData.damage * (1 + weaponData.damageSpread));
                         damageable.TakeDamage(amountOfDamage);
                     }
                     if (hitInfo.transform.TryGetComponent(out ParticlesManager particlesManager))
