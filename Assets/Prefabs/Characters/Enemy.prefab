@@ -1106,7 +1106,8 @@ MonoBehaviour:
   checksPerSecondForFindPlayer: 3
   checksPerSecondForPursuitPlayer: 3
   damageError: 0.25
-  checksPerSecondsForLookAtPlayer: 0
+  smoothTime: 0.1
+  maxSpeed: 100
 --- !u!114 &8181830020826422455
 MonoBehaviour:
   m_ObjectHideFlags: 0
