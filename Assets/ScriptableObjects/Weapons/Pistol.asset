@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cc762da0dc347a2a093567b9353d31c, type: 3}
-  m_Name: Assault Rifle
+  m_Name: Pistol
   m_EditorClassIdentifier: 
-  name: Assault Rifle
-  weaponID: 0
-  damage: 25
+  name: Pistol
+  weaponID: 3
+  damage: 10
   damageSpread: 0.1
-  maxBulletsInMagazine: 30
-  maxAllAmmo: 120
-  currentBulletsInMagazine: 30
-  allAmmo: 120
+  maxBulletsInMagazine: 12
+  maxAllAmmo: 48
+  currentBulletsInMagazine: 12
+  allAmmo: 48
   bulletsPerShot: 1
-  reloadTime: 1
-  shotSpread: 0
-  shotsPerSecond: 10
-  maxShotDistance: 100
+  reloadTime: 2
+  shotSpread: 10
+  shotsPerSecond: 5.8333335
+  maxShotDistance: 40
   isAutomatic: 1
-  shotSound: {fileID: 8300000, guid: ac3b6fa5adf19634da2c3062554260bf, type: 3}
+  shotSound: {fileID: 8300000, guid: 3a7db791a3fff06408785b48b4c5522d, type: 3}
   noAmmoSound: {fileID: 8300000, guid: cb7706f68733b2c4f8df5bae835f6a5e, type: 3}
-  reloadSound: {fileID: 8300000, guid: f7133645aaa50b04daf9050ec8aa3429, type: 3}
+  reloadSound: {fileID: 8300000, guid: 658499afad3549648a7067d9e8ff5b20, type: 3}
   isReloading: 0
