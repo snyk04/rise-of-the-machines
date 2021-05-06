@@ -17,7 +17,7 @@ MonoBehaviour:
   moveSpeed: 2
   fieldOfView: 190
   viewDistance: 25
-  fightStartDistance: 4
-  fightStopDistance: 4
+  fightStartDistance: 2.5
+  fightStopDistance: 2.5
   damagePerHit: 10
   attackInterval: 1

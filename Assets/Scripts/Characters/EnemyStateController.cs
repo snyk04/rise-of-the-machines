@@ -70,6 +70,7 @@ namespace Characters
         {
             gameState = GameState.Instance;
             playerShooting = PlayerShooting.Instance;
+            navMeshAgent.stoppingDistance = enemy.fightStartDistance;
             
             StartPatrolling();
         }
