@@ -23,6 +23,8 @@ namespace Classes.TryInHierarchie {
             Debug.Log($"Upgrade {Name}");
         }
 
-        public abstract bool TryPick();
+        public bool TryPick() {
+            return Player.Instance.Inventory.TryAdd(this);
+        }
     }
 }
