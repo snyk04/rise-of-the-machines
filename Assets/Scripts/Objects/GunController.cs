@@ -80,6 +80,10 @@ namespace Objects
                     {
                         particlesManager.EmitAllParticles(hitInfo);
                     }
+                    if (hitInfo.transform.TryGetComponent(out HitSoundManager hitSoundManager))
+                    {
+                        hitSoundManager.PlayRandomClip();
+                    }
                 }
             }
 
