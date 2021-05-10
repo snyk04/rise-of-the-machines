@@ -44,6 +44,22 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ShootLeftShoulder",
+                    "type": "Button",
+                    "id": "00eb2bbc-2d65-440f-8ece-3bf9f8d2999d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "ShootRightShoulder",
+                    "type": "Button",
+                    "id": "c131dad9-d027-4650-9bc0-4833ac87402e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -99,6 +115,28 @@
                     "processors": "",
                     "groups": "Keyboard + Mouse",
                     "action": "StartShootingRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d60c0473-1397-4140-9311-f923230aa7ed",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "ShootRightShoulder",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "92e8f1c2-acd0-41ea-b1fb-e1aff62f873f",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "ShootLeftShoulder",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

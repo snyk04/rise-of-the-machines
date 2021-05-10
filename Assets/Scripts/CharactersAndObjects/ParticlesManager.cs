@@ -6,18 +6,18 @@ namespace CharactersAndObjects
     {
         [SerializeField] private ParticleSystem[] particles;
 
-        public void EmitAllParticles(RaycastHit hitInfo)
+        public void EmitAllParticles(Vector3 particlePosition, Vector3 particleDirection)
         {
             foreach (ParticleSystem particle in particles)
             {
-                EmitSpecifiedParticle(particle, hitInfo, 1);
+                EmitSpecifiedParticle(particle, particlePosition, particleDirection, 1);
             }
         }
 
-        private void EmitSpecifiedParticle(ParticleSystem particle, RaycastHit hitInfo, int count)
+        private void EmitSpecifiedParticle(ParticleSystem particle, Vector3 particlePosition, Vector3 particleDirection, int count)
         {
-            particle.transform.position = hitInfo.point;
-            particle.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
+            particle.transform.position = particlePosition;
+            particle.transform.rotation = Quaternion.LookRotation(particleDirection);
             particle.transform.Rotate(Vector3.right, 90);
             particle.Emit(count);
         }

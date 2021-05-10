@@ -57,6 +57,22 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ShootLeftShoulder"",
+                    ""type"": ""Button"",
+                    ""id"": ""00eb2bbc-2d65-440f-8ece-3bf9f8d2999d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ShootRightShoulder"",
+                    ""type"": ""Button"",
+                    ""id"": ""c131dad9-d027-4650-9bc0-4833ac87402e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -112,6 +128,28 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
                     ""action"": ""StartShootingRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d60c0473-1397-4140-9311-f923230aa7ed"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""ShootRightShoulder"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92e8f1c2-acd0-41ea-b1fb-e1aff62f873f"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""ShootLeftShoulder"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -343,6 +381,8 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Combat_StopShootingLeft = m_Combat.FindAction("StopShootingLeft", throwIfNotFound: true);
         m_Combat_StartShootingRight = m_Combat.FindAction("StartShootingRight", throwIfNotFound: true);
         m_Combat_StopShootingRight = m_Combat.FindAction("StopShootingRight", throwIfNotFound: true);
+        m_Combat_ShootLeftShoulder = m_Combat.FindAction("ShootLeftShoulder", throwIfNotFound: true);
+        m_Combat_ShootRightShoulder = m_Combat.FindAction("ShootRightShoulder", throwIfNotFound: true);
         // Interaction
         m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
         m_Interaction_ChangeState = m_Interaction.FindAction("ChangeState", throwIfNotFound: true);
@@ -407,6 +447,8 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Combat_StopShootingLeft;
     private readonly InputAction m_Combat_StartShootingRight;
     private readonly InputAction m_Combat_StopShootingRight;
+    private readonly InputAction m_Combat_ShootLeftShoulder;
+    private readonly InputAction m_Combat_ShootRightShoulder;
     public struct CombatActions
     {
         private @Controls m_Wrapper;
@@ -416,6 +458,8 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @StopShootingLeft => m_Wrapper.m_Combat_StopShootingLeft;
         public InputAction @StartShootingRight => m_Wrapper.m_Combat_StartShootingRight;
         public InputAction @StopShootingRight => m_Wrapper.m_Combat_StopShootingRight;
+        public InputAction @ShootLeftShoulder => m_Wrapper.m_Combat_ShootLeftShoulder;
+        public InputAction @ShootRightShoulder => m_Wrapper.m_Combat_ShootRightShoulder;
         public InputActionMap Get() { return m_Wrapper.m_Combat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -440,6 +484,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @StopShootingRight.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShootingRight;
                 @StopShootingRight.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShootingRight;
                 @StopShootingRight.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShootingRight;
+                @ShootLeftShoulder.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnShootLeftShoulder;
+                @ShootLeftShoulder.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnShootLeftShoulder;
+                @ShootLeftShoulder.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnShootLeftShoulder;
+                @ShootRightShoulder.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnShootRightShoulder;
+                @ShootRightShoulder.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnShootRightShoulder;
+                @ShootRightShoulder.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnShootRightShoulder;
             }
             m_Wrapper.m_CombatActionsCallbackInterface = instance;
             if (instance != null)
@@ -459,6 +509,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @StopShootingRight.started += instance.OnStopShootingRight;
                 @StopShootingRight.performed += instance.OnStopShootingRight;
                 @StopShootingRight.canceled += instance.OnStopShootingRight;
+                @ShootLeftShoulder.started += instance.OnShootLeftShoulder;
+                @ShootLeftShoulder.performed += instance.OnShootLeftShoulder;
+                @ShootLeftShoulder.canceled += instance.OnShootLeftShoulder;
+                @ShootRightShoulder.started += instance.OnShootRightShoulder;
+                @ShootRightShoulder.performed += instance.OnShootRightShoulder;
+                @ShootRightShoulder.canceled += instance.OnShootRightShoulder;
             }
         }
     }
@@ -595,6 +651,8 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnStopShootingLeft(InputAction.CallbackContext context);
         void OnStartShootingRight(InputAction.CallbackContext context);
         void OnStopShootingRight(InputAction.CallbackContext context);
+        void OnShootLeftShoulder(InputAction.CallbackContext context);
+        void OnShootRightShoulder(InputAction.CallbackContext context);
     }
     public interface IInteractionActions
     {

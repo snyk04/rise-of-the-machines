@@ -35,7 +35,9 @@ namespace Classes.TryInHierarchie
 
         private Weapon(WeaponSO weaponSO, Dictionary<Type, Characteristic> stats) : base(weaponSO.name, stats)
         {
+            // TODO: возможно это должно выглядеть немного по-другому, нужно подумать
             WeaponData = weaponSO;
+            WeaponData.reloadTime = WeaponData.reloadSound.length;
         }
 
         public float GetDamage() => Stats[Type.Damage].Value;

@@ -10,11 +10,13 @@ namespace PlayerScripts
 
         public static PlayerShooting Instance;
         
-        [SerializeField] private GunController leftGun;
-        [SerializeField] private GunController rightGun;
+        [SerializeField] private GunController leftHandWeapon;
+        [SerializeField] private GunController rightHandWeapon;
+        [SerializeField] private GunController leftShoulderWeapon;
+        [SerializeField] private GunController rightShoulderWeapon;
 
-        public GunController LeftGun => leftGun;
-        public GunController RightGun => rightGun;
+        public GunController LeftHandWeapon => leftHandWeapon;
+        public GunController RightHandWeapon => rightHandWeapon;
         
         private bool IsLeftGunShooting { get; set; }
         private bool IsRightGunShooting { get; set; }
@@ -46,24 +48,26 @@ namespace PlayerScripts
             input.combatActions.StopShootingLeft.performed += context => StopShootingLeft();
             input.combatActions.StartShootingRight.performed += context => StartShootingRight();
             input.combatActions.StopShootingRight.performed += context => StopShootingRight();
+            input.combatActions.ShootLeftShoulder.performed += context => leftShoulderWeapon.TryShoot();
+            input.combatActions.ShootRightShoulder.performed += context => rightShoulderWeapon.TryShoot();
             
-            leftGun.Weapon.OnShot += () => { OnShot?.Invoke(); };
-            rightGun.Weapon.OnShot += () => { OnShot?.Invoke(); };
+            leftHandWeapon.Weapon.OnShot += () => { OnShot?.Invoke(); };
+            rightHandWeapon.Weapon.OnShot += () => { OnShot?.Invoke(); };
         }
         private void Update()
         {
             if (IsLeftGunShooting)
             {
-                leftGun.TryShoot();
-                if (!leftGun.Weapon.WeaponData.isAutomatic)
+                leftHandWeapon.TryShoot();
+                if (!leftHandWeapon.Weapon.WeaponData.isAutomatic)
                 {
                     StopShootingLeft();
                 }
             }
             if (IsRightGunShooting)
             {
-                rightGun.TryShoot();
-                if (!rightGun.Weapon.WeaponData.isAutomatic)
+                rightHandWeapon.TryShoot();
+                if (!rightHandWeapon.Weapon.WeaponData.isAutomatic)
                 {
                     StopShootingRight();
                 }
@@ -77,8 +81,8 @@ namespace PlayerScripts
 
         private void Reload()
         {
-            leftGun.Reload();
-            rightGun.Reload();
+            leftHandWeapon.Reload();
+            rightHandWeapon.Reload();
         }
 
         private void StartShootingLeft()

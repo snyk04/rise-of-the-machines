@@ -5,11 +5,15 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using System.Collections;
 using System.Collections.Generic;
+using Characters;
+using Classes;
 
 namespace Objects
 {
     public class GunController : MonoBehaviour
     {
+        # region Properties
+        
         [Header("Gun prefab settings")]
         [SerializeField] private WeaponSO weaponSo;
         [SerializeField] private LineRenderer lineRenderer;
@@ -19,11 +23,17 @@ namespace Objects
         public Weapon Weapon { get; private set; }
         private GunSound gunSound;
         private Coroutine animateShoot;
+        private WeaponSO weaponData;
+        
+        #endregion
+
+        #region Behaviour methods
 
         private void Awake()
         {
             Weapon = Weapon.CreateWeapon(Instantiate(weaponSo));
             gunSound = GetComponent<GunSound>();
+            weaponData = Weapon.WeaponData;
 
             lineRenderer = lineRenderer ? lineRenderer : gameObject.AddComponent<LineRenderer>();
             ClearLineRenderer();
@@ -32,8 +42,11 @@ namespace Objects
             Weapon.OnReloadStart += gunSound.PlayReloadSound;
         }
 
-        private List<Ray> rays = new List<Ray>();
+        #endregion
 
+        #region Methods
+
+        private List<Ray> rays = new List<Ray>();
         public void TryShoot()
         {
             Weapon.ShotResult shotResult = Weapon.TryShoot(Time.time, muzzleHole.position, muzzleHole.rotation, out rays);
@@ -47,7 +60,14 @@ namespace Objects
                     Reload();
                     break;
                 case Weapon.ShotResult.ShotSuccessful:
-                    Shoot(rays);
+                    if (weaponData.isSmart)
+                    {
+                        ShootSmartly();
+                    }
+                    else
+                    {
+                        ShootManually(rays);
+                    }
                     break;
                 case Weapon.ShotResult.TooFast:
                     return;
@@ -57,11 +77,9 @@ namespace Objects
         }
 
         private List<Vector3> positions = new List<Vector3>();
-
-        private void Shoot(List<Ray> rays)
+        private void ShootManually(List<Ray> rays)
         {
             positions.Clear();
-            WeaponSO weaponData = Weapon.WeaponData;
 
             var muzzleHolePos = muzzleHole.position;
 
@@ -78,7 +96,7 @@ namespace Objects
                     }
                     if (hitInfo.transform.TryGetComponent(out ParticlesManager particlesManager))
                     {
-                        particlesManager.EmitAllParticles(hitInfo);
+                        particlesManager.EmitAllParticles(hitInfo.point, hitInfo.normal);
                     }
                     if (hitInfo.transform.TryGetComponent(out HitSoundManager hitSoundManager))
                     {
@@ -92,6 +110,55 @@ namespace Objects
                 particle.Emit(1);
             }
             gunSound.PlayShotSound();
+        }
+
+        private void ShootSmartly()
+        {
+            StartCoroutine(ShootingSmartly());
+        }
+        private IEnumerator ShootingSmartly()
+        {
+            var colliders = Physics.OverlapSphere(Player.Instance.Transform.position, weaponData.maxShotDistance);
+            foreach (Collider collider in colliders)
+            {
+                if (!collider.transform.TryGetComponent(out EnemyController enemyController))
+                {
+                    continue;
+                }
+                
+                var enemyPosition = collider.transform.position;
+                var rotatingCoroutine = StartCoroutine(LookAtEnemy(enemyPosition, 0, 90, 0));
+                yield return new WaitForSeconds(0.5f);
+                for (int i = 0; i < 10; i++)
+                {
+                    if (collider.transform.TryGetComponent(out DamageableController damageable))
+                    {
+                        var amountOfDamage = Random.Range(weaponData.damage * (1 - weaponData.damageSpread), weaponData.damage * (1 + weaponData.damageSpread));
+                        damageable.TakeDamage(amountOfDamage);
+                    }
+                    if (collider.transform.TryGetComponent(out ParticlesManager particlesManager))
+                    {
+                        particlesManager.EmitAllParticles(enemyPosition, (Player.Instance.Transform.position - enemyPosition).normalized);
+                    }
+                    if (collider.transform.TryGetComponent(out HitSoundManager hitSoundManager))
+                    {
+                        hitSoundManager.PlayRandomClip();
+                    }
+                
+                    foreach (ParticleSystem particle in shotParticles)
+                    {
+                        particle.Emit(1);
+                    }
+                    gunSound.PlayShotSound();
+
+                    yield return new WaitForSeconds(1 / weaponData.shotsPerSecond);
+                }
+                
+
+                StopCoroutine(rotatingCoroutine);
+
+                yield break;
+            }
         }
         public void Reload()
         {
@@ -137,5 +204,20 @@ namespace Objects
                 lineRenderer.positionCount = 0;
             }
         }
+        
+        private IEnumerator LookAtEnemy(Vector3 enemyPosition, float xRotation, float yRotation, float zRotation)
+        {
+            var velocity = Vector3.zero;
+            while (true)
+            {
+                var enemyPlayerVector = (enemyPosition - transform.position).normalized;
+                var rotation = Quaternion.Euler(xRotation, yRotation, zRotation);
+                var rotatedVector = rotation * enemyPlayerVector;
+                transform.forward = Vector3.SmoothDamp(transform.forward, rotatedVector, ref velocity, 0.1f, 1000);
+                yield return new WaitForEndOfFrame();
+            }
+        }
+
+        #endregion
     }
 }

@@ -16,4 +16,4 @@ namespace Classes.TryInHierarchie {
             return new List<ICanBePickedUp>(inventory); // todo don't know is this ok
         }
     }
-}
+}   

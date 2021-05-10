@@ -16,8 +16,8 @@ namespace UserInterface
 
         private void Awake()
         {
-            leftGun = playerShooting.LeftGun;
-            rightGun = playerShooting.RightGun;
+            leftGun = playerShooting.LeftHandWeapon;
+            rightGun = playerShooting.RightHandWeapon;
         }
         private void Start()
         {
