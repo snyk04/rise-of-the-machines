@@ -24,7 +24,6 @@ namespace Classes.ScriptableObjects
         public float shotsPerSecond;
         public float maxShotDistance;
         public bool isAutomatic;
-        public bool isSmart;
 
         [Header("Sound")]
         public AudioClip shotSound;

@@ -12,8 +12,8 @@ namespace PlayerScripts
         
         [SerializeField] private GunController leftHandWeapon;
         [SerializeField] private GunController rightHandWeapon;
-        [SerializeField] private GunController leftShoulderWeapon;
-        [SerializeField] private GunController rightShoulderWeapon;
+        [SerializeField] private SmartGunController leftShoulderWeapon;
+        [SerializeField] private SmartGunController rightShoulderWeapon;
 
         public GunController LeftHandWeapon => leftHandWeapon;
         public GunController RightHandWeapon => rightHandWeapon;
@@ -48,8 +48,8 @@ namespace PlayerScripts
             input.combatActions.StopShootingLeft.performed += context => StopShootingLeft();
             input.combatActions.StartShootingRight.performed += context => StartShootingRight();
             input.combatActions.StopShootingRight.performed += context => StopShootingRight();
-            input.combatActions.ShootLeftShoulder.performed += context => leftShoulderWeapon.TryShoot();
-            input.combatActions.ShootRightShoulder.performed += context => rightShoulderWeapon.TryShoot();
+            input.combatActions.ShootLeftShoulder.performed += context => leftShoulderWeapon.ShootSomehow();
+            input.combatActions.ShootRightShoulder.performed += context => rightShoulderWeapon.ShootSomehow();
             
             leftHandWeapon.Weapon.OnShot += () => { OnShot?.Invoke(); };
             rightHandWeapon.Weapon.OnShot += () => { OnShot?.Invoke(); };
