@@ -171,10 +171,10 @@ MonoBehaviour:
   humanFollow: {fileID: 8352755541510628590}
   robotFollow: {fileID: 8348087770303479007}
   virtualCamera: {fileID: 0}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 545817430553012377}
   canvasController: {fileID: 0}
-  enterRobotSound: {fileID: 0}
-  exitRobotSound: {fileID: 0}
+  enterRobotSound: {fileID: 8300000, guid: 2d79726888a28264f90899ea2c08ec2f, type: 3}
+  exitRobotSound: {fileID: 8300000, guid: 7fa26bdd50e4b0f448183ec32ce25c74, type: 3}
   humanSpawnDistance: 3
 --- !u!114 &4929464958797153170
 MonoBehaviour:
@@ -280,7 +280,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b5450f642984840b86ada6c247db70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 8576996361051769252}
+  leftHandWeapon: {fileID: 0}
+  rightHandWeapon: {fileID: 0}
+  leftShoulderWeapon: {fileID: 0}
+  rightShoulderWeapon: {fileID: 0}
 --- !u!114 &7228771617698822595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,18 +542,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1445490268242107550}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8576996361051769252 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7136223002006771002, guid: d3463ee89162fbc45994bb9da6f1328e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1445490268242107550}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31b89dc8191cae44fa97ee5c263e8f30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &5639799342483008006 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6506573514855986840, guid: d3463ee89162fbc45994bb9da6f1328e,

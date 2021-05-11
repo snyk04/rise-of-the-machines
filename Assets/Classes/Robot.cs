@@ -13,13 +13,13 @@ namespace Classes {
         public CharacterController CharacterController { get; }
         public Transform GunTransform { get; }
 
-        private readonly Dictionary<Type, EquipmentSlot> equipmentSlots = new Dictionary<Type, EquipmentSlot> {
+        public readonly Dictionary<Type, EquipmentSlot> equipmentSlots = new Dictionary<Type, EquipmentSlot> {
             {Type.Head, new HeadSlot()},
             {Type.Chest, new ChestSlot()},
             {Type.Legs, new LegsSlot()}
         };
 
-        private readonly WeaponsSlot weaponsSlot = new WeaponsSlot(new Dictionary<WeaponSlot.Spot, WeaponSlot> {
+        public readonly WeaponsSlots weaponsSlots = new WeaponsSlots(new Dictionary<WeaponSlot.Spot, WeaponSlot> {
             {WeaponSlot.Spot.TwoHands, new WeaponSlot(WeaponSlot.Spot.TwoHands)}
         });
 
@@ -60,7 +60,7 @@ namespace Classes {
         }
 
         public void ChangeWeapon(Weapon newWeapon, WeaponSlot.Spot spot) {
-            if (weaponsSlot.TryChangeItem(newWeapon, spot, out var oldWeapon)) {
+            if (weaponsSlots.TryChangeItem(newWeapon, spot, out var oldWeapon)) {
                 RecalculateCharacteristics(oldWeapon, newWeapon);
             }
         }

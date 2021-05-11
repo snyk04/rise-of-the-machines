@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Classes.TryInHierarchie {
-    public class WeaponsSlot {
+    public class WeaponsSlots {
         public Dictionary<WeaponSlot.Spot, WeaponSlot> Slots { get; private set; }
 
-        public WeaponsSlot(Dictionary<WeaponSlot.Spot, WeaponSlot> slots) {
+        public WeaponsSlots(Dictionary<WeaponSlot.Spot, WeaponSlot> slots) {
             Slots = slots;
         }
 
