@@ -9,6 +9,9 @@ namespace Objects
 {
     public class SmartGunController : GunController
     {
+        [Header("Rotating timings")]
+        [SerializeField] private float rotateTime;
+        
         private Transform enemyTransform;
         private Vector3 enemyPosition;
 
@@ -33,30 +36,17 @@ namespace Objects
             }
             gunSound.PlayShotSound();
         }
-        
-        private IEnumerator LookAtEnemy(Vector3 enemyPosition, float xRotation, float yRotation, float zRotation)
-        {
-            var velocity = Vector3.zero;
-            while (true)
-            {
-                var enemyPlayerVector = (enemyPosition - transform.position).normalized;
-                var rotation = Quaternion.Euler(xRotation, yRotation, zRotation);
-                var rotatedVector = rotation * enemyPlayerVector;
-                transform.forward = Vector3.SmoothDamp(transform.forward, rotatedVector, ref velocity, 0.1f, 1000);
-                yield return new WaitForEndOfFrame();
-            }
-        }
 
-        public void ShootSomehow()
+        public void ShootABurst()
         {
             if (Weapon.WeaponData.isReloading)
             {
                 return;
             }
             
-            StartCoroutine(ShootingSomehow());
+            StartCoroutine(ShootingABurst());
         }
-        private IEnumerator ShootingSomehow()
+        private IEnumerator ShootingABurst()
         {
             var colliders = Physics.OverlapSphere(Player.Instance.Transform.position, weaponData.maxShotDistance);
             foreach (Collider collider in colliders)
@@ -68,8 +58,8 @@ namespace Objects
 
                 enemyTransform = collider.transform;
                 enemyPosition = enemyTransform.position;
-                var rotatingCoroutine = StartCoroutine(LookAtEnemy(enemyPosition, 0, 90, 0));
-                yield return new WaitForSeconds(0.5f);
+                var lookAtEnemyCoroutine = StartCoroutine(RotateToEnemy(enemyPosition));
+                yield return new WaitForSeconds(rotateTime * 3);
                 for (int i = 0; i < Weapon.WeaponData.maxBulletsInMagazine; i++)
                 {
                     if (collider == null)
@@ -81,9 +71,34 @@ namespace Objects
                     
                     yield return new WaitForSeconds(1 / weaponData.shotsPerSecond);
                 }
-                StopCoroutine(rotatingCoroutine);
+                StopCoroutine(lookAtEnemyCoroutine);
             }
+            var rotatingCoroutine = StartCoroutine(RotateToDefaultPosition());
+            yield return new WaitForSeconds(rotateTime * 3);
+            StopCoroutine(rotatingCoroutine);
             yield return null;
+        }
+        
+        private IEnumerator RotateToEnemy(Vector3 enemyPosition)
+        {
+            var velocity = Vector3.zero;
+            
+            while (true)
+            {
+                var goalForward = Quaternion.Euler(0, 90, 0) * (enemyPosition - transform.position).normalized;
+                transform.forward = Vector3.SmoothDamp(transform.forward, goalForward , ref velocity, rotateTime, 1000);
+                yield return new WaitForEndOfFrame();
+            }
+        }
+        private IEnumerator RotateToDefaultPosition()
+        {
+            var velocity = Vector3.zero;
+            while (true)
+            {
+                var goalForward = Quaternion.Euler(0, 90, 0) * Player.Instance.Transform.forward;
+                transform.forward = Vector3.SmoothDamp(transform.forward, goalForward , ref velocity, rotateTime, 1000);
+                yield return new WaitForEndOfFrame();
+            }
         }
     }
 }

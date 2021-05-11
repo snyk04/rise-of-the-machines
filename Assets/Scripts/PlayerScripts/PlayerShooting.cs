@@ -48,8 +48,8 @@ namespace PlayerScripts
             input.combatActions.StopShootingLeft.performed += context => StopShootingLeft();
             input.combatActions.StartShootingRight.performed += context => StartShootingRight();
             input.combatActions.StopShootingRight.performed += context => StopShootingRight();
-            input.combatActions.ShootLeftShoulder.performed += context => leftShoulderWeapon.ShootSomehow();
-            input.combatActions.ShootRightShoulder.performed += context => rightShoulderWeapon.ShootSomehow();
+            input.combatActions.ShootLeftShoulder.performed += context => leftShoulderWeapon.ShootABurst();
+            input.combatActions.ShootRightShoulder.performed += context => rightShoulderWeapon.ShootABurst();
             
             leftHandWeapon.Weapon.OnShot += () => { OnShot?.Invoke(); };
             rightHandWeapon.Weapon.OnShot += () => { OnShot?.Invoke(); };

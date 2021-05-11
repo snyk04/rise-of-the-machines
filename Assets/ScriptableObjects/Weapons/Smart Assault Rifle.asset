@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Smart Assault Rifle
   weaponID: 4
-  damage: 10
+  damage: 1
   damageSpread: 0.1
   maxBulletsInMagazine: 15
-  maxAllAmmo: 99999
+  maxAllAmmo: 999999
   currentBulletsInMagazine: 15
-  allAmmo: 99999
+  allAmmo: 999999
   bulletsPerShot: 1
-  reloadTime: 15
+  reloadTime: 0
   shotSpread: 0
   shotsPerSecond: 17.5
   maxShotDistance: 100

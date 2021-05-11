@@ -1504,8 +1504,8 @@ Transform:
   m_LocalPosition: {x: -718.5, y: -404, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 58699686}
   - {fileID: 1348657745}
+  - {fileID: 58699686}
   - {fileID: 1191478734}
   m_Father: {fileID: 653862983}
   m_RootOrder: 1
@@ -4007,7 +4007,7 @@ PrefabInstance:
     - target: {fileID: 5123428254204717879, guid: bdc3a5abdc6a43b4c9d8f4ae3caba54a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5123428254204717879, guid: bdc3a5abdc6a43b4c9d8f4ae3caba54a,
         type: 3}
@@ -5408,7 +5408,7 @@ PrefabInstance:
     - target: {fileID: 1459103385778355155, guid: fbaca33496b28774c9bf4c38e2a1890c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1459103385778355155, guid: fbaca33496b28774c9bf4c38e2a1890c,
         type: 3}
@@ -6132,7 +6132,7 @@ MonoBehaviour:
   - {fileID: 1398619479}
   - {fileID: 527662653}
   - {fileID: 1100539818}
-  shotsPerCast: 30
+  rotateTime: 0.1
 --- !u!1 &2705254963258764331
 GameObject:
   m_ObjectHideFlags: 0
@@ -6172,7 +6172,7 @@ MonoBehaviour:
   - {fileID: 1837234735}
   - {fileID: 1946114019}
   - {fileID: 400318035}
-  shotsPerCast: 15
+  rotateTime: 0.1
 --- !u!198 &3001356628281302444 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 2229777154009511729, guid: fbaca33496b28774c9bf4c38e2a1890c,
