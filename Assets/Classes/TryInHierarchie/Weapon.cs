@@ -103,5 +103,4 @@ namespace Classes.TryInHierarchie
             WeaponData.isReloading = false;
         }
     }
-    
 }
