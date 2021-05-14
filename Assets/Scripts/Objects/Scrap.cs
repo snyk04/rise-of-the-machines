@@ -14,7 +14,7 @@ namespace Objects
 
         private void Start()
         {
-            scrapInventoryController = PlayerController.playerController.GetComponent<PlayerScrapController>();
+            scrapInventoryController = PlayerController.Instance.GetComponent<PlayerScrapController>();
         }
         private void OnTriggerEnter(Collider other)
         {

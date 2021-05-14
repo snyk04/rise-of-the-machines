@@ -14,12 +14,13 @@ namespace PlayerScripts
         [SerializeField] private Transform humanGunTransform;
         [SerializeField] private Transform robotGunTransform;
 
-        public static PlayerController playerController;
+        public static PlayerController Instance;
+        
         private Player player;
 
         private void Awake()
         {
-            playerController = this;
+            Instance = this;
             player = new Player(new Human(100, 4, 20, human, humanAnimator, humanCharacterController, humanGunTransform),
                                 new Robot(100, 4, 20, robot, robotAnimator, robotCharacterController, robotGunTransform)); // todo add HumanSO, RobotSO
         }
