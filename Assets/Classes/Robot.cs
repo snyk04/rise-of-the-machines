@@ -9,7 +9,7 @@ namespace Classes {
         public delegate void CharacteristicsChanged();
 
         public event CharacteristicsChanged CharacteristicsChangedEvent;
-
+        
         public Player.UnityData UnityRobotData { get; private set; }
 
         public readonly Dictionary<Type, EquipmentSlot> equipmentSlots = new Dictionary<Type, EquipmentSlot> {
@@ -26,6 +26,10 @@ namespace Classes {
             CharacterController characterController, Transform gunTransform) : base(maxHealth, armor, moveSpeed) {
             UnityRobotData = new Player.UnityData();
             UnityRobotData.Initialize(transform, animator, characterController, gunTransform);
+        }
+
+        public Robot(float maxHealth, float moveSpeed, float armor) : base(maxHealth, armor, moveSpeed) {
+            UnityRobotData = new Player.UnityData();
         }
         
         public Transform Transform => UnityRobotData.Transform;

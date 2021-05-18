@@ -10,12 +10,23 @@ namespace Classes {
             public CharacterController CharacterController { get; private set; }
             public Transform GunTransform { get; private set; }
             
+            public bool Initialized { get; private set; }
+
             public void Initialize(Transform transform, Animator animator, CharacterController characterController,
                 Transform gunTransform) {
                 Transform = transform;
                 Animator = animator;
                 CharacterController = characterController;
                 GunTransform = gunTransform;
+                Initialized = true;
+            }
+
+            public void Uninitialize() {
+                Transform = null;
+                Animator = null;
+                CharacterController = null;
+                GunTransform = null;
+                Initialized = false;
             }
         }
 

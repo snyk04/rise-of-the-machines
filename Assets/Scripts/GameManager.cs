@@ -5,16 +5,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager Instance { get; private set; }
 
     private void Awake()
     {
         Instance = this;
         DontDestroyOnLoad(gameObject);
-    }
-
-    private void Start()
-    {
-        
+        var player = new Player(new Human(100, 4, 20),
+            new Robot(100, 4, 20)); // todo add HumanSO, RobotSO
     }
 }

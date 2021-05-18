@@ -14,19 +14,21 @@ namespace PlayerScripts
         [SerializeField] private Transform humanGunTransform;
         [SerializeField] private Transform robotGunTransform;
 
-        public static PlayerController Instance;
+        public static PlayerController Instance { get; private set; }
         
-        private Player player;
 
-        private void Awake()
+        private void Start()
         {
             Instance = this;
-            player = new Player(new Human(100, 4, 20, human, humanAnimator, humanCharacterController, humanGunTransform),
-                                new Robot(100, 4, 20, robot, robotAnimator, robotCharacterController, robotGunTransform)); // todo add HumanSO, RobotSO
+            var player = Player.Instance;
+            player.Human.UnityHumanData.Initialize(human, humanAnimator, humanCharacterController, humanGunTransform);
+            player.Robot.UnityRobotData.Initialize(robot, robotAnimator, robotCharacterController, robotGunTransform);
         }
 
-        // private void Update() {
-        //     Debug.Log(Player.Instance.Health.HP);   
-        // }
+        private void Update() {
+            Debug.Log(Player.Instance.Human.UnityHumanData.Transform);   
+            Debug.Log(Player.Instance.Robot.UnityRobotData.Transform);   
+            Debug.Log(Player.Instance.UnityPlayerData.Transform);   
+        }
     }
 }

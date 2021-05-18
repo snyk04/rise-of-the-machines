@@ -11,6 +11,9 @@ namespace Classes {
             UnityHumanData = new Player.UnityData();
             UnityHumanData.Initialize(transform, animator, characterController, gunTransform);
         }
+        public Human(float maxHealth, float moveSpeed, float armor) : base(maxHealth, moveSpeed, armor) {
+            UnityHumanData = new Player.UnityData();
+        }
 
         public Transform Transform => UnityHumanData.Transform;
         public Animator Animator => UnityHumanData.Animator;
