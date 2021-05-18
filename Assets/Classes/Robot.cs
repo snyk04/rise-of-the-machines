@@ -10,8 +10,7 @@ namespace Classes {
 
         public event CharacteristicsChanged CharacteristicsChangedEvent;
 
-        public CharacterController CharacterController { get; }
-        public Transform GunTransform { get; }
+        public Player.UnityData UnityRobotData { get; private set; }
 
         public readonly Dictionary<Type, EquipmentSlot> equipmentSlots = new Dictionary<Type, EquipmentSlot> {
             {Type.Head, new HeadSlot()},
@@ -24,12 +23,15 @@ namespace Classes {
         });
 
         public Robot(float maxHealth, float moveSpeed, float armor, Transform transform, Animator animator,
-            CharacterController characterController, Transform gunTransform) : base(maxHealth, armor, moveSpeed,
-            transform,
-            animator) {
-            CharacterController = characterController;
-            GunTransform = gunTransform;
+            CharacterController characterController, Transform gunTransform) : base(maxHealth, armor, moveSpeed) {
+            UnityRobotData = new Player.UnityData();
+            UnityRobotData.Initialize(transform, animator, characterController, gunTransform);
         }
+        
+        public Transform Transform => UnityRobotData.Transform;
+        public Animator Animator => UnityRobotData.Animator;
+        public CharacterController CharacterController => UnityRobotData.CharacterController;
+        public Transform GunTransform => UnityRobotData.GunTransform;
 
         public void ChangeArmor(Equipment newItem) {
             Equipment oldItem;

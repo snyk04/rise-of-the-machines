@@ -10,15 +10,11 @@ namespace Classes {
         public HealthCharacteristic Health { get; }
         public SpeedCharacteristic MoveSpeed { get; protected set; }
         public ArmorCharacteristic PersonArmor { get; protected set; }
-        public Transform Transform { get; }
-        public Animator Animator { get; }
 
-        protected Person(float maxHealth, float moveSpeed, float armor, Transform transform, Animator animator) {
+        protected Person(float maxHealth, float moveSpeed, float armor) {
             Health = new HealthCharacteristic(maxHealth, Die);
             MoveSpeed = new SpeedCharacteristic(moveSpeed);
             PersonArmor = new ArmorCharacteristic(armor);
-            Transform = transform;
-            Animator = animator;
             Stats.Add(Type.Health, Health);
             Stats.Add(Type.Speed, MoveSpeed);
             Stats.Add(Type.Armor, PersonArmor);

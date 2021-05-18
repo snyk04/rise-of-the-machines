@@ -4,7 +4,14 @@ namespace Classes
 {
     public class Enemy : Person
     {
-        public Enemy(float maxHealth, float moveSpeed, float armor, Transform transform, Animator animator) : base(maxHealth, moveSpeed, armor, transform, animator) { }
+        public Transform Transform { get; private set; }
+        public Animator Animator { get; private set; }
+
+        public Enemy(float maxHealth, float moveSpeed, float armor, Transform transform, Animator animator) : base(
+            maxHealth, moveSpeed, armor) {
+            Transform = transform;
+            Animator = animator;
+        }
 
         protected override void Die()
         {
