@@ -1,4 +1,5 @@
-﻿using Classes;
+﻿using System;
+using Classes;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,6 +34,12 @@ namespace UserInterface
                     // Player.Instance.Armor.OnArmorChange += ChangeArmor;
                     break;
             }
+        }
+
+        private void Update()
+        {
+            Debug.Log($"human : {Player.Instance.Human.Health.HP}");
+            Debug.Log($"robot : {Player.Instance.Robot.Health.HP}");
         }
 
         private void ChangeHp()

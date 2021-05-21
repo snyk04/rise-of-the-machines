@@ -24,11 +24,5 @@ namespace PlayerScripts
             player.Human.UnityHumanData.Initialize(human, humanAnimator, humanCharacterController, humanGunTransform);
             player.Robot.UnityRobotData.Initialize(robot, robotAnimator, robotCharacterController, robotGunTransform);
         }
-
-        private void Update() {
-            Debug.Log(Player.Instance.Human.UnityHumanData.Transform);   
-            Debug.Log(Player.Instance.Robot.UnityRobotData.Transform);   
-            Debug.Log(Player.Instance.UnityPlayerData.Transform);   
-        }
     }
 }

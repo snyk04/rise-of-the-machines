@@ -1,6 +1,9 @@
-﻿using InputHandling;
+﻿using System;
+using Classes;
+using InputHandling;
 using Objects;
 using UnityEngine;
+using UserInterface;
 
 namespace PlayerScripts
 {
@@ -9,15 +12,24 @@ namespace PlayerScripts
         #region Properties
 
         public static PlayerShooting Instance;
-        
-        [SerializeField] private GunController leftHandWeapon;
-        [SerializeField] private GunController rightHandWeapon;
-        [SerializeField] private SmartGunController leftShoulderWeapon;
-        [SerializeField] private SmartGunController rightShoulderWeapon;
 
-        public GunController LeftHandWeapon => leftHandWeapon;
-        public GunController RightHandWeapon => rightHandWeapon;
+        [SerializeField] private GunController humanLeftHandGun;
+        [SerializeField] private GunController humanRightHandGun;
+        [SerializeField] private SmartGunController humanLeftShoulderGun;
+        [SerializeField] private SmartGunController humanRightShoulderGun;
         
+        [Space]
+        
+        [SerializeField] private GunController robotLeftHandGun;
+        [SerializeField] private GunController robotRightHandGun;
+        [SerializeField] private SmartGunController robotLeftShoulderGun;
+        [SerializeField] private SmartGunController robotRightShoulderGun;
+        
+        public GunController LeftHandGun { get; private set; }
+        public GunController RightHandGun { get; private set; }
+        public SmartGunController LeftShoulderGun { get; private set; }
+        public SmartGunController RightShoulderGun { get; private set; }
+
         private bool IsLeftGunShooting { get; set; }
         private bool IsRightGunShooting { get; set; }
 
@@ -42,32 +54,33 @@ namespace PlayerScripts
         private void Start()
         {
             input = InputCombat.Instance;
+            
+            ChangeShooter();
 
             input.combatActions.Reload.performed += context => Reload();
             input.combatActions.StartShootingLeft.performed += context => StartShootingLeft();
             input.combatActions.StopShootingLeft.performed += context => StopShootingLeft();
             input.combatActions.StartShootingRight.performed += context => StartShootingRight();
             input.combatActions.StopShootingRight.performed += context => StopShootingRight();
-            input.combatActions.ShootLeftShoulder.performed += context => leftShoulderWeapon.ShootABurst();
-            input.combatActions.ShootRightShoulder.performed += context => rightShoulderWeapon.ShootABurst();
-            
-            leftHandWeapon.Weapon.OnShot += () => { OnShot?.Invoke(); };
-            rightHandWeapon.Weapon.OnShot += () => { OnShot?.Invoke(); };
+            input.combatActions.ShootLeftShoulder.performed += context => LeftShoulderGun.ShootABurst();
+            input.combatActions.ShootRightShoulder.performed += context => RightShoulderGun.ShootABurst();
+
+            Player.Instance.stateChangedEvent += ChangeShooter;
         }
         private void Update()
         {
             if (IsLeftGunShooting)
             {
-                leftHandWeapon.TryShoot();
-                if (!leftHandWeapon.Weapon.WeaponData.isAutomatic)
+                LeftHandGun.TryShoot();
+                if (!LeftHandGun.Weapon.WeaponData.isAutomatic)
                 {
                     StopShootingLeft();
                 }
             }
             if (IsRightGunShooting)
             {
-                rightHandWeapon.TryShoot();
-                if (!rightHandWeapon.Weapon.WeaponData.isAutomatic)
+                RightHandGun.TryShoot();
+                if (!RightHandGun.Weapon.WeaponData.isAutomatic)
                 {
                     StopShootingRight();
                 }
@@ -81,8 +94,8 @@ namespace PlayerScripts
 
         private void Reload()
         {
-            leftHandWeapon.Reload();
-            rightHandWeapon.Reload();
+            LeftHandGun.Reload();
+            RightHandGun.Reload();
         }
 
         private void StartShootingLeft()
@@ -100,6 +113,45 @@ namespace PlayerScripts
         private void StopShootingRight()
         {
             IsRightGunShooting = false;
+        }
+
+        private void ChangeShooter()
+        {
+            switch (Player.Instance.CurrentState)
+            {
+                case Player.State.Human:
+                    LeftHandGun = humanLeftHandGun;
+                    RightHandGun = humanRightHandGun;
+                    LeftShoulderGun = humanLeftShoulderGun;
+                    RightShoulderGun = humanRightShoulderGun;
+                    break;
+                case Player.State.Robot:
+                    LeftHandGun = robotLeftHandGun;
+                    RightHandGun = robotRightHandGun;
+                    LeftShoulderGun = robotLeftShoulderGun;
+                    RightShoulderGun = robotRightShoulderGun;                    
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
+            AmmoCounter.Instance.SubscribeToGuns();
+
+            if (LeftHandGun)
+            {
+                LeftHandGun.Weapon.OnShot -= InvokeShoot;
+                LeftHandGun.Weapon.OnShot += InvokeShoot;
+            }
+            if (RightHandGun)
+            {
+                RightHandGun.Weapon.OnShot -= InvokeShoot;
+                RightHandGun.Weapon.OnShot += InvokeShoot;
+            }
+        }
+
+        private void InvokeShoot()
+        {
+            OnShot?.Invoke();
         }
 
         #endregion

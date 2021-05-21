@@ -45,6 +45,8 @@ namespace PlayerScripts
 
         #endregion
 
+        #region Behaviour methods
+        
         private void Start()
         {
             combatInput = InputCombat.Instance;
@@ -56,6 +58,10 @@ namespace PlayerScripts
             audioSource.volume = 1f;
             audioSource.spatialBlend = 1f;
         }
+
+        #endregion
+
+        #region Methods
 
         private void SetVirtualCameraTarget(Transform follow, Transform lookAt)
         {
@@ -75,14 +81,17 @@ namespace PlayerScripts
             string[] textQuery = { "Одеваемся.", "Одеваемся..", "Одеваемся..." };
             canvasController.StartAnimation(textQuery);
 
-            ChangePlayerState(Player.State.Robot);
             emptyRobot.SetActive(false);
-            human.SetActive(false);
-            robot.SetActive(true);
+
             SetVirtualCameraTarget(robotFollow, robotLookAt);
 
             yield return new WaitForSeconds(enterRobotSound.length);
             canvasController.StopAnimation();
+            
+            human.SetActive(false);
+            robot.SetActive(true);
+            
+            ChangePlayerState(Player.State.Robot);
 
             yield return StartCoroutine(canvasController.UnfadeScreen());
 
@@ -101,10 +110,7 @@ namespace PlayerScripts
             string[] textQuery = { "Раздеваемся.", "Раздеваемся..", "Раздеваемся..." };
             canvasController.StartAnimation(textQuery);
 
-            ChangePlayerState(Player.State.Human);
             emptyRobot.SetActive(true);
-            human.SetActive(true);
-            robot.SetActive(false);
             emptyRobot.transform.position = robot.transform.position;
             emptyRobot.transform.eulerAngles = robot.transform.eulerAngles;
             human.transform.position = robot.transform.position + robot.transform.forward * humanSpawnDistance;
@@ -112,6 +118,10 @@ namespace PlayerScripts
 
             yield return new WaitForSeconds(exitRobotSound.length);
             canvasController.StopAnimation();
+            
+            human.SetActive(true);
+            robot.SetActive(false);
+            ChangePlayerState(Player.State.Human);
 
             yield return StartCoroutine(canvasController.UnfadeScreen());
 
@@ -172,5 +182,7 @@ namespace PlayerScripts
             interactionInput.DisableControls();
             movementInput.DisableControls();
         }
+
+        #endregion
     }
 }

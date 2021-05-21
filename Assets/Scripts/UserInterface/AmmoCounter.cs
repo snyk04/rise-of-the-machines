@@ -1,4 +1,5 @@
-﻿using Objects;
+﻿using System;
+using Objects;
 using PlayerScripts;
 using TMPro;
 using UnityEngine;
@@ -7,6 +8,8 @@ namespace UserInterface
 {
     public class AmmoCounter : MonoBehaviour
     {
+        public static AmmoCounter Instance;
+        
         [SerializeField] private TextMeshProUGUI leftGunText;
         [SerializeField] private TextMeshProUGUI rightGunText;
         [SerializeField] private PlayerShooting playerShooting;
@@ -16,23 +19,43 @@ namespace UserInterface
 
         private void Awake()
         {
-            leftGun = playerShooting.LeftHandWeapon;
-            rightGun = playerShooting.RightHandWeapon;
+            Instance = this;
         }
-        private void Start()
+
+        public void SubscribeToGuns()
         {
-            var leftWeapon = leftGun.Weapon;
-            var rightWeapon = rightGun.Weapon;
-            var leftWeaponData = leftWeapon.WeaponData;
-            var rightWeaponData = rightWeapon.WeaponData;
-
-            leftWeapon.OnShot += UpdateAmmoLeft;
-            rightWeapon.OnShot += UpdateAmmoRight;
-            leftWeapon.OnReloadEnd += UpdateAmmoLeft;
-            rightWeapon.OnReloadEnd += UpdateAmmoRight;
-
-            UpdateAmmoLeft();
-            UpdateAmmoRight();
+            leftGun = playerShooting.LeftHandGun;
+            rightGun = playerShooting.RightHandGun;
+            
+            if (leftGun)
+            {
+                var leftWeapon = leftGun.Weapon;
+                leftWeapon.OnShot -= UpdateAmmoLeft;
+                leftWeapon.OnReloadEnd -= UpdateAmmoLeft;
+                leftWeapon.OnShot += UpdateAmmoLeft;
+                leftWeapon.OnReloadEnd += UpdateAmmoLeft;
+                
+                UpdateAmmoLeft();
+            }
+            else
+            {
+                leftGunText.text = "";
+            }
+            
+            if (rightGun)
+            {
+                var rightWeapon = rightGun.Weapon;
+                rightWeapon.OnShot -= UpdateAmmoRight;
+                rightWeapon.OnReloadEnd -= UpdateAmmoRight;
+                rightWeapon.OnShot += UpdateAmmoRight;
+                rightWeapon.OnReloadEnd += UpdateAmmoRight;
+                
+                UpdateAmmoRight();
+            }
+            else
+            {
+                rightGunText.text = "";
+            }
         }
 
         private void UpdateAmmoLeft()
