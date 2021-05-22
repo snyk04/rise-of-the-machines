@@ -1,20 +1,22 @@
 ﻿using UnityEngine;
 
-public class DragAndDrop : MonoBehaviour
-{
-    public enum Section
+namespace Packages.SimpleDragAndDrop.Scripts {
+    public class DragAndDrop : MonoBehaviour
     {
-        Armor,
-        Weapons
-    }
+        public enum Section
+        {
+            Armor,
+            Weapons
+        }
 
-    public enum Slot
-    {
-        Everything,
-        Head,
-        Body,
-        Legs,
-        HandWeapon,
-        ShoulderWeapon
+        public enum Slot
+        {
+            Everything,
+            Head,
+            Body,
+            Legs,
+            HandWeapon,
+            ShoulderWeapon
+        }
     }
 }
