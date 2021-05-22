@@ -6,7 +6,7 @@ using Project.Classes.Slots;
 using Project.Classes.Utils;
 using UnityEngine;
 
-namespace Project.Classes.CanBePickedUp.Equipment
+namespace Project.Classes.ItemsAndInventory.Equipment
 {
     using Type = Characteristic.Type;
 

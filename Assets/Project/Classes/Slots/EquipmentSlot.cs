@@ -1,4 +1,4 @@
-﻿using Project.Classes.CanBePickedUp.Equipment;
+﻿using Project.Classes.ItemsAndInventory.Equipment;
 
 namespace Project.Classes.Slots {
     public abstract class EquipmentSlot {

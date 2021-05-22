@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Project.Interfaces;
 
-namespace Project.Classes.CanBePickedUp
+namespace Project.Classes.ItemsAndInventory
 {
     public class Inventory
     {

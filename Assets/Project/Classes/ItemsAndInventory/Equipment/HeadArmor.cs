@@ -3,7 +3,7 @@ using Project.Classes.Characteristics;
 using Project.Classes.ScriptableObjects;
 using Project.Classes.Slots;
 
-namespace Project.Classes.CanBePickedUp.Equipment {
+namespace Project.Classes.ItemsAndInventory.Equipment {
     using Type = Characteristic.Type;
 
     public class HeadArmor : Equipment {

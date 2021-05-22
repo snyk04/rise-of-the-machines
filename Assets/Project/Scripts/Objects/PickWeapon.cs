@@ -1,4 +1,4 @@
-﻿using Project.Classes.CanBePickedUp.Equipment;
+﻿using Project.Classes.ItemsAndInventory.Equipment;
 using Project.Classes.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.InputSystem;

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Project.Classes.CanBePickedUp.Equipment;
+using Project.Classes.ItemsAndInventory.Equipment;
 using Project.Classes.Slots;
 using UnityEngine;
 using Type = Project.Classes.Slots.EquipmentSlot.Type;

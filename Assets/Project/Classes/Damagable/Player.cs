@@ -1,5 +1,5 @@
-﻿using Project.Classes.CanBePickedUp;
-using Project.Classes.Characteristics;
+﻿using Project.Classes.Characteristics;
+using Project.Classes.ItemsAndInventory;
 using UnityEngine;
 
 namespace Project.Classes.Damagable {

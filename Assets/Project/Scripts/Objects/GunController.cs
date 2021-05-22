@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Project.Classes.CanBePickedUp.Equipment;
+using Project.Classes.ItemsAndInventory.Equipment;
 using Project.Classes.ScriptableObjects;
 using Project.Scripts.CharactersAndObjects;
 using UnityEngine;
