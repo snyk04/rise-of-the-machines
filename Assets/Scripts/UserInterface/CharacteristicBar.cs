@@ -35,12 +35,7 @@ namespace UserInterface
                     break;
             }
         }
-
-        private void Update()
-        {
-            Debug.Log($"human : {Player.Instance.Human.Health.HP}");
-            Debug.Log($"robot : {Player.Instance.Robot.Health.HP}");
-        }
+        
 
         private void ChangeHp()
         {
