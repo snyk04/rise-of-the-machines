@@ -62,8 +62,8 @@ namespace Project.Scripts.PlayerScripts
             input.combatActions.StopShootingLeft.performed += context => StopShootingLeft();
             input.combatActions.StartShootingRight.performed += context => StartShootingRight();
             input.combatActions.StopShootingRight.performed += context => StopShootingRight();
-            input.combatActions.ShootLeftShoulder.performed += context => LeftShoulderGun.ShootABurst();
-            input.combatActions.ShootRightShoulder.performed += context => RightShoulderGun.ShootABurst();
+            input.combatActions.ShootLeftShoulder.performed += context => LeftShoulderGun?.ShootABurst();
+            input.combatActions.ShootRightShoulder.performed += context => RightShoulderGun?.ShootABurst();
 
             Player.Instance.stateChangedEvent += ChangeShooter;
         }
@@ -94,12 +94,16 @@ namespace Project.Scripts.PlayerScripts
 
         private void Reload()
         {
-            LeftHandGun.Reload();
-            RightHandGun.Reload();
+            LeftHandGun?.Reload();
+            RightHandGun?.Reload();
         }
 
         private void StartShootingLeft()
         {
+            if (!LeftHandGun)
+            {
+                return;
+            }
             IsLeftGunShooting = true;
         }
         private void StopShootingLeft()
@@ -108,6 +112,10 @@ namespace Project.Scripts.PlayerScripts
         }
         private void StartShootingRight()
         {
+            if (!RightHandGun)
+            {
+                return;
+            }
             IsRightGunShooting = true;
         }
         private void StopShootingRight()

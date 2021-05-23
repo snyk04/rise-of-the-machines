@@ -16,7 +16,6 @@ namespace Project.Scripts.PlayerScripts
 
         public static PlayerController Instance { get; private set; }
         
-
         private void Start()
         {
             Instance = this;

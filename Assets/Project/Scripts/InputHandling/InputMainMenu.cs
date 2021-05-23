@@ -1,5 +1,4 @@
-﻿using Inputs;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Project.Scripts.InputHandling
 {
@@ -12,8 +11,6 @@ namespace Project.Scripts.InputHandling
         {
             mainMenuActions = Input.Controls.MainMenu;
             Instance = this;
-
-            SetControls();
         }
         private void OnEnable()
         {
@@ -31,9 +28,6 @@ namespace Project.Scripts.InputHandling
         public void DisableControls()
         {
             mainMenuActions.Disable();
-        }
-        private void SetControls()
-        {
         }
     }
 }

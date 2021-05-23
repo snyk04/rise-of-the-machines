@@ -6,13 +6,12 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace Inputs {
-    public class @Controls : IInputActionCollection, IDisposable
+public class @Controls : IInputActionCollection, IDisposable
+{
+    public InputActionAsset asset { get; }
+    public @Controls()
     {
-        public InputActionAsset asset { get; }
-        public @Controls()
-        {
-            asset = InputActionAsset.FromJson(@"{
+        asset = InputActionAsset.FromJson(@"{
     ""name"": ""Controls"",
     ""maps"": [
         {
@@ -343,6 +342,33 @@ namespace Inputs {
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UserInterface"",
+            ""id"": ""2c61272b-73cb-4203-b716-0fb279a71752"",
+            ""actions"": [
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""40c36e62-07bf-4303-ae6c-19fdf8142e47"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""43b310a2-09dc-4915-a2e4-6f1cfc1be103"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -375,298 +401,337 @@ namespace Inputs {
         }
     ]
 }");
-            // Combat
-            m_Combat = asset.FindActionMap("Combat", throwIfNotFound: true);
-            m_Combat_Reload = m_Combat.FindAction("Reload", throwIfNotFound: true);
-            m_Combat_StartShootingLeft = m_Combat.FindAction("StartShootingLeft", throwIfNotFound: true);
-            m_Combat_StopShootingLeft = m_Combat.FindAction("StopShootingLeft", throwIfNotFound: true);
-            m_Combat_StartShootingRight = m_Combat.FindAction("StartShootingRight", throwIfNotFound: true);
-            m_Combat_StopShootingRight = m_Combat.FindAction("StopShootingRight", throwIfNotFound: true);
-            m_Combat_ShootLeftShoulder = m_Combat.FindAction("ShootLeftShoulder", throwIfNotFound: true);
-            m_Combat_ShootRightShoulder = m_Combat.FindAction("ShootRightShoulder", throwIfNotFound: true);
-            // Interaction
-            m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
-            m_Interaction_ChangeState = m_Interaction.FindAction("ChangeState", throwIfNotFound: true);
-            // Movement
-            m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
-            m_Movement_Movement = m_Movement.FindAction("Movement", throwIfNotFound: true);
-            m_Movement_Rotate = m_Movement.FindAction("Rotate", throwIfNotFound: true);
-            // MainMenu
-            m_MainMenu = asset.FindActionMap("MainMenu", throwIfNotFound: true);
-            m_MainMenu_Clicked = m_MainMenu.FindAction("Clicked", throwIfNotFound: true);
-        }
-
-        public void Dispose()
-        {
-            UnityEngine.Object.Destroy(asset);
-        }
-
-        public InputBinding? bindingMask
-        {
-            get => asset.bindingMask;
-            set => asset.bindingMask = value;
-        }
-
-        public ReadOnlyArray<InputDevice>? devices
-        {
-            get => asset.devices;
-            set => asset.devices = value;
-        }
-
-        public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
-
-        public bool Contains(InputAction action)
-        {
-            return asset.Contains(action);
-        }
-
-        public IEnumerator<InputAction> GetEnumerator()
-        {
-            return asset.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
-        public void Enable()
-        {
-            asset.Enable();
-        }
-
-        public void Disable()
-        {
-            asset.Disable();
-        }
-
         // Combat
-        private readonly InputActionMap m_Combat;
-        private ICombatActions m_CombatActionsCallbackInterface;
-        private readonly InputAction m_Combat_Reload;
-        private readonly InputAction m_Combat_StartShootingLeft;
-        private readonly InputAction m_Combat_StopShootingLeft;
-        private readonly InputAction m_Combat_StartShootingRight;
-        private readonly InputAction m_Combat_StopShootingRight;
-        private readonly InputAction m_Combat_ShootLeftShoulder;
-        private readonly InputAction m_Combat_ShootRightShoulder;
-        public struct CombatActions
-        {
-            private @Controls m_Wrapper;
-            public CombatActions(@Controls wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Reload => m_Wrapper.m_Combat_Reload;
-            public InputAction @StartShootingLeft => m_Wrapper.m_Combat_StartShootingLeft;
-            public InputAction @StopShootingLeft => m_Wrapper.m_Combat_StopShootingLeft;
-            public InputAction @StartShootingRight => m_Wrapper.m_Combat_StartShootingRight;
-            public InputAction @StopShootingRight => m_Wrapper.m_Combat_StopShootingRight;
-            public InputAction @ShootLeftShoulder => m_Wrapper.m_Combat_ShootLeftShoulder;
-            public InputAction @ShootRightShoulder => m_Wrapper.m_Combat_ShootRightShoulder;
-            public InputActionMap Get() { return m_Wrapper.m_Combat; }
-            public void Enable() { Get().Enable(); }
-            public void Disable() { Get().Disable(); }
-            public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(CombatActions set) { return set.Get(); }
-            public void SetCallbacks(ICombatActions instance)
-            {
-                if (m_Wrapper.m_CombatActionsCallbackInterface != null)
-                {
-                    @Reload.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnReload;
-                    @Reload.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnReload;
-                    @Reload.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnReload;
-                    @StartShootingLeft.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShootingLeft;
-                    @StartShootingLeft.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShootingLeft;
-                    @StartShootingLeft.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShootingLeft;
-                    @StopShootingLeft.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShootingLeft;
-                    @StopShootingLeft.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShootingLeft;
-                    @StopShootingLeft.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShootingLeft;
-                    @StartShootingRight.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShootingRight;
-                    @StartShootingRight.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShootingRight;
-                    @StartShootingRight.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShootingRight;
-                    @StopShootingRight.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShootingRight;
-                    @StopShootingRight.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShootingRight;
-                    @StopShootingRight.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShootingRight;
-                    @ShootLeftShoulder.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnShootLeftShoulder;
-                    @ShootLeftShoulder.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnShootLeftShoulder;
-                    @ShootLeftShoulder.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnShootLeftShoulder;
-                    @ShootRightShoulder.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnShootRightShoulder;
-                    @ShootRightShoulder.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnShootRightShoulder;
-                    @ShootRightShoulder.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnShootRightShoulder;
-                }
-                m_Wrapper.m_CombatActionsCallbackInterface = instance;
-                if (instance != null)
-                {
-                    @Reload.started += instance.OnReload;
-                    @Reload.performed += instance.OnReload;
-                    @Reload.canceled += instance.OnReload;
-                    @StartShootingLeft.started += instance.OnStartShootingLeft;
-                    @StartShootingLeft.performed += instance.OnStartShootingLeft;
-                    @StartShootingLeft.canceled += instance.OnStartShootingLeft;
-                    @StopShootingLeft.started += instance.OnStopShootingLeft;
-                    @StopShootingLeft.performed += instance.OnStopShootingLeft;
-                    @StopShootingLeft.canceled += instance.OnStopShootingLeft;
-                    @StartShootingRight.started += instance.OnStartShootingRight;
-                    @StartShootingRight.performed += instance.OnStartShootingRight;
-                    @StartShootingRight.canceled += instance.OnStartShootingRight;
-                    @StopShootingRight.started += instance.OnStopShootingRight;
-                    @StopShootingRight.performed += instance.OnStopShootingRight;
-                    @StopShootingRight.canceled += instance.OnStopShootingRight;
-                    @ShootLeftShoulder.started += instance.OnShootLeftShoulder;
-                    @ShootLeftShoulder.performed += instance.OnShootLeftShoulder;
-                    @ShootLeftShoulder.canceled += instance.OnShootLeftShoulder;
-                    @ShootRightShoulder.started += instance.OnShootRightShoulder;
-                    @ShootRightShoulder.performed += instance.OnShootRightShoulder;
-                    @ShootRightShoulder.canceled += instance.OnShootRightShoulder;
-                }
-            }
-        }
-        public CombatActions @Combat => new CombatActions(this);
-
+        m_Combat = asset.FindActionMap("Combat", throwIfNotFound: true);
+        m_Combat_Reload = m_Combat.FindAction("Reload", throwIfNotFound: true);
+        m_Combat_StartShootingLeft = m_Combat.FindAction("StartShootingLeft", throwIfNotFound: true);
+        m_Combat_StopShootingLeft = m_Combat.FindAction("StopShootingLeft", throwIfNotFound: true);
+        m_Combat_StartShootingRight = m_Combat.FindAction("StartShootingRight", throwIfNotFound: true);
+        m_Combat_StopShootingRight = m_Combat.FindAction("StopShootingRight", throwIfNotFound: true);
+        m_Combat_ShootLeftShoulder = m_Combat.FindAction("ShootLeftShoulder", throwIfNotFound: true);
+        m_Combat_ShootRightShoulder = m_Combat.FindAction("ShootRightShoulder", throwIfNotFound: true);
         // Interaction
-        private readonly InputActionMap m_Interaction;
-        private IInteractionActions m_InteractionActionsCallbackInterface;
-        private readonly InputAction m_Interaction_ChangeState;
-        public struct InteractionActions
-        {
-            private @Controls m_Wrapper;
-            public InteractionActions(@Controls wrapper) { m_Wrapper = wrapper; }
-            public InputAction @ChangeState => m_Wrapper.m_Interaction_ChangeState;
-            public InputActionMap Get() { return m_Wrapper.m_Interaction; }
-            public void Enable() { Get().Enable(); }
-            public void Disable() { Get().Disable(); }
-            public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(InteractionActions set) { return set.Get(); }
-            public void SetCallbacks(IInteractionActions instance)
-            {
-                if (m_Wrapper.m_InteractionActionsCallbackInterface != null)
-                {
-                    @ChangeState.started -= m_Wrapper.m_InteractionActionsCallbackInterface.OnChangeState;
-                    @ChangeState.performed -= m_Wrapper.m_InteractionActionsCallbackInterface.OnChangeState;
-                    @ChangeState.canceled -= m_Wrapper.m_InteractionActionsCallbackInterface.OnChangeState;
-                }
-                m_Wrapper.m_InteractionActionsCallbackInterface = instance;
-                if (instance != null)
-                {
-                    @ChangeState.started += instance.OnChangeState;
-                    @ChangeState.performed += instance.OnChangeState;
-                    @ChangeState.canceled += instance.OnChangeState;
-                }
-            }
-        }
-        public InteractionActions @Interaction => new InteractionActions(this);
-
+        m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
+        m_Interaction_ChangeState = m_Interaction.FindAction("ChangeState", throwIfNotFound: true);
         // Movement
-        private readonly InputActionMap m_Movement;
-        private IMovementActions m_MovementActionsCallbackInterface;
-        private readonly InputAction m_Movement_Movement;
-        private readonly InputAction m_Movement_Rotate;
-        public struct MovementActions
-        {
-            private @Controls m_Wrapper;
-            public MovementActions(@Controls wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Movement => m_Wrapper.m_Movement_Movement;
-            public InputAction @Rotate => m_Wrapper.m_Movement_Rotate;
-            public InputActionMap Get() { return m_Wrapper.m_Movement; }
-            public void Enable() { Get().Enable(); }
-            public void Disable() { Get().Disable(); }
-            public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(MovementActions set) { return set.Get(); }
-            public void SetCallbacks(IMovementActions instance)
-            {
-                if (m_Wrapper.m_MovementActionsCallbackInterface != null)
-                {
-                    @Movement.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnMovement;
-                    @Movement.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnMovement;
-                    @Movement.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnMovement;
-                    @Rotate.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
-                    @Rotate.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
-                    @Rotate.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
-                }
-                m_Wrapper.m_MovementActionsCallbackInterface = instance;
-                if (instance != null)
-                {
-                    @Movement.started += instance.OnMovement;
-                    @Movement.performed += instance.OnMovement;
-                    @Movement.canceled += instance.OnMovement;
-                    @Rotate.started += instance.OnRotate;
-                    @Rotate.performed += instance.OnRotate;
-                    @Rotate.canceled += instance.OnRotate;
-                }
-            }
-        }
-        public MovementActions @Movement => new MovementActions(this);
-
+        m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
+        m_Movement_Movement = m_Movement.FindAction("Movement", throwIfNotFound: true);
+        m_Movement_Rotate = m_Movement.FindAction("Rotate", throwIfNotFound: true);
         // MainMenu
-        private readonly InputActionMap m_MainMenu;
-        private IMainMenuActions m_MainMenuActionsCallbackInterface;
-        private readonly InputAction m_MainMenu_Clicked;
-        public struct MainMenuActions
+        m_MainMenu = asset.FindActionMap("MainMenu", throwIfNotFound: true);
+        m_MainMenu_Clicked = m_MainMenu.FindAction("Clicked", throwIfNotFound: true);
+        // UserInterface
+        m_UserInterface = asset.FindActionMap("UserInterface", throwIfNotFound: true);
+        m_UserInterface_Inventory = m_UserInterface.FindAction("Inventory", throwIfNotFound: true);
+    }
+
+    public void Dispose()
+    {
+        UnityEngine.Object.Destroy(asset);
+    }
+
+    public InputBinding? bindingMask
+    {
+        get => asset.bindingMask;
+        set => asset.bindingMask = value;
+    }
+
+    public ReadOnlyArray<InputDevice>? devices
+    {
+        get => asset.devices;
+        set => asset.devices = value;
+    }
+
+    public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
+
+    public bool Contains(InputAction action)
+    {
+        return asset.Contains(action);
+    }
+
+    public IEnumerator<InputAction> GetEnumerator()
+    {
+        return asset.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
+
+    public void Enable()
+    {
+        asset.Enable();
+    }
+
+    public void Disable()
+    {
+        asset.Disable();
+    }
+
+    // Combat
+    private readonly InputActionMap m_Combat;
+    private ICombatActions m_CombatActionsCallbackInterface;
+    private readonly InputAction m_Combat_Reload;
+    private readonly InputAction m_Combat_StartShootingLeft;
+    private readonly InputAction m_Combat_StopShootingLeft;
+    private readonly InputAction m_Combat_StartShootingRight;
+    private readonly InputAction m_Combat_StopShootingRight;
+    private readonly InputAction m_Combat_ShootLeftShoulder;
+    private readonly InputAction m_Combat_ShootRightShoulder;
+    public struct CombatActions
+    {
+        private @Controls m_Wrapper;
+        public CombatActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Reload => m_Wrapper.m_Combat_Reload;
+        public InputAction @StartShootingLeft => m_Wrapper.m_Combat_StartShootingLeft;
+        public InputAction @StopShootingLeft => m_Wrapper.m_Combat_StopShootingLeft;
+        public InputAction @StartShootingRight => m_Wrapper.m_Combat_StartShootingRight;
+        public InputAction @StopShootingRight => m_Wrapper.m_Combat_StopShootingRight;
+        public InputAction @ShootLeftShoulder => m_Wrapper.m_Combat_ShootLeftShoulder;
+        public InputAction @ShootRightShoulder => m_Wrapper.m_Combat_ShootRightShoulder;
+        public InputActionMap Get() { return m_Wrapper.m_Combat; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CombatActions set) { return set.Get(); }
+        public void SetCallbacks(ICombatActions instance)
         {
-            private @Controls m_Wrapper;
-            public MainMenuActions(@Controls wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Clicked => m_Wrapper.m_MainMenu_Clicked;
-            public InputActionMap Get() { return m_Wrapper.m_MainMenu; }
-            public void Enable() { Get().Enable(); }
-            public void Disable() { Get().Disable(); }
-            public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(MainMenuActions set) { return set.Get(); }
-            public void SetCallbacks(IMainMenuActions instance)
+            if (m_Wrapper.m_CombatActionsCallbackInterface != null)
             {
-                if (m_Wrapper.m_MainMenuActionsCallbackInterface != null)
-                {
-                    @Clicked.started -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnClicked;
-                    @Clicked.performed -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnClicked;
-                    @Clicked.canceled -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnClicked;
-                }
-                m_Wrapper.m_MainMenuActionsCallbackInterface = instance;
-                if (instance != null)
-                {
-                    @Clicked.started += instance.OnClicked;
-                    @Clicked.performed += instance.OnClicked;
-                    @Clicked.canceled += instance.OnClicked;
-                }
+                @Reload.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnReload;
+                @StartShootingLeft.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShootingLeft;
+                @StartShootingLeft.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShootingLeft;
+                @StartShootingLeft.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShootingLeft;
+                @StopShootingLeft.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShootingLeft;
+                @StopShootingLeft.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShootingLeft;
+                @StopShootingLeft.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShootingLeft;
+                @StartShootingRight.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShootingRight;
+                @StartShootingRight.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShootingRight;
+                @StartShootingRight.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnStartShootingRight;
+                @StopShootingRight.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShootingRight;
+                @StopShootingRight.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShootingRight;
+                @StopShootingRight.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnStopShootingRight;
+                @ShootLeftShoulder.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnShootLeftShoulder;
+                @ShootLeftShoulder.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnShootLeftShoulder;
+                @ShootLeftShoulder.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnShootLeftShoulder;
+                @ShootRightShoulder.started -= m_Wrapper.m_CombatActionsCallbackInterface.OnShootRightShoulder;
+                @ShootRightShoulder.performed -= m_Wrapper.m_CombatActionsCallbackInterface.OnShootRightShoulder;
+                @ShootRightShoulder.canceled -= m_Wrapper.m_CombatActionsCallbackInterface.OnShootRightShoulder;
+            }
+            m_Wrapper.m_CombatActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
+                @StartShootingLeft.started += instance.OnStartShootingLeft;
+                @StartShootingLeft.performed += instance.OnStartShootingLeft;
+                @StartShootingLeft.canceled += instance.OnStartShootingLeft;
+                @StopShootingLeft.started += instance.OnStopShootingLeft;
+                @StopShootingLeft.performed += instance.OnStopShootingLeft;
+                @StopShootingLeft.canceled += instance.OnStopShootingLeft;
+                @StartShootingRight.started += instance.OnStartShootingRight;
+                @StartShootingRight.performed += instance.OnStartShootingRight;
+                @StartShootingRight.canceled += instance.OnStartShootingRight;
+                @StopShootingRight.started += instance.OnStopShootingRight;
+                @StopShootingRight.performed += instance.OnStopShootingRight;
+                @StopShootingRight.canceled += instance.OnStopShootingRight;
+                @ShootLeftShoulder.started += instance.OnShootLeftShoulder;
+                @ShootLeftShoulder.performed += instance.OnShootLeftShoulder;
+                @ShootLeftShoulder.canceled += instance.OnShootLeftShoulder;
+                @ShootRightShoulder.started += instance.OnShootRightShoulder;
+                @ShootRightShoulder.performed += instance.OnShootRightShoulder;
+                @ShootRightShoulder.canceled += instance.OnShootRightShoulder;
             }
         }
-        public MainMenuActions @MainMenu => new MainMenuActions(this);
-        private int m_KeyboardMouseSchemeIndex = -1;
-        public InputControlScheme KeyboardMouseScheme
+    }
+    public CombatActions @Combat => new CombatActions(this);
+
+    // Interaction
+    private readonly InputActionMap m_Interaction;
+    private IInteractionActions m_InteractionActionsCallbackInterface;
+    private readonly InputAction m_Interaction_ChangeState;
+    public struct InteractionActions
+    {
+        private @Controls m_Wrapper;
+        public InteractionActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ChangeState => m_Wrapper.m_Interaction_ChangeState;
+        public InputActionMap Get() { return m_Wrapper.m_Interaction; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InteractionActions set) { return set.Get(); }
+        public void SetCallbacks(IInteractionActions instance)
         {
-            get
+            if (m_Wrapper.m_InteractionActionsCallbackInterface != null)
             {
-                if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard + Mouse");
-                return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
+                @ChangeState.started -= m_Wrapper.m_InteractionActionsCallbackInterface.OnChangeState;
+                @ChangeState.performed -= m_Wrapper.m_InteractionActionsCallbackInterface.OnChangeState;
+                @ChangeState.canceled -= m_Wrapper.m_InteractionActionsCallbackInterface.OnChangeState;
+            }
+            m_Wrapper.m_InteractionActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @ChangeState.started += instance.OnChangeState;
+                @ChangeState.performed += instance.OnChangeState;
+                @ChangeState.canceled += instance.OnChangeState;
             }
         }
-        private int m_GamepadSchemeIndex = -1;
-        public InputControlScheme GamepadScheme
+    }
+    public InteractionActions @Interaction => new InteractionActions(this);
+
+    // Movement
+    private readonly InputActionMap m_Movement;
+    private IMovementActions m_MovementActionsCallbackInterface;
+    private readonly InputAction m_Movement_Movement;
+    private readonly InputAction m_Movement_Rotate;
+    public struct MovementActions
+    {
+        private @Controls m_Wrapper;
+        public MovementActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_Movement_Movement;
+        public InputAction @Rotate => m_Wrapper.m_Movement_Rotate;
+        public InputActionMap Get() { return m_Wrapper.m_Movement; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MovementActions set) { return set.Get(); }
+        public void SetCallbacks(IMovementActions instance)
         {
-            get
+            if (m_Wrapper.m_MovementActionsCallbackInterface != null)
             {
-                if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
-                return asset.controlSchemes[m_GamepadSchemeIndex];
+                @Movement.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnMovement;
+                @Movement.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnMovement;
+                @Movement.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnMovement;
+                @Rotate.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
+                @Rotate.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
+                @Rotate.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
+            }
+            m_Wrapper.m_MovementActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Movement.started += instance.OnMovement;
+                @Movement.performed += instance.OnMovement;
+                @Movement.canceled += instance.OnMovement;
+                @Rotate.started += instance.OnRotate;
+                @Rotate.performed += instance.OnRotate;
+                @Rotate.canceled += instance.OnRotate;
             }
         }
-        public interface ICombatActions
+    }
+    public MovementActions @Movement => new MovementActions(this);
+
+    // MainMenu
+    private readonly InputActionMap m_MainMenu;
+    private IMainMenuActions m_MainMenuActionsCallbackInterface;
+    private readonly InputAction m_MainMenu_Clicked;
+    public struct MainMenuActions
+    {
+        private @Controls m_Wrapper;
+        public MainMenuActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Clicked => m_Wrapper.m_MainMenu_Clicked;
+        public InputActionMap Get() { return m_Wrapper.m_MainMenu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MainMenuActions set) { return set.Get(); }
+        public void SetCallbacks(IMainMenuActions instance)
         {
-            void OnReload(InputAction.CallbackContext context);
-            void OnStartShootingLeft(InputAction.CallbackContext context);
-            void OnStopShootingLeft(InputAction.CallbackContext context);
-            void OnStartShootingRight(InputAction.CallbackContext context);
-            void OnStopShootingRight(InputAction.CallbackContext context);
-            void OnShootLeftShoulder(InputAction.CallbackContext context);
-            void OnShootRightShoulder(InputAction.CallbackContext context);
+            if (m_Wrapper.m_MainMenuActionsCallbackInterface != null)
+            {
+                @Clicked.started -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnClicked;
+                @Clicked.performed -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnClicked;
+                @Clicked.canceled -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnClicked;
+            }
+            m_Wrapper.m_MainMenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Clicked.started += instance.OnClicked;
+                @Clicked.performed += instance.OnClicked;
+                @Clicked.canceled += instance.OnClicked;
+            }
         }
-        public interface IInteractionActions
+    }
+    public MainMenuActions @MainMenu => new MainMenuActions(this);
+
+    // UserInterface
+    private readonly InputActionMap m_UserInterface;
+    private IUserInterfaceActions m_UserInterfaceActionsCallbackInterface;
+    private readonly InputAction m_UserInterface_Inventory;
+    public struct UserInterfaceActions
+    {
+        private @Controls m_Wrapper;
+        public UserInterfaceActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Inventory => m_Wrapper.m_UserInterface_Inventory;
+        public InputActionMap Get() { return m_Wrapper.m_UserInterface; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UserInterfaceActions set) { return set.Get(); }
+        public void SetCallbacks(IUserInterfaceActions instance)
         {
-            void OnChangeState(InputAction.CallbackContext context);
+            if (m_Wrapper.m_UserInterfaceActionsCallbackInterface != null)
+            {
+                @Inventory.started -= m_Wrapper.m_UserInterfaceActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_UserInterfaceActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_UserInterfaceActionsCallbackInterface.OnInventory;
+            }
+            m_Wrapper.m_UserInterfaceActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
+            }
         }
-        public interface IMovementActions
+    }
+    public UserInterfaceActions @UserInterface => new UserInterfaceActions(this);
+    private int m_KeyboardMouseSchemeIndex = -1;
+    public InputControlScheme KeyboardMouseScheme
+    {
+        get
         {
-            void OnMovement(InputAction.CallbackContext context);
-            void OnRotate(InputAction.CallbackContext context);
+            if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard + Mouse");
+            return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
         }
-        public interface IMainMenuActions
+    }
+    private int m_GamepadSchemeIndex = -1;
+    public InputControlScheme GamepadScheme
+    {
+        get
         {
-            void OnClicked(InputAction.CallbackContext context);
+            if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+            return asset.controlSchemes[m_GamepadSchemeIndex];
         }
+    }
+    public interface ICombatActions
+    {
+        void OnReload(InputAction.CallbackContext context);
+        void OnStartShootingLeft(InputAction.CallbackContext context);
+        void OnStopShootingLeft(InputAction.CallbackContext context);
+        void OnStartShootingRight(InputAction.CallbackContext context);
+        void OnStopShootingRight(InputAction.CallbackContext context);
+        void OnShootLeftShoulder(InputAction.CallbackContext context);
+        void OnShootRightShoulder(InputAction.CallbackContext context);
+    }
+    public interface IInteractionActions
+    {
+        void OnChangeState(InputAction.CallbackContext context);
+    }
+    public interface IMovementActions
+    {
+        void OnMovement(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
+    }
+    public interface IMainMenuActions
+    {
+        void OnClicked(InputAction.CallbackContext context);
+    }
+    public interface IUserInterfaceActions
+    {
+        void OnInventory(InputAction.CallbackContext context);
     }
 }

@@ -170,6 +170,7 @@ namespace Project.Scripts.PlayerScripts
         {
             Player.Instance.CurrentState = state;
         }
+        
         private void EnableControls()
         {
             combatInput.EnableControls();

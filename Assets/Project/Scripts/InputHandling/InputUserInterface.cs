@@ -1,15 +1,17 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Project.Scripts.InputHandling
 {
-    public class InputInteraction : MonoBehaviour
+    public class InputUserInterface : MonoBehaviour
     {
-        public Controls.InteractionActions interactionActions;
-        public static InputInteraction Instance;
+        public Controls.UserInterfaceActions userInterfaceActions;
+        public static InputUserInterface Instance;
 
         private void Awake()
         {
-            interactionActions = Input.Controls.Interaction;
+            userInterfaceActions = Input.Controls.UserInterface;
             Instance = this;
         }
         private void OnEnable()
@@ -23,11 +25,11 @@ namespace Project.Scripts.InputHandling
 
         public void EnableControls()
         {
-            interactionActions.Enable();
+            userInterfaceActions.Enable();
         }
         public void DisableControls()
         {
-            interactionActions.Disable();
+            userInterfaceActions.Disable();
         }
     }
 }

@@ -5,6 +5,7 @@ namespace Project.Scripts {
     {
         public static GameState Instance;
         private int amountOfTriggeredEnemies = 0;
+        public bool IsBattle => amountOfTriggeredEnemies > 0;
 
         public delegate void ChangeStateEvent();
         public event ChangeStateEvent OnCombatStart;

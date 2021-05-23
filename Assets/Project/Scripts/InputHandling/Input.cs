@@ -1,6 +1,4 @@
-﻿using Inputs;
-
-namespace Project.Scripts.InputHandling
+﻿namespace Project.Scripts.InputHandling
 {
     public static class Input
     {

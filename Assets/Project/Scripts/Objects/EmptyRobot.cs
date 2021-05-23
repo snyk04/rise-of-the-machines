@@ -9,10 +9,12 @@ namespace Project.Scripts.Objects
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<CharacterController>(out _))
+            if (!other.TryGetComponent<CharacterController>(out _))
             {
-                playerChanger.ActivateEnterText();
+                return;
             }
+
+            playerChanger.ActivateEnterText();
         }
         private void OnTriggerExit(Collider other)
         {

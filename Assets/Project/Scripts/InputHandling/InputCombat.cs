@@ -1,5 +1,4 @@
-﻿using Inputs;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Project.Scripts.InputHandling
 {
@@ -12,8 +11,6 @@ namespace Project.Scripts.InputHandling
         {
             combatActions = Input.Controls.Combat;
             Instance = this;
-
-            SetControls();
         }
         private void OnEnable()
         {
@@ -31,9 +28,6 @@ namespace Project.Scripts.InputHandling
         public void DisableControls()
         {
             combatActions.Disable();
-        }
-        private void SetControls()
-        {
         }
     }
 }

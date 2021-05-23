@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 7496466952330130788}
   - component: {fileID: 7228771617698822595}
   - component: {fileID: 5141393436180325233}
+  - component: {fileID: 4311152375073512107}
   m_Layer: 0
   m_Name: PlayerContainer
   m_TagString: Untagged
@@ -280,10 +281,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b5450f642984840b86ada6c247db70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftHandWeapon: {fileID: 0}
-  rightHandWeapon: {fileID: 0}
-  leftShoulderWeapon: {fileID: 0}
-  rightShoulderWeapon: {fileID: 0}
+  humanLeftHandGun: {fileID: 0}
+  humanRightHandGun: {fileID: 0}
+  humanLeftShoulderGun: {fileID: 0}
+  humanRightShoulderGun: {fileID: 0}
+  robotLeftHandGun: {fileID: 0}
+  robotRightHandGun: {fileID: 0}
+  robotLeftShoulderGun: {fileID: 0}
+  robotRightShoulderGun: {fileID: 0}
 --- !u!114 &7228771617698822595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,6 +311,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb3b4ef715fb2f44c8a7d2dd08047e8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4311152375073512107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459103385778355154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c96497128ce386347bd41bae9e59901f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3971754860528872086
