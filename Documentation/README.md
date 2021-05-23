@@ -104,7 +104,245 @@ public class Target : MonoBehaviour
 
 Отже, поєднання цих можливостей надає вам зручний готовий інструмент. Ви можете досить швидко створити просту гру за допомогою функціоналу NavMesh.
 
-# 4. Організація роботи зброї
+# 2. Реалізація характеристик
+
+Характеристики мають загальний абстрактний клас ```Characteristic```:
+
+```cs
+public abstract class Characteristic {
+    public enum Type {
+        Health,
+        Speed,
+        Armor,
+        Damage
+    }
+    public float Value { get; set; }
+    protected Characteristic(float value) {
+        Value = value;
+    }
+}
+```
+
+Існує 4 типи характеристик:
+- Здоров'я.
+- Шкидкість.
+- Бронювання.
+- Шкода.
+
+## 2.1 Характеристика здоров’я
+
+Змінна величини здоров’я має вигляд:
+
+```cs
+public float HP {
+    get => Value;
+    private set {
+        if (Math.Abs(Value - value) > float.Epsilon) {
+          OnHpChange?.Invoke();
+        }
+        Value = Mathf.Clamp(value, 0, MaxHP);
+        if (Value.Equals(0)) {
+            OnHealthZero?.Invoke();
+        }
+    }
+}
+```
+	
+Клас ```HealthCharacteristic``` має 2 події:
+
+```cs
+private event HealthZero OnHealthZero;
+public event HpChange OnHpChange;
+```
+
+```OnHealthZero``` визначає подію при якій величина здоров’я стає рівною ```0```
+```OnHpChange``` визначає подію при якій величина здоров’я змінює своє значення.
+
+## 2.2 Характеристика швидкості
+
+```cs
+public class SpeedCharacteristic : Characteristic {
+    public SpeedCharacteristic(float speed) : base(speed) {}
+}
+```
+
+Характеристика швидкості використовується у сутності ```Person```.
+
+## 2.3 Характеристика бронювання
+
+```cs
+public class ArmorCharacteristic : Characteristic {
+
+    private float armorCoefficient;
+
+    public ArmorCharacteristic(float armor, float armorCoefficient = 0.05f) : base(armor) {
+        this.armorCoefficient = armorCoefficient;
+        }
+
+    public float GetResistance() {
+        return 1 / (1 + armorCoefficient * Value);
+    }
+}
+```
+
+Характеристика бронювання використовується для розрахунку кількості шкоди.
+Кількість отриманої шкоди залежить від величини опору, що в свою чергу залежить від бронювання.
+Величина опору розраховується за формулою:
+
+```cs
+public float GetResistance() {
+	return 1 / (1 + armorCoefficient * Value);
+}
+```
+, де ```armorCoefficient``` - величина, що визначає наскільки сильно величина опору залежить від величини бронювання;
+```Value``` - величина бронювання;
+Величина броні є у таких сутностей, як ```Person```, ```ArmorCharacteristic```, а також їх спадкоємців.
+
+## 2.4 Характеристика шкоди
+
+```cs
+public class DamageCharacteristic : Characteristic {
+    public DamageCharacteristic(float damage) : base(damage){}
+}
+```
+
+Кількість шкоди розраховується за формулою:
+
+```cs
+var damageAccountingArmor = damage * (1 - ((ArmorCharaceristic) Stats[Type.Armor]).GetResistance());
+```
+, де ```(ArmorCharaceristic) Stats[Type.Armor]``` – клас бронювання, від якого ми отримуємо величину опору;
+```damage``` – величина шкоди без урахування опору;
+
+# 3. Клас Item
+
+```cs
+public abstract class Item : ICanBePickedUp {
+   public virtual bool TryPick() {
+       return Player.Instance.Inventory.TryAdd(this);
+   }
+}
+```
+
+Клас ```Item``` використовується для опису предметів, що можуть бути підняті гравцем.
+```Item``` має 2 дочерні класи: ```Scrap``` та ```Equipment```.
+```Scrap``` може бути використаним гравцем для підвищення рівня предметів, що можуть бути одягненим гравцем, тобто, спадкоємців класу ```Equipment```.
+
+Спадкоємцями класу ```Equipment``` є:
+- ```HeadArmor```.
+- ```ChestArmor```.
+- ```LegsArmor```.
+- ```Weapon```.
+
+# 4. Damageable
+
+Гравець може бути в двох режимах:
+- Людина.
+- Робот.
+
+Через велику кількість загальних змінних та методів було вирішено створити загальний клас ```Person```, для якого ```Human``` та ```Robot``` є спадкоємцями.
+
+Клас ```Person```:
+
+```cs
+public Dictionary<Type, Characteristic> Stats { get; private set; } = new Dictionary<Type, Characteristic>();
+
+public HealthCharacteristic Health { get; }
+public SpeedCharacteristic MoveSpeed { get; protected set; }
+public ArmorCharacteristic PersonArmor { get; protected set; }
+
+protected Person(float maxHealth, float moveSpeed, float armor) {
+    Health = new HealthCharacteristic(maxHealth, Die);
+    MoveSpeed = new SpeedCharacteristic(moveSpeed);
+    PersonArmor = new ArmorCharacteristic(armor);
+    Stats.Add(Type.Health, Health);
+    Stats.Add(Type.Speed, MoveSpeed);
+    Stats.Add(Type.Armor, PersonArmor);
+}
+```
+
+Гравець має ```Dictionary<Type, Characteristic> Stats```, що зберігає загальну кількість характеристик ```Person’а```.
+
+А також ```Health```, ```MoveSpeed```, ```PersonArmor```, що зберігають власні характеристикки ```Person’а```.
+
+Person має 3 спадкоємця:
+- ```Human```.
+- ```Robot```.
+- ```Enemy```.
+	
+```Enemy``` має дві додаткові змінні, а саме:
+
+```cs
+public Transform Transform { get; private set; }
+public Animator Animator { get; private set; }
+```
+
+Ці змінні необхідні Unity для відображення позиції та анімацій ```Enemy```.
+
+У класі ```Human``` додаткових змінних трохи більше, а саме використовується класс ```Player.UnityData```, який зберігає 4 змінних необхідних Unity.
+
+```cs
+public Player.UnityData UnityHumanData { get; private set;}
+```
+
+```Player.UnityData``` має наступний вигляд:
+
+```cs
+public class UnityData {
+	public Transform Transform { get; private set; }
+    public Animator Animator { get; private set; }
+    public CharacterController CharacterController { get; private set; }
+    public Transform GunTransform { get; private set; }
+            
+    public bool Initialized { get; private set; }
+
+    public void Initialize(Transform transform, Animator animator, CharacterController characterController,
+        Transform gunTransform) {
+        Transform = transform;
+        Animator = animator;
+        CharacterController = characterController;
+        GunTransform = gunTransform;
+        Initialized = true;
+    }
+
+	public void Uninitialize() {
+        Transform = null;
+        Animator = null;
+        CharacterController = null;
+        GunTransform = null;
+        Initialized = false;
+    }
+}
+```
+
+Клас Robot має також 4 додаткові змінні запаковані в ```Player.UnityData```, а також поля необхідні для зберігання озброєння.
+
+```cs
+public Player.UnityData UnityRobotData { get; private set;}
+
+public readonly Dictionary<Type, EquipmentSlot> equipmentSlots = new Dictionary<Type, EquipmentSlot> {
+        {Type.Head, new HeadSlot()},
+        {Type.Chest, new ChestSlot()},
+        {Type.Legs, new LegsSlot()}
+};
+
+public readonly WeaponsSlots weaponsSlots = new WeaponsSlots(new Dictionary<WeaponSlot.Spot, WeaponSlot> {
+    {WeaponSlot.Spot.TwoHands, new WeaponSlot(WeaponSlot.Spot.TwoHands)}
+});
+```
+
+Клас ```Robot``` відрізняється від ```Human``` можливістю надягати озброєння.
+
+Також є клас ```Player```, що зберігає посилання на екземпляри класів ```Human``` та ```Robot```, крім того, містить нинішній стан гравця (робот або людина) та містить посилання на відповідні функції людини чи робота завдяки делегатам:
+
+```cs
+public enum State {
+    Human,
+    Robot
+}
+```
+
+# 5. Організація роботи зброї
 
 Поведінка та взаємодія зі зброєю реалізована з використанням розподілу логіки по трьом різним класам (скриптам).
 
