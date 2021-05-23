@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Project.Classes.Characteristics {
     public class HealthCharacteristic : Characteristic {
@@ -21,6 +22,9 @@ namespace Project.Classes.Characteristics {
         public float HP {
             get => Value;
             private set {
+                if (Math.Abs(Value - value) > float.Epsilon) {
+                    OnHpChange?.Invoke();
+                }
                 Value = Mathf.Clamp(value, 0, MaxHP);
                 if (Value.Equals(0)) {
                     OnHealthZero?.Invoke();
@@ -40,11 +44,9 @@ namespace Project.Classes.Characteristics {
                 return;
             }
             HP -= damage;
-            OnHpChange?.Invoke();
         }
         public void RestoreHealth(float heal) {
             HP += heal;
-            OnHpChange?.Invoke();
         }
         public void HealToMaxHP() => RestoreHealth(MaxHP);
     }

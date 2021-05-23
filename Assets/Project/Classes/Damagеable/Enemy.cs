@@ -1,7 +1,7 @@
 ﻿using Project.Scripts;
 using UnityEngine;
 
-namespace Project.Classes.Damagable
+namespace Project.Classes.Damagеable
 {
     public class Enemy : Person
     {

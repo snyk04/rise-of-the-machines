@@ -1,4 +1,5 @@
-﻿using Project.Classes.Damagable;
+﻿using System;
+using Project.Classes.Damagеable;
 using UnityEngine;
 
 namespace Project.Scripts.PlayerScripts
@@ -22,6 +23,10 @@ namespace Project.Scripts.PlayerScripts
             var player = Player.Instance;
             player.Human.UnityHumanData.Initialize(human, humanAnimator, humanCharacterController, humanGunTransform);
             player.Robot.UnityRobotData.Initialize(robot, robotAnimator, robotCharacterController, robotGunTransform);
+        }
+
+        private void Update() {
+            Debug.Log($"{(Player.Instance.Inventory.Content.Count > 0 ? Player.Instance.Inventory.Content[0] : null)}");
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Project.Classes.Damagable;
+using Project.Classes.Damagеable;
 using Project.Scripts.Characters;
 using Project.Scripts.CharactersAndObjects;
 using UnityEngine;

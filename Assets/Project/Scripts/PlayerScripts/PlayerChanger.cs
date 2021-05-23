@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Cinemachine;
-using Project.Classes.Damagable;
+using Project.Classes.Damagеable;
 using Project.Scripts.InputHandling;
 using Project.Scripts.UserInterface;
 using UnityEngine;

@@ -2,7 +2,7 @@
 using Project.Classes.ItemsAndInventory;
 using UnityEngine;
 
-namespace Project.Classes.Damagable {
+namespace Project.Classes.Damagеable {
     public class Player {
         public class UnityData {
             public Transform Transform { get; private set; }

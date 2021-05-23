@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-
-namespace Project.Classes.Damagable {
+namespace Project.Classes.Damagеable {
     public class Human : Person {
         public Player.UnityData UnityHumanData { get; private set; }
 

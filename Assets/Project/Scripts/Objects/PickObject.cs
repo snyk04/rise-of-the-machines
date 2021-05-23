@@ -11,15 +11,15 @@ namespace Project.Scripts.Objects {
         private bool readyToPickUp;
 
         public bool TryPickObject() {
-            if (readyToPickUp) {
-                return item.TryPick();
+            if (readyToPickUp && item.TryPick()) {
+                Destroy(gameObject);
+                return true;
             }
 
             return false;
         }
 
-        private void OnTriggerEnter(Collider other) {
-
+        private void OnTriggerStay(Collider other) {
             if (other.TryGetComponent<CharacterController>(out _)) {
                 ReadyToPickUp?.Invoke();
                 readyToPickUp = true;

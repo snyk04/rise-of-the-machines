@@ -5,7 +5,7 @@ using Project.Classes.Slots;
 using UnityEngine;
 using Type = Project.Classes.Slots.EquipmentSlot.Type;
 
-namespace Project.Classes.Damagable {
+namespace Project.Classes.Damagеable {
     public class Robot : Person {
         public delegate void CharacteristicsChanged();
 

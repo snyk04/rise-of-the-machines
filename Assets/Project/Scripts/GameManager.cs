@@ -1,4 +1,4 @@
-﻿using Project.Classes.Damagable;
+﻿using Project.Classes.Damagеable;
 using UnityEngine;
 
 namespace Project.Scripts {

@@ -2,7 +2,7 @@
 using Project.Interfaces;
 using UnityEngine;
 
-namespace Project.Classes.Damagable {
+namespace Project.Classes.Damagеable {
     public class Breakable : IDamageable {
         public HealthCharacteristic Health { get; }
 

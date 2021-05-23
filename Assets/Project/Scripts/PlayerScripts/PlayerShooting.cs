@@ -1,5 +1,5 @@
 ﻿using System;
-using Project.Classes.Damagable;
+using Project.Classes.Damagеable;
 using Project.Scripts.InputHandling;
 using Project.Scripts.Objects;
 using Project.Scripts.UserInterface;

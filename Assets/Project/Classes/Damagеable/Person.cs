@@ -3,7 +3,7 @@ using Project.Classes.Characteristics;
 using Project.Interfaces;
 using Type = Project.Classes.Characteristics.Characteristic.Type;
 
-namespace Project.Classes.Damagable {
+namespace Project.Classes.Damagеable {
     public abstract class Person : IDamageable, IHasCharacteristics {
 
         public Dictionary<Type, Characteristic> Stats { get; private set; } = new Dictionary<Type, Characteristic>();
