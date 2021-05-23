@@ -4,7 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Bullet
   - Enemy
   layers:
   - Default
@@ -15,11 +14,11 @@ TagManager:
   - UI
   - 
   - 
-  - PostProcessing
+  - Raycast Obstacle
+  - Damageable
+  - Ground
   - 
-  - 
-  - 
-  - 
+  - Minimap
   - 
   - 
   - 
