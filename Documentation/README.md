@@ -1,4 +1,4 @@
-# 1. Реалізація пошуку шляхів для ігрового штучного інтелекту за допомогою NavMesh
+# 1. Реалізація пошуку шляхів для ігрового штучного інтелекту за допомогою NavMesh (Сниченков Д. А.)
 
 Іноді нам потрібно, щоб АІ-персонажі бродили по ігровому рівню, слідуючи по грубо окресленому або точно заданому шляху. Наприклад в гоночній грі АІ-противники повинні їхати по дорозі, а в RTS юніти повинні вміти переміщатися в потрібну точку, рухаючись по рельєфу, а також враховувати положення один одного.
 
@@ -104,7 +104,7 @@ public class Target : MonoBehaviour
 
 Отже, поєднання цих можливостей надає вам зручний готовий інструмент. Ви можете досить швидко створити просту гру за допомогою функціоналу NavMesh.
 
-# 2. Реалізація характеристик
+# 2. Реалізація характеристик (Діденко В. В.)
 
 Характеристики мають загальний абстрактний клас ```Characteristic```:
 
@@ -147,7 +147,7 @@ public float HP {
     }
 }
 ```
-	
+    
 Клас ```HealthCharacteristic``` має 2 події:
 
 ```cs
@@ -191,7 +191,7 @@ public class ArmorCharacteristic : Characteristic {
 
 ```cs
 public float GetResistance() {
-	return 1 / (1 + armorCoefficient * Value);
+    return 1 / (1 + armorCoefficient * Value);
 }
 ```
 , де ```armorCoefficient``` - величина, що визначає наскільки сильно величина опору залежить від величини бронювання;
@@ -214,7 +214,7 @@ var damageAccountingArmor = damage * (1 - ((ArmorCharaceristic) Stats[Type.Armor
 , де ```(ArmorCharaceristic) Stats[Type.Armor]``` – клас бронювання, від якого ми отримуємо величину опору;
 ```damage``` – величина шкоди без урахування опору;
 
-# 3. Клас Item
+# 3. Клас Item (Діденко В. В.)
 
 ```cs
 public abstract class Item : ICanBePickedUp {
@@ -234,7 +234,7 @@ public abstract class Item : ICanBePickedUp {
 - ```LegsArmor```.
 - ```Weapon```.
 
-# 4. Damageable
+# 4. Damageable (Діденко В. В.)
 
 Гравець може бути в двох режимах:
 - Людина.
@@ -269,7 +269,7 @@ Person має 3 спадкоємця:
 - ```Human```.
 - ```Robot```.
 - ```Enemy```.
-	
+    
 ```Enemy``` має дві додаткові змінні, а саме:
 
 ```cs
@@ -289,7 +289,7 @@ public Player.UnityData UnityHumanData { get; private set;}
 
 ```cs
 public class UnityData {
-	public Transform Transform { get; private set; }
+    public Transform Transform { get; private set; }
     public Animator Animator { get; private set; }
     public CharacterController CharacterController { get; private set; }
     public Transform GunTransform { get; private set; }
@@ -305,7 +305,7 @@ public class UnityData {
         Initialized = true;
     }
 
-	public void Uninitialize() {
+    public void Uninitialize() {
         Transform = null;
         Animator = null;
         CharacterController = null;
@@ -342,7 +342,7 @@ public enum State {
 }
 ```
 
-# 5. Організація роботи зброї
+# 5. Організація роботи зброї (Рихтик Д. М.)
 
 Поведінка та взаємодія зі зброєю реалізована з використанням розподілу логіки по трьом різним класам (скриптам).
 
